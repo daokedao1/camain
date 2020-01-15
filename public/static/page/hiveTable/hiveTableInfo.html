@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>数据管理</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="/other/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/other/bootstrap-table/bootstrap-table.min.css">
+    <link rel="stylesheet" href="/other/bootstrap/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="/other/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/other/css/ionicons.min.css">
+    <link rel="stylesheet" href="/other/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/other/dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="/other/codeMirror/codemirror.css">
+    <link rel="stylesheet" href="/other/codeMirror/show-hint.css">
+    <link rel="stylesheet" href="/other/jsmind/jsmind.css">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body class="sidebar-mini skin-purple wysihtml5-supported">
+<div class="wrapper">
+    <header class="main-header">
+        <title>DMO | desert</title>
+        <a class="logo">venus</a>
+        <nav class="navbar navbar-static-top" role="navigation">
+            <a class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+            <div class="compy"><img height="50px" src="/img/logo.png"></div>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown user user-menu">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="hidden-xs">Admin</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+</div>
+<aside class="main-sidebar">
+    <section class="sidebar">
+        <ul class="sidebar-menu">
+        </ul>
+    </section>
+</aside>
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a>数据知识</a></li>
+                <li class="active">表详情</li>
+            </ol>
+        </div>
+        <div class="row">
+            <!--标签页-->
+            <div class="box">
+                <form class="form-horizontal">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="biaoming" class="col-sm-2 control-label">表名</label>
+                            <div class="col-sm-3 input-group-sm">
+                                <input type="text" class="form-control" id="biaoming" placeholder="" readonly>
+                            </div>
+                            <div class="col-sm-7"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="desc" class="col-sm-2 control-label">中文名</label>
+                            <div class="col-sm-3 input-group-sm">
+                                <input type="text" class="form-control" id="desc" placeholder="" readonly>
+                            </div>
+                            <div class="col-sm-7"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="jishi" class="col-sm-2 control-label">所在仓库/集市</label>
+                            <div class="col-sm-3 input-group-sm">
+                                <input type="text" class="form-control" id="jishi" placeholder="" readonly>
+                            </div>
+                            <div class="col-sm-7"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="jishi" class="col-sm-2 control-label"></label>
+                            <div class="col-sm-8 input-group-sm">
+                                <div class="nav-tabs-custom mycustomnav">
+                                    <ul class="nav nav-tabs">
+                                        <li><a href="#tab_1-1" data-toggle="tab">基本信息</a></li>
+                                        <li class="active"><a href="#tab_2-2" data-toggle="tab">字段详情</a></li>
+                                        <li><a href="#tab_2-3" data-toggle="tab">血缘关系</a></li>
+                                        <li><a href="#tab_2-4" data-toggle="tab">数据预览</a></li>
+                                    </ul>
+                                    <div class="tab-content mytable">
+                                        <div class="tab-pane " id="tab_1-1">
+                                            <form class="form-horizontal">
+                                                <div class="box-body">
+                                                    <div class="form-group">
+                                                        <label for="miaoshu" class="col-sm-2 control-label">描述</label>
+                                                        <div class="col-sm-5 input-group-sm">
+                                                            <input type="text" class="form-control" id="miaoshu"
+                                                                   placeholder="" readonly>
+                                                        </div>
+                                                        <div class="col-sm-5"></div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="fuzeren" class="col-sm-2 control-label">负责人</label>
+                                                        <div class="col-sm-5 input-group-sm">
+                                                            <input type="text" class="form-control" id="fuzeren"
+                                                                   placeholder="" readonly>
+                                                        </div>
+                                                        <div class="col-sm-5"></div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="jiqun" class="col-sm-2 control-label">所在集群位置</label>
+                                                        <div class="col-sm-5 input-group-sm">
+                                                            <input type="text" class="form-control" id="jiqun"
+                                                                   placeholder="" readonly>
+                                                        </div>
+                                                        <div class="col-sm-5"></div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="atime" class="col-sm-2 control-label">创建时间</label>
+                                                        <div class="col-sm-5">
+                                                            <input type="text" class="form-control" id="atime"
+                                                                   placeholder="" readonly>
+                                                        </div>
+                                                        <div class="col-sm-5"></div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="ctime" class="col-sm-2 control-label">修改时间</label>
+                                                        <div class="col-sm-5">
+                                                            <input type="text" class="form-control" id="ctime"
+                                                                   placeholder="" readonly>
+                                                        </div>
+                                                        <div class="col-sm-5"></div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="biaoguanxi"
+                                                               class="col-sm-2 control-label">表关系</label>
+                                                        <div class="col-sm-5">
+                                                            <input type="text" class="form-control" id="biaoguanxi"
+                                                                   placeholder="" readonly>
+                                                        </div>
+                                                        <div class="col-sm-5"></div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="tab-pane active" id="tab_2-2">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th>字段名</th>
+                                                    <th>字段类型</th>
+                                                    <th>备注</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="tableStr">
+                                                </tbody>
+                                            </table>
+                                            <small class="partitionTip"><i></i>表示分区字段</small>
+                                        </div>
+                                        <div class="tab-pane" id="tab_2-3">
+                                            <div style="margin-bottom:10px;">提示:<span style="color: #ff0000;">左侧为上游任务/表,右侧为下游任务/表</span>
+                                                <i style="display: inline-block;margin-left:15px;width:10px;height:10px;background-color:#ffec00;border:1px solid #ccc;"></i>表
+                                                <i style="display: inline-block;margin-left:15px;width:10px;height:10px;background-color:#fff;border:1px solid #ccc;"></i>任务
+                                            </div>
+                                            <div id="jsmind_container"></div>
+                                            <div class="dbnameInfo"></div>
+                                        </div>
+                                        <div class="tab-pane" id="tab_2-4">
+                                            <div class="box-body">
+                                                <div class="nav-tabs-custom">
+                                                    <div class="form-groups">
+                                                        <div class="col-sm-12 input-groups-sm">
+                                                            <textarea class="sqlTextarea" style="height:300px;" placeholder="sql编辑框 eq: select * from o_adv_info limit 100"  id="sql"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="box-footer" style="margin: 0pc 15px;">
+                                                <button type="button" class="btn btn-info pull-right " id="startSql">执行</button>
+                                            </div>
+                                            <div class="box-body">
+                                                <table id ="queryTableId"
+                                                       data-pagination="true"
+                                                       data-page-size="10"
+                                                       data-toggle="table">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+
+
+                    </div><!-- /.box-body -->
+                </form>
+
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="overlay-wrapper" style="display: none;">
+    <div class="overlay">
+        <i class="fa fa-refresh fa-spin"></i>
+    </div>
+</div>
+
+<!--<div class="modal" id="mymodalcontent">-->
+<!--<div class="modal-dialog">-->
+<!--<div class="modal-content">-->
+<!--<div class="modal-header">-->
+<!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>-->
+<!--<h4 class="modal-title">模态弹出窗标题</h4>-->
+<!--</div>-->
+<!--<div class="modal-body">-->
+<!--<p>模态弹出窗主体内容</p>-->
+<!--</div>-->
+<!--<div class="modal-footer">-->
+<!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+<!--<button type="button" class="btn btn-primary">保存</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+</body>
+<script src="/other/require/require_jquery-2.1.4.js"></script>
+<script src="/other/jsmind/jsmind.js"></script>
+<script src="/other/jsmind/jsmind.draggable.js"></script>
+<script src="/other/jsmind/jsmind.screenshot.js"></script>
+
+<script src="/js/requireConfig.js"></script>
+<script src="/js/hiveTable/hiveTableInfo.js"></script>
+</html>

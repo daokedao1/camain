@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>数据管理</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../../other/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../other/bootstrap/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="../../other/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../other/css/ionicons.min.css">
+    <link rel="stylesheet" href="../../other/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="../../other/dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../../css/index.css">
+</head>
+<body class="sidebar-mini skin-purple wysihtml5-supported">
+<div class="wrapper">
+    <!-- <header class="main-header">
+        <title>DMO | desert</title>
+       <a class="logo">venus</a>
+        <nav class="navbar navbar-static-top" role="navigation">
+            <a class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+            <div class="compy"><img height="50px" src="/img/logo.png"></div>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown user user-menu">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="hidden-xs">Admin</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+</div>
+<aside class="main-sidebar">
+    <section class="sidebar">
+        <ul class="sidebar-menu">
+            <li class="treeview active">
+                <a>
+                    <i class="fa fa-table"></i> <span>用户标签</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/page/userTag/tagDataSourceList.html"><i class="fa fa-cog"></i>数据源管理</a></li>
+                    <li><a href="/page/userTag/tagList.html"><i class="fa fa-cog"></i>标签管理</a></li>
+                    <li><a href="/page/userTag/ruleList.html"><i class="fa fa-cog"></i>用户群组管理</a></li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+</aside> -->
+<div class="content-wrapper">
+    <section class="content">
+
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a>数据知识</a></li>
+                <li class="active">数据检索</li>
+            </ol>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box" style="margin-bottom:5px;">
+                    <div class="form-horizontal">
+                        <div class="box-body" >
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"><span class="glyphicon glyphicon-book" style="top:2px;margin-right: 4px;"></span>知识库</label>
+                                <div class="col-sm-9 input-group-sm" style="color: #666666;font-size:12px;">
+                                    <input type="text" class="form-control searchbutinput" id="content" style="margin-left:15px;" placeholder="请输入需要搜索表的中/英名称">
+                                    <button class="btn btn-block btn-primary btn-xs searchinputbut">搜索</button>
+                                </div>
+                                <div class="col-sm-1 input-group-sm">
+                                    <div style="display: none;" class="autextBox">
+                                        <p>新增：<span class="addBarPage">0</span>条</p> 
+                                        <p>更新：<span class="updataBarPage">0</span>条</p> 
+                                    </div>
+                                    <p style="display: none;" class="synchronizationLoding">正在同步中。。。<p/>
+                                    <button  class="btn btn-block btn-primary btn-xs synchronization">同步</button>
+                                </div>
+                            </div>
+                            <div  class="searchContent">
+                                <div class="form-group labelGroups searchTitOpe">
+                                    <label class="col-sm-2 control-label">高级搜索</label>
+                                    <div class="col-sm-10 input-group-sm">
+                                        <a class="deleteAll">全部取消</a>
+                                        <!--<a class="showContent">收起筛选</a>-->
+                                    </div>
+                                </div>
+                                <div class="form-group labelGroups">
+                                    <label class="col-sm-2 control-label">所在集市</label>
+
+                                    <div class="col-sm-10 input-group-sm">
+                                        <ul class="tagValues" data-one="true" id="jishi"  style="color: #666666;font-size:12px;">
+                                            <!--<li>-->
+                                            <!--<a>-->
+                                            <!--标签师打发-->
+                                            <!--<i class="fa fa-fw fa-times-circle"></i>-->
+                                            <!--</a>-->
+                                            <!--</li>-->
+                                        </ul>
+                                        <div class="more">
+                                            <a>
+                                                更多
+                                                <i class="fa fa-fw fa-plus"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sperLine"></div>
+                                <div class="form-group labelGroups">
+                                    <label class="col-sm-2 control-label">分层</label>
+
+                                    <div class="col-sm-10 input-group-sm">
+                                        <ul class="tagValues" data-one="true" id="fenceng"  style="color: #666666;font-size:12px;">
+                                            <li><a data-value="mryt_tmp">tmp<i class="fa fa-fw fa-times-circle"></i></a></li>
+                                            <li><a data-value="mryt_sdm">sdm<i class="fa fa-fw fa-times-circle"></i></a></li>
+                                            <li><a data-value="mryt_gdl">gdl<i class="fa fa-fw fa-times-circle"></i></a></li>
+                                            <li><a data-value="mryt_fdl">fdl<i class="fa fa-fw fa-times-circle"></i></a></li>
+                                            <li><a data-value="mryt_dim">dim<i class="fa fa-fw fa-times-circle"></i></a></li>
+                                            <li><a data-value="mryt_bdm">bdm<i class="fa fa-fw fa-times-circle"></i></a></li>
+                                            <li><a data-value="mryt_adl">adl<i class="fa fa-fw fa-times-circle"></i></a></li>
+                                            <li><a data-value="mryt_alg">alg<i class="fa fa-fw fa-times-circle"></i></a></li>
+                                        </ul>
+                                        <div class="more">
+                                            <a>
+                                                更多
+                                                <i class="fa fa-fw fa-plus"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sperLine" id="zhutiSpe"></div>
+                            </div>
+
+                            <div class="moreSelectDiv"><a id="showMoreSelect">更多选项<i class="fa fa-angle-down"></i></a></div>
+                        </div><!-- /.box-body -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="searchResult">
+            <div class="col-md-12 totalNumDiv">
+                共<span>0</span>条
+            </div>
+            <!--<div class="col-md-6">-->
+                <!--<div class="info-box s_info">-->
+                    <!--<span class="s_name">a_amt_amorice_mdesuaset</span>-->
+                    <!--<span class="s_time">创建:2019-09-13 10:48:57</span>-->
+                    <!--<span class="s_desc">HQL导入到户帖子阿斯顿发的说法</span>-->
+                    <!--<span class="s_jishi">所在集市:<span class="label label-success">财务数据集市</span></span>-->
+                    <!--<span class="s_biaoqian">标签:<span class="label label-warning">阿萨德法师打发</span><span class="label label-warning">阿萨德法师打发</span></span>-->
+                <!--</div>-->
+            <!--</div>-->
+
+        </div>
+    </section>
+</div>
+
+</body>
+<script src="../../other/require/require_jquery-2.1.4.js"></script>
+<script src="../../js/requireConfig.js"></script>
+<script src="../../js/hiveTable/dataSearch.js"></script>
+</html>

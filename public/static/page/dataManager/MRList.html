@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>数据管理</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+      <link rel="stylesheet" href="/other/bootstrap/css/bootstrap.min.css">
+      <link rel="stylesheet" href="/other/bootstrap/css/bootstrap-datetimepicker.min.css">
+      <link rel="stylesheet" href="/other/css/font-awesome.min.css">
+      <link rel="stylesheet" href="/other/css/ionicons.min.css">
+      <link rel="stylesheet" href="/other/dist/css/AdminLTE.min.css">
+      <link rel="stylesheet" href="/other/dist/css/skins/_all-skins.min.css">
+      <link rel="stylesheet" href="/css/index.css">
+  </head>
+  <body class="sidebar-mini skin-purple wysihtml5-supported">
+      <div class="wrapper">
+          <header class="main-header">
+              <title>DMO | desert</title>
+              <a class="logo">venus</a>
+              <nav class="navbar navbar-static-top" role="navigation">
+                  <a class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                      <span class="sr-only">Toggle navigation</span>
+                  </a>
+                 <div class="compy"><img height="50px" src="/img/logo.png"></div>
+                  <div class="navbar-custom-menu">
+                      <ul class="nav navbar-nav">
+                          <li class="dropdown user user-menu">
+                              <a class="dropdown-toggle" data-toggle="dropdown">
+                                  <span class="hidden-xs">Admin</span>
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </nav>
+          </header>
+      </div>
+      <aside class="main-sidebar">
+          <section class="sidebar">
+              <ul class="sidebar-menu">
+              </ul>
+          </section>
+      </aside>
+      <div class="content-wrapper">
+          <section class="content">
+              <div class="row">
+                  <ol class="breadcrumb">
+                      <li><a>数据知识</a></li>
+                      <li class="active">hive udf管理</li>
+                  </ol>
+              </div>
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="box  box-table">
+                          <div class="box-header with-border">
+                              <div class="mytableTop">
+                                  <h3 class="box-title">MR任务列表</h3>
+                                  <i class="fa fa-fw fa-plus pull-right" id="addMR"></i>
+                              </div>
+                          </div>
+                          <div class="box-body mytable">
+                              <table class="table table-bordered">
+                                  <thead>
+                                      <tr>
+                                          <th>任务名称(英)</th>
+                                          <th>任务名称(中)</th>
+                                          <th>class name</th>
+                                          <th>描述</th>
+                                          <th>负责人</th>
+                                          <th>input path</th>
+                                          <th>output path</th>
+                                          <th>创建时间</th>
+                                          <th>修改时间</th>
+                                          <th  style="width:100px;">操作</th>
+                                      </tr>
+                                      <tr class="searchTh">
+                                          <th><input type="text" id="enName"/></th>
+                                          <th><input type="text" id="cnName"/></th>
+                                          <th><input type="text" id="className"/></th>
+                                          <th><input type="text" id="describe"/></th>
+                                          <th><input type="text" id="administrator"/></th>
+                                          <th><input type="text" id="inputPath"/></th>
+                                          <th><input type="text" id="outputPath"/></th>
+                                          <th><input type="text" id="createTime"/></th>
+                                          <th><input type="text" id="updateTime"/></th>
+                                          <th></th>
+                                      </tr>
+                                  </thead>
+                                  <tbody id="taskTableList">
+                                  </tbody></table>
+                          </div><!-- /.box-body -->
+                          <div class="box-footer clearfix">
+                              <ul class="pagination pagination-sm no-margin pull-right">
+                                  <li><a href="javascript:void(0);" id="prevPage">上一页</a></li>
+                                  <li><a href="javascript:void(0);" id="nextPage">下一页</a></li>
+                              </ul>
+                              当前页数：<small id="currentPageNum">0</small>
+                              总页数：<small id="totalPageNum">0</small>
+                              总数：<small id="totalNum">0</small>
+                          </div>
+                      </div>
+                  </div><!-- /.col -->
+              </div>
+          </section>
+      </div>
+
+      <div class="overlay-wrapper" style="display: none;">
+          <div class="overlay">
+              <i class="fa fa-refresh fa-spin"></i>
+          </div>
+      </div>
+  </body>
+  <script src="/other/require/require_jquery-2.1.4.js"></script>
+  <script src="/js/requireConfig.js"></script>
+  <script src="/js/dataManager/MRList.js"></script>
+</html>

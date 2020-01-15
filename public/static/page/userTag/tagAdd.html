@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>数据管理</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="/other/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/other/bootstrap/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="/other/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/other/css/ionicons.min.css">
+    <link rel="stylesheet" href="/other/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/other/dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="/other/quickSearch/quickSearch.css">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body class="sidebar-mini skin-purple wysihtml5-supported">
+    <div class="wrapper">
+        <header class="main-header">
+            <title>DMO | desert</title>
+            <a class="logo">venus</a>
+            <nav class="navbar navbar-static-top" role="navigation">
+                <a class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <div class="compy">
+                    每日一淘大数据平台
+                </div>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown user user-menu">
+                            <a class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="hidden-xs">Admin</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+    </div>
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <ul class="sidebar-menu">
+                <li class="treeview active">
+                    <a>
+                        <i class="fa fa-table"></i> <span>用户标签</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="/page/userTag/tagList.html"><i class="fa fa-cog"></i>标签管理</a></li>
+                        <li><a href="/page/userTag/ruleList.html"><i class="fa fa-cog"></i>用户群组管理</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+    </aside>
+    <div class="content-wrapper">
+        <section class="content">
+
+            <div class="row">
+                <ol class="breadcrumb">
+                    <li><a>用户标签管理</a></li>
+                    <li class="active">新增标签</li>
+                </ol>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box">
+                        <form class="form-horizontal">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">标签名称</label>
+                                    <div class="col-sm-3 input-group-sm">
+                                        <input type="text" class="form-control" id="tagname" placeholder="">
+                                    </div>
+                                    <div class="col-sm-2"><small class="errorMessage" id="enameError">标签名称重复,请重新填写</small></div>
+                                    <div class="col-sm-5"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">DB简称</label>
+                                    <div class="col-sm-3 input-group-sm">
+                                        <input type="text" class="form-control" id="dbname" name="dbname" placeholder="">
+                                        <label class="glyphicon glyphicon-search quickSearchIcon"></label>
+                                    </div>
+                                    <div class="col-sm-7">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">库名</label>
+                                    <div class="col-sm-3 input-group-sm">
+                                        <input type="text" class="form-control" id="database" name="database" placeholder="">
+                                        <label class="glyphicon glyphicon-search quickSearchIcon"></label>
+                                    </div>
+                                    <div class="col-sm-7">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">表名</label>
+                                    <div class="col-sm-3 input-group-sm">
+                                        <input type="text" class="form-control" id="tableName" placeholder="">
+                                        <label class="glyphicon glyphicon-search quickSearchIcon"></label>
+                                    </div>
+                                    <div class="col-sm-7">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">标签类别</label>
+                                    <div class="col-sm-3 input-group-sm">
+                                        <select id="tagType" class="myselect100">
+                                            <option value="1">维度</option>
+                                            <option value="2">静态指标</option>
+                                            <option value="3">动态指标</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-7"></div>
+                                </div>
+                                <div class="form-group selectColumdiv">
+                                    <label class="col-sm-2 control-label">标签映射字段</label>
+                                    <div class="col-sm-3 input-group-sm">
+                                        <input type="text" class="form-control" id="selectColum" placeholder="">
+                                        <label class="glyphicon glyphicon-search quickSearchIcon"></label>
+                                    </div>
+                                    <div class="col-sm-7">
+                                    </div>
+                                </div>
+                                <div class="form-group dongtaizhibiao" style="display: none;">
+                                    <label class="col-sm-2 control-label">聚合规则</label>
+                                    <div class="col-sm-3 input-group-sm">
+                                        <input type="text" class="form-control" id="rule" placeholder="">
+                                    </div>
+                                    <div class="col-sm-7"></div>
+                                </div>
+                                <div class="form-group dongtaizhibiao" style="display: none;">
+                                    <label class="col-sm-2 control-label">聚合时间字段映射</label>
+                                    <div class="col-sm-3 input-group-sm">
+                                        <input type="text" class="form-control" id="juheDate" placeholder="">
+                                    </div>
+                                    <div class="col-sm-7"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">标签分类</label>
+                                    <div class="col-sm-3 input-group-sm">
+                                        <select id="tagClass" class="myselect100">
+                                            <option value="1">自然属性</option>
+                                            <option value="2">浏览行为</option>
+                                            <option value="3">购买行为</option>
+                                            <option value="4">搜索偏好</option>
+                                            <option value="5">社会属性</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-7"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">用户标识字段</label>
+                                    <div class="col-sm-3 input-group-sm">
+                                        <select id="userColum" class="myselect100">
+                                            <option value="card_no">card_no</option>
+                                            <option value="device_id">device_id</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-7"></div>
+                                </div>
+                                <!--<div class="form-group">-->
+                                    <!--<label class="col-sm-2 control-label">标签枚举值或域值</label>-->
+                                    <!--<div class="col-sm-3 input-group-sm">-->
+                                        <!--<a class="btn pull-left" id="yulanColums">预览</a>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-sm-7"></div>-->
+                                <!--</div>-->
+                                <div class="form-group meinudiv" style="display:none;">
+                                    <label class="col-sm-2 control-label"></label>
+                                    <div class="col-sm-7 input-group-sm">
+                                        <div class="dataTables_wrapper form-inline dt-bootstrap">
+                                            <div class="box unebox">
+                                                <div class="box-header with-border">
+                                                    <h3 class="box-title tableMes tableMesTit">枚举值</h3>
+                                                    <div class="box-tools pull-right">
+                                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                                    </div>
+                                                </div><!-- /.box-header -->
+                                                <div class="box-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table no-margin">
+                                                            <tbody id="meijuvalues">
+                                                            </tbody>
+                                                        </table>
+                                                    </div><!-- /.table-responsive -->
+                                                </div><!-- /.box-body -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="desc" class="col-sm-2 control-label">描述</label>
+                                    <div class="col-sm-6">
+                                        <textarea class="form-control" id="desc" rows="6" placeholder="描述..."></textarea>
+                                    </div>
+                                    <div class="col-sm-4"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="desc" class="col-sm-2 control-label"></label>
+                                    <div class="col-sm-3">
+                                        <a class="btn btn-info pull-left" id="add">保存</a>
+                                    </div>
+                                    <div class="col-sm-3">
+
+                                    </div>
+                                    <div class="col-sm-4"></div>
+                                </div>
+                            </div><!-- /.box-body -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+</div>
+
+</body>
+<script src="/other/require/require_jquery-2.1.4.js"></script>
+<script src="/js/requireConfig.js"></script>
+<script src="/js/userTag/tagAddDataSource.js"></script>
+</html>

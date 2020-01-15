@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>数据管理</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="/other/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/other/bootstrap/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="/other/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/other/css/ionicons.min.css">
+    <link rel="stylesheet" href="/other/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/other/dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="/other/quickSearch/quickSearch.css">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body class="sidebar-mini skin-purple wysihtml5-supported">
+ 
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a>数据知识</a></li>
+                <li class="active">指标添加</li>
+            </ol>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="form-horizontal">
+                        <div class="box-body">
+
+                            <div class="form-group ">
+                                <label class="col-sm-1 control-label">编码</label>
+                                <div class="col-sm-3 input-group-sm">
+                                    <input readonly type="text" class="form-control" id="code" name="code" placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <label class="col-sm-1 control-label">表名</label>
+                                <div class="col-sm-3 input-group-sm">
+                                    <input type="text" class="form-control" id="dbTable" name="dbTable" placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <label class="col-sm-1 control-label">别名</label>
+                                <div class="col-sm-3 input-group-sm">
+                                    <input type="text" class="form-control" id="alias" name="alias" placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <label class="col-sm-1 control-label">字段名</label>
+                                <div class="col-sm-3 input-group-sm">
+                                    <textarea rows="10" cols="50" onpropertychange="this.style.posHeight=this.scrollHeight " id="field" name="field" placeholder=""></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <label class="col-sm-1 control-label">指标名称</label>
+                                <div class="col-sm-3 input-group-sm">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <label class="col-sm-1 control-label">指标解释</label>
+                                <div class="col-sm-3 input-group-sm">
+                                    <input type="text" class="form-control" id="note" name="note" placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <label class="col-sm-1 control-label">指标类型</label>
+                                <div class="col-sm-3 input-group-sm">
+                                    <input type="text" class="form-control" id="type" name="type" placeholder="" value="CUSTOM" >
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label"></label>
+                                <div class="col-sm-3">
+                                    <a class="btn btn-info pull-left" id="addGroup">保存</a>
+                                </div>
+                                <div class="col-sm-3">
+                                </div>
+                                <div class="col-sm-4"></div>
+                            </div>
+                        </div><!-- /.box-body -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>
+
+</body>
+<script src="/other/require/require_jquery-2.1.4.js"></script>
+<script src="/js/requireConfig.js"></script>
+<script src="/js/dataManager/metricsAdd.js"></script>
+</html>

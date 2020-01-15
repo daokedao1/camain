@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>数据管理</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+      <link rel="stylesheet" href="../../other/bootstrap/css/bootstrap.min.css">
+      <link rel="stylesheet" href="../../other/bootstrap/css/bootstrap-datetimepicker.min.css">
+      <link rel="stylesheet" href="../../other/css/font-awesome.min.css">
+      <link rel="stylesheet" href="../../other/css/ionicons.min.css">
+      <link rel="stylesheet" href="../../other/dist/css/AdminLTE.min.css">
+      <link rel="stylesheet" href="../../other/dist/css/skins/_all-skins.min.css">
+      <link rel="stylesheet" href="../../other/quickSearch/quickSearch.css">
+      <link rel="stylesheet" href="../../css/index.css">
+  </head>
+  <body class="sidebar-mini skin-purple wysihtml5-supported">
+      <div class="content-wrapper">
+          <section class="content">
+              <div class="row">
+                  <ol class="breadcrumb">
+                      <li><a>数据查询</a></li>
+                      <li><a href="hqlTaskList.html">hql任务列表</a></li>
+                      <li class="active">hql任务详情</li>
+                  </ol>
+              </div>
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="box">
+                      <form class="form-horizontal">
+                        <div class="box-body">
+                                <div class="form-groups">
+                                  <label class="col-sm-2 control-label">任务名称</label>
+                                  <div class="col-sm-3 input-groups-sm">
+                                      <input type="text" class="form-control" id="name" placeholder="" readonly>
+                                  </div>
+                                  <div class="col-sm-7"></div>
+                                </div>
+                                <div class="form-groups">
+                                  <label class="col-sm-2 control-label">负责人</label>
+                                  <div class="col-sm-3 input-groups-sm">
+                                      <input type="text" class="form-control" id="userNames" placeholder="" readonly>
+                                  </div>
+                                    <div class="col-sm-1" style="line-height:30px;padding-left:0;">
+                                        <i class="fa fa-fw fa-plus" id="addUserBut"></i>
+                                    </div>
+                                    <div class="col-sm-6"></div>
+                                </div>
+                                <div class="form-groups">
+                                  <label class="col-sm-2 control-label">hql脚本内容</label>
+                                  <div class="col-sm-8 input-groups-sm" >
+                                      <textarea class="sqlTextarea" id="sql" readonly></textarea>
+                                  </div>
+                                  <div class="col-sm-2"></div>
+                                </div>
+                                 <div class="form-groups">
+                                  <label class="col-sm-2 control-label">hql脚本内容</label>
+                                  <div class="col-sm-8 input-groups-sm" >
+                                      <textarea class="descTextarea" id="desc"></textarea>
+                                  </div>
+                                  <div class="col-sm-2"></div>
+                                </div>
+                            </div>
+                          <div class="box-footer">
+                              <a id="saveInfo" class="btn btn-info pull-right">修改</a>
+                          </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </section>
+      </div>
+      <div class="modal" id="userModal">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                      <h4 class="modal-title">请选择用户</h4>
+                  </div>
+                  <div class="modal-body">
+                      <div class="box box-solid">
+                          <div class="box-header with-border">
+                              <div class="form-groups">
+                                  <label  class="col-sm-2 control-label">快速查询</label>
+                                  <div class="col-sm-6 input-groups-sm">
+                                      <input type="text" class="form-control" id="quickSearchName" placeholder="">
+                                  </div>
+                                  <div class="col-sm-4"></div>
+                              </div>
+
+                          </div>
+                          <div class="box-body no-padding selectUsers">
+                              <!--<a class="btn btn-app" data-id="1" data-loginName="guoyan">-->
+                              <!--<span class="badge bg-yellow"><i class="fa fa-fw fa-times"></i></span>-->
+                              <!--Notifications-->
+                              <!--</a>-->
+                          </div>
+                          <div class="box-body no-padding" style="display: block;">
+                              <ul class="nav nav-pills nav-stacked myuserUl">
+                                  <!--<li><a href="javascript:void(0);">郭岩  guoya@elong.com</a></li>-->
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+                      <button type="button" class="btn btn-primary" id="addFuzeren">确定</button>
+                  </div>
+              </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+      </div>
+  </body>
+  <script src="../../other/require/require_jquery-2.1.4.js"></script>
+  <script src="../../js/requireConfig.js"></script>
+  <script src="../../js/dataManager/hqlTaskInfo.js"></script>
+</html>

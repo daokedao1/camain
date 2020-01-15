@@ -1,0 +1,27 @@
+{
+  "devDependencies": {
+    "http-proxy": "^1.18.0"
+  },
+  "name": "lx",
+  "version": "1.0.0",
+  "description": "lx",
+  "main": "mime.js",
+  "dependencies": {
+    "_debug@3.2.6@debug": "^3.2.6",
+    "_eventemitter3@4.0.0@eventemitter3": "^4.0.0",
+    "_follow-redirects@1.9.0@follow-redirects": "^1.9.0",
+    "_http-proxy@1.18.0@http-proxy": "^1.18.0",
+    "_ms@2.1.2@ms": "^2.1.2",
+    "_requires-port@1.0.0@requires-port": "^1.0.0",
+    "debug": "^3.2.6",
+    "eventemitter3": "^4.0.0",
+    "follow-redirects": "^1.9.0",
+    "ms": "^2.1.2",
+    "requires-port": "^1.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "lx",
+  "license": "ISC"
+}

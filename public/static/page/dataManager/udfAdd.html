@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>数据管理</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="/other/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/other/bootstrap/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="/other/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/other/css/ionicons.min.css">
+    <link rel="stylesheet" href="/other/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/other/dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="/other/quickSearch/quickSearch.css">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body class="sidebar-mini skin-purple wysihtml5-supported">
+ 
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a>查询开发</a></li>
+                <li class="active">udf新增</li>
+            </ol>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <form class="form-horizontal" method="post" id="form" action="/venus/transform/udf/saveUDF" target="callbackIframe" enctype="multipart/form-data">
+                        <div class="box-body">
+                            <div class="form-groups">
+                                <label class="col-sm-2 control-label">udf名称</label>
+                                <div class="col-sm-3 input-groups-sm">
+                                    <input type="text" class="form-control" id="udfName" name="udfName" placeholder="">
+                                </div>
+                                <div class="col-sm-7">
+                                    <input type="hidden" id="id" name="id"/>
+                                </div>
+                            </div>
+                            <div class="form-groups">
+                                <label class="col-sm-2 control-label">负责人</label>
+                                <div class="col-sm-3 input-groups-sm">
+                                    <input type="text" class="form-control" id="administrator" name="administrator" readonly >
+                                </div>
+                                <div class="col-sm-1" style="line-height:30px;padding-left:0;">
+                                    <i class="fa fa-fw fa-plus" id="addUserBut"></i>
+                                </div>
+                                <div class="col-sm-6"></div>
+                            </div>
+                            <div class="form-groups">
+                                <label class="col-sm-2 control-label">上传jar包</label>
+                                <div class="col-sm-3 input-groups-sm">
+                                    <input type="file"  id="file" name="file" >
+                                </div>
+                                <div class="col-sm-7"></div>
+                            </div>
+                            <div class="form-groups">
+                                <label class="col-sm-2 control-label">class name</label>
+                                <div class="col-sm-3 input-groups-sm">
+                                    <input type="text" class="form-control" id="className" name="className" placeholder="">
+                                </div>
+                                <div class="col-sm-7">
+                                </div>
+                            </div>
+                            <div class="form-groups">
+                                <label class="col-sm-2 control-label">用例</label>
+                                <div class="col-sm-6">
+                                    <span id="jarTip" style="display: block;margin-top:10px;"></span>
+                                    <span id="classNameTip" style="display: block;margin-bottom:10px;"></span>
+                                    <textarea class="form-control" id="exampleOpre" rows="6" placeholder="用例..."></textarea>
+                                </div>
+                                <div class="col-sm-4">
+                                    <textarea id="example" name="example" style="display: none;"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-groups">
+                                <label class="col-sm-2 control-label">描述</label>
+                                <div class="col-sm-4">
+                                    <textarea class="form-control" id="describe" name="describe" rows="6" placeholder="描述..."></textarea>
+                                </div>
+                                <div class="col-sm-4"></div>
+                            </div>
+                            <div class="form-groups">
+                                <label class="col-sm-2 control-label"></label>
+                                <div class="col-sm-3">
+                                    <a class="btn btn-info pull-left" id="addOne">保存</a>
+                                </div>
+                                <div class="col-sm-3">
+                                </div>
+                                <div class="col-sm-4"></div>
+                            </div>
+                        </div><!-- /.box-body -->
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>
+
+<div class="modal" id="userModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">请选择用户</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box box-solid">
+                    <div class="box-header with-border">
+                        <div class="form-groups">
+                            <label  class="col-sm-2 control-label">快速查询</label>
+                            <div class="col-sm-6 input-groups-sm">
+                                <input type="text" class="form-control" id="quickSearchName" placeholder="">
+                            </div>
+                            <div class="col-sm-4"></div>
+                        </div>
+
+                    </div>
+                    <div class="box-body no-padding selectUsers">
+                        <!--<a class="btn btn-app" data-id="1" data-loginName="guoyan">-->
+                        <!--<span class="badge bg-yellow"><i class="fa fa-fw fa-times"></i></span>-->
+                        <!--Notifications-->
+                        <!--</a>-->
+                    </div>
+                    <div class="box-body no-padding" style="display: block;">
+                        <ul class="nav nav-pills nav-stacked myuserUl">
+                            <!--<li><a href="javascript:void(0);">郭岩  guoya@elong.com</a></li>-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="addFuzeren">确定</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<iframe id="callbackIframe" name="callbackIframe" style="display: none;">
+</iframe>
+
+</body>
+<script src="/other/require/require_jquery-2.1.4.js"></script>
+<script src="/js/requireConfig.js"></script>
+<script src="/js/dataManager/udfAdd.js"></script>
+</html>

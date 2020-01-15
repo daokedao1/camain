@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>数据管理</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+      <link rel="stylesheet" href="../../other/bootstrap/css/bootstrap.min.css">
+      <link rel="stylesheet" href="../../other/bootstrap/css/bootstrap-datetimepicker.min.css">
+      <link rel="stylesheet" href="../../other/css/font-awesome.min.css">
+      <link rel="stylesheet" href="../../other/css/ionicons.min.css">
+      <link rel="stylesheet" href="../../other/dist/css/AdminLTE.min.css">
+      <link rel="stylesheet" href="../../other/dist/css/skins/_all-skins.min.css">
+      <link rel="stylesheet" href="../../other/quickSearch/quickSearch.css">
+      <link rel="stylesheet" href="../../css/index.css">
+  </head>
+  <body class="sidebar-mini skin-purple wysihtml5-supported">
+
+      <div class="content-wrapper">
+          <section class="content">
+              <div class="row">
+                  <ol class="breadcrumb">
+                      <li><a>数据知识</a></li>
+                      <li class="active">表管理</li>
+                  </ol>
+              </div>
+              <div class="row">
+                  <div class="col-md-2 no-padding-right" id="leftKu">
+                      <!--<div class="box box-solid collapsed-box">-->
+                          <!--<div class="box-header with-border" data-pid="-1">-->
+                              <!--<h3 class="box-title">仓库</h3>-->
+                              <!--<div class="box-tools">-->
+                                  <!--<button class="btn btn-box-tool" data-id="-1" data-flag="false" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                              <!--</div>-->
+                          <!--</div>-->
+                          <!--<div class="box-body no-padding" style="display: none;">-->
+                              <!--<ul class="nav nav-pills nav-stacked" data-pid="-1">-->
+                              <!--</ul>-->
+                          <!--</div>-->
+                      <!--</div>-->
+                  </div><!-- /.col -->
+                  <div class="col-md-10">
+                      <div class="box  box-table">
+                          <div class="box-header with-border">
+                              <div class="mytableTop">
+                                  <h3 class="box-title">Table管理</h3>
+                                  <i class="fa fa-fw fa-plus pull-right" id="addHiveTable"></i>
+                              </div>
+                          </div>
+                          <div class="box-body dingzhitable">
+                              <table class="table table-bordered">
+                                  <thead>
+                                      <tr>
+                                          <th>表名</th>
+                                          <th>中文名</th>
+                                          <th>创建人</th>
+                                          <th>类型</th>
+                                          <th style="width:120px;">创建时间</th>
+                                          <th  style="width:120px;">最近修改时间</th>
+                                          <th  style="width:100px;">操作</th>
+                                      </tr>
+                                      <tr class="searchTh">
+                                          <th><input type="text" id="tableName"/></th>
+                                          <th><input type="text" id="cname"/></th>
+                                          <th><input type="text" id="createName"/></th>
+                                          <th><select id="tableType">
+                                              <option value="">--全部--</option>
+                                              <option value="MANAGED_TABLE">内表</option>
+                                              <option value="EXTERNAL_TABLE">外表</option>
+                                          </select></th>
+                                          <th><input type="text" id="createTime"/></th>
+                                          <th><input type="text" id="modifyTime"/></th>
+                                          <th></th>
+                                      </tr>
+                                  </thead>
+                                  <tbody id="hiveTableList">
+                                  </tbody></table>
+                          </div><!-- /.box-body -->
+                          <div class="box-footer clearfix">
+                              <ul class="pagination pagination-sm no-margin pull-right">
+                                  <li><a href="javascript:void(0);" id="prevPage">上一页</a></li>
+                                  <li><a href="javascript:void(0);" id="nextPage">下一页</a></li>
+                              </ul>
+                              当前页数：<small id="currentPageNum">0</small>
+                              总页数：<small id="totalPageNum">0</small>
+                              总数：<small id="totalNum">0</small>
+                          </div>
+                      </div>
+                  </div><!-- /.col -->
+              </div>
+          </section>
+      </div>
+
+      <div class="modal" id="chooseTypeModal">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                      <h4 class="modal-title">请选择依赖数据源类型</h4>
+                  </div>
+                  <div class="modal-body">
+                      <div class="form-group">
+                          <div class="row">
+                              <div class="radio col-md-5">
+                                  <label>
+                                      <input value="1" name="hivetype" type="radio" checked id="hiveIn">RDS源
+                                  </label>
+                                  <label style="margin-left:30px;">
+                                      <input  value="2" name="hivetype" type="radio" id="hiveOut">Hive源
+                                  </label>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+                      <button type="button" class="btn btn-primary" id="sureAddHive">确定</button>
+                  </div>
+              </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+      </div>
+
+
+      <div class="overlay-wrapper" style="display: none;">
+          <div class="overlay">
+              <i class="fa fa-refresh fa-spin"></i>
+          </div>
+      </div>
+  </body>
+
+  <script src="../../other/require/require_jquery-2.1.4.js"></script>
+  <script src="../../js/requireConfig.js"></script>
+  <!--<script src="../../other/plugins/jQuery/jQuery-2.1.4.min.js"></script>-->
+  <!--<script src="../../other/bootstrap/js/bootstrap.min.js"></script>-->
+  <!--<script src="../../other/bootstrap/js/bootstrap-datetimepicker.min.js"></script>-->
+  <!--<script src="../../other/dist/js/app.min.js"></script>-->
+  <!--<script src="/js/common.js"></script>-->
+  <!--<script src="../../other/quickSearch/quickSearch.js"></script>-->
+  <script src="../../js/hiveTable/hiveTableList.js"></script>
+</html>
