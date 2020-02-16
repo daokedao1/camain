@@ -1,0 +1,118 @@
+.allData{
+  background-color: #fff;
+  .ant-list-bordered .ant-list-item{
+    padding-right: 0px;
+    padding-left: 0px;
+  
+    text-align: center;
+  }
+
+
+  .allData_m{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    .allData_t{
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      align-items: flex-start;
+      width: 100%;
+      padding: 9px 0;
+
+    }
+    ul{
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      font-size: 12px;
+      padding-left:0px;
+      .list{
+        width: 125px;
+        display: flex;
+        margin-right:1%;
+        flex-flow: column nowrap;
+        justify-content: flex-start;
+        align-items: center;
+      margin-bottom: 30px;
+        .ant-list-bordered .ant-list-item{
+          width: 123px;
+          white-space: nowrap;
+          overflow: hidden;
+        }
+        .headerList{
+          text-align: center;
+          height: 26px;
+        }
+        img{
+          margin-bottom: 20px;
+        }
+        .ant-list-bordered .ant-list-item:nth-child(odd){
+          background-color:#f2f7fc;
+        }
+        button{
+          width:100%;
+        }
+      }
+    }
+    h3{
+
+    }
+  }
+
+}
+.headerList {
+  color: #fff;
+  font-size: 15px;
+  animation: fade 600ms infinite;
+  background: red;
+  cursor: pointer;
+  -webkit-animation: fade 600ms infinite;
+}
+@keyframes fade {
+  from {
+      opacity: 1.0;
+  }
+  50% {
+      opacity: 0.4;
+  }
+  to {
+      opacity: 1.0;
+  }
+}
+
+@-webkit-keyframes fade {
+  from {
+      opacity: 1.0;
+  }
+  50% {
+      opacity: 0.4;
+  }
+  to {
+      opacity: 1.0;
+  }
+}
+.tipsDes{
+  p{
+    color:#1890ff;
+    cursor: pointer;
+  
+  }
+
+
+}
+.topAllData{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.cuoshi{
+  padding-left: 70px;
+  // color:#3385ff;
+  // font-size:21px;
+}
+
