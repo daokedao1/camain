@@ -3,28 +3,25 @@ import React,{Component} from 'react';
 import { Form, Icon, Input, Button, Checkbox,message } from 'antd';
 import { PwaInstaller } from '../widget';
 import {saveAuthInfo} from '../../redux/common';
-import {POST} from '../../axios/tools'
-import {setCookie} from './../../utils/index'
-import {connect} from 'react-redux'
-import localData from './../../utils/localStorage'
-
-import {dataList} from './serve'
+import {login} from '../../axios';
+import {setCookie} from './../../utils/index';
+import {connect} from 'react-redux';
 
 const FormItem = Form.Item;
 @connect(state => {
-  console.log(state)
+    console.log(state);
     return {
         auth: state.default.auth
-        }
+    };
 }, {saveAuthInfo})
 
 class Login extends Component {
-  constructor(props) {
-    super(props)
-      this.state = {
-          auth: '',
-          title: '',
-      };
+    constructor(props) {
+        super(props);
+        this.state = {
+            auth: '',
+            title: ''
+        };
     //   localStorage.setItem('allData','');
     }
     componentDidUpdate(prevProps) { // React 16.3+弃用componentWillReceiveProps
@@ -40,20 +37,22 @@ class Login extends Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
+                let param = {
+                    'username': values.loginId,
+                    'password': values.password
 
-                 POST('/login',{
-                     ...values
-                 }).then(res=>{
-                     if(res.data.result){
+                };
+                console.log(param);
+                login().then(res=>{
+                    if(res.success){
                         this.props.saveAuthInfo(res);
-                        setCookie('Authorization',res.data.Authorization)
+                        setCookie('token',res.data.token);
                         setCookie('usertokentime',new Date().getTime());
 
-              
-                            this.props.history.push('/');
-                       
-                     }
-                 })
+                        this.props.history.push('/');
+
+                    }
+                });
             }
         });
     };
@@ -69,14 +68,14 @@ class Login extends Component {
                     <Form onSubmit={this.handleSubmit} style={{maxWidth: '300px'}}>
                         <FormItem>
                             {getFieldDecorator('loginId', {
-                                rules: [{ required: true, message: '请输入用户名!' }],
+                                rules: [{ required: true, message: '请输入用户名!' }]
                             })(
                                 <Input  prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="管理员输入admin" />
                             )}
                         </FormItem>
                         <FormItem>
                             {getFieldDecorator('password', {
-                                rules: [{ required: true, message: '请输入密码!' }],
+                                rules: [{ required: true, message: '请输入密码!' }]
                             })(
                                 <Input  prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="密码" />
                             )}

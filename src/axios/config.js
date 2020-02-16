@@ -17,7 +17,9 @@ export const GIT_USER = 'https://api.github.com/user';
 // bbc top news
 export const NEWS_BBC ='https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=429904aa01f54a39a278a406acf50070';
 
-const domain = 'http://39.98.215.185:8088';
-// const domain = 'http://127.0.0.1:8088';
+const domain = 'http://47.105.149.158:8090';
+
 
 export const GEE_HISTORY_LIST = domain+'/api/alarmlog/list';
+//登录
+export const LOGIN_URL = domain+'/auth/login';

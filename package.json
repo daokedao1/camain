@@ -77,7 +77,6 @@
     "react-draft-wysiwyg": "^1.12.13",
     "react-draggable": "^3.0.5",
     "react-hot-loader": "^4.3.11",
-    "react-html-table-to-excel": "^2.0.0",
     "react-loadable": "^5.5.0",
     "react-qmap": "^0.1.6",
     "react-redux": "^5.0.7",
@@ -181,5 +180,5 @@
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.8"
   },
-  "proxy": "http://39.98.215.185:8088"
+  "proxy": "http://47.105.149.158:8090/"
 }
