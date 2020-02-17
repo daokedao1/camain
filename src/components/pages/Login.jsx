@@ -6,7 +6,11 @@ import {saveAuthInfo} from '../../redux/common';
 import {login} from '../../axios';
 import {setCookie} from './../../utils/index';
 import {connect} from 'react-redux';
-
+import Particles from 'reactparticles.js';
+const bg = {
+    backgroundImage:`url(${require('./img/login_bg1.jpg')})`,
+    backgroundSize: '100% 100%'
+};
 const FormItem = Form.Item;
 @connect(state => {
     console.log(state);
@@ -60,10 +64,11 @@ class Login extends Component {
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
-            <div className="login">
+            <div style={bg} className="login">
+                <Particles id="test-particles" />
                 <div className="login-form" >
                     <div className="login-logo">
-                        <span>注水泵远程智能诊断监控系统</span>
+                        <span>venus</span>
                         <PwaInstaller />
                     </div>
                     <Form onSubmit={this.handleSubmit} style={{maxWidth: '300px'}}>
