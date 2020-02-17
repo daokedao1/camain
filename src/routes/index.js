@@ -7,7 +7,7 @@ import DocumentTitle from 'react-document-title';
 import AllComponents from '../components';
 import routesConfig from './config';
 import queryString from 'query-string';
-import {getCookie,setCookie} from '../utils/index'
+import {getCookie,setCookie} from '../utils/index';
 
 export default class CRouter extends Component {
     requireAuth = (permission, component) => {
@@ -22,24 +22,24 @@ export default class CRouter extends Component {
         const { auth } = this.props;
         // const permissions = auth.permissions;
 
-        const Authorization=getCookie("Authorization");
-        const usertokentime=getCookie("usertokentime")||0;
+        const token=getCookie('token');
+        const usertokentime=getCookie('usertokentime')||0;
         let curDate = new Date().getTime();
         // if (process.env.NODE_ENV === 'production' && !permissions) {
 
         if((curDate - usertokentime) > 2*3600*1000){
-          setCookie('Authorization','')
-          setCookie('usertokentime','')
-          return <Redirect to={'/login'} />;
+            setCookie('token','');
+            setCookie('usertokentime','');
+            return <Redirect to={'/login'} />;
         }
-        if(!Authorization ){
+        if(!token ){
 
-              // 线上环境判断是否登录
-              // localStorage.setItem('user','');
-              // localStorage.setItem('usertokentime','');
-              setCookie('Authorization','')
-              setCookie('usertokentime','')
-              return <Redirect to={'/login'} />;
+            // 线上环境判断是否登录
+            // localStorage.setItem('user','');
+            // localStorage.setItem('usertokentime','');
+            setCookie('token','');
+            setCookie('usertokentime','');
+            return <Redirect to={'/login'} />;
         }
 
         return permission ? this.requireAuth(permission, component) : component;
@@ -77,7 +77,7 @@ export default class CRouter extends Component {
                                             ...props,
                                             query: queryParams
                                                 ? queryString.parse(queryParams[0])
-                                                : {},
+                                                : {}
                                         };
 
                                         // 重新包装组件

@@ -1,6 +1,6 @@
 
 import React,{Component} from 'react';
-import { Form, Icon, Input, Button, Checkbox,message } from 'antd';
+import { Form, Icon, Input, Button,message } from 'antd';
 import { PwaInstaller } from '../widget';
 import {saveAuthInfo} from '../../redux/common';
 import {login} from '../../axios';
@@ -43,14 +43,15 @@ class Login extends Component {
 
                 };
                 console.log(param);
-                login().then(res=>{
+                login(param).then(res=>{
                     if(res.success){
                         this.props.saveAuthInfo(res);
                         setCookie('token',res.data.token);
                         setCookie('usertokentime',new Date().getTime());
 
                         this.props.history.push('/');
-
+                    }else{
+                        message.warning(res.message);
                     }
                 });
             }
