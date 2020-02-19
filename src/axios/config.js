@@ -23,3 +23,4 @@ const domain = 'http://47.105.149.158:8090';
 export const GEE_HISTORY_LIST = domain+'/api/alarmlog/list';
 //登录
 export const LOGIN_URL = domain+'/auth/login';
+export const GET_ALUMNI_ORG = domain+'/api/alumni/page';//校友组织

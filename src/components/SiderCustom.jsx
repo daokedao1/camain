@@ -19,7 +19,7 @@ class SiderCustom extends Component {
                 ...state2,
                 firstHide: state.collapsed !== props.collapsed && props.collapsed, // 两个不等时赋值props属性值否则为false
                 openKey: state.openKey || (!props.collapsed && state1.openKey)
-            }
+            };
         }
         return null;
     }
@@ -34,14 +34,14 @@ class SiderCustom extends Component {
         return {
             collapsed,
             // firstHide: collapsed,
-            mode: collapsed ? 'vertical' : 'inline',
+            mode: collapsed ? 'vertical' : 'inline'
         };
     };
     state = {
         mode: 'inline',
         openKey: '',
         selectedKey: '',
-        firstHide: true, // 点击收缩菜单，第一次隐藏展开子菜单，openMenu时恢复
+        firstHide: true // 点击收缩菜单，第一次隐藏展开子菜单，openMenu时恢复
     };
     componentDidMount() {
         // this.setMenuOpen(this.props);
@@ -58,8 +58,8 @@ class SiderCustom extends Component {
     openMenu = v => {
         this.setState({
             openKey: v[v.length - 1],
-            firstHide: false,
-        })
+            firstHide: false
+        });
     };
     render() {
         const { selectedKey, openKey, firstHide, collapsed } = this.state;
@@ -71,9 +71,9 @@ class SiderCustom extends Component {
                 style={{ overflowY: 'auto' }}
             >
 
-                <div className="logo" style={{lineHeight:'32px',textAlign:'center',fontSize:"12px",backgrounColor:"#000"}}>
+                <div className="logo" style={{lineHeight:'32px',textAlign:'center',fontSize:'12px',backgrounColor:'#000'}}>
                     {/* <img src={img} alt=""/> */}
-                     
+                     后台管理系统
                 </div>
                 <SiderMenu
                     menus={routes.menus}
@@ -92,7 +92,7 @@ class SiderCustom extends Component {
                     `}
                 </style>
             </Sider>
-        )
+        );
     }
 }
 

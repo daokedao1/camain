@@ -1,9 +1,12 @@
 
 import axios from 'axios';
-import {cookieGet} from '../utils';
+import Cookie from 'js-cookie';
 import store from './../redux/store';
 let query = {};
 const env = process.env.NODE_ENV || 'development';
+const token = 'Bearer '+Cookie.get('token');
+console.log(token);
+
 // axios.defaults.crossDomain = true;
 // axios.defaults.withCredentials  = true;
 /**
@@ -16,7 +19,8 @@ export const GET = (url, params = {}) => {
         params = {};
     }
     let headers = {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'Authorization':token
     };
     return new Promise((resolve, reject) => {
         axios({
@@ -68,13 +72,14 @@ export const POST = (url, data = {}) => {
     // query.code = sessionStorage.getItem("accessToken") || decodeURIComponent(cookieGet('accessToken')) || ''
     // query.p = sessionStorage.getItem("source") || cookieGet('source') || ''
     // query.v = sessionStorage.getItem("version") || cookieGet('version') || ''
-    console.log(url);
+
 
     if (!data) {
         data = {};
     }
     let headers = {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'Authorization':token
     };
     return new Promise((resolve, reject) => {
         axios({

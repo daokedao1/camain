@@ -16,3 +16,7 @@ export const getHistoryList = (param = {}) => GET(config.GEE_HISTORY_LIST,param 
 export const login = (param = {}) => POST(config.LOGIN_URL,param ).then(res=>{
     return res;
 }).catch(err=>err);
+//获取组织
+export const getAlumniOrg = (param = {}) => POST(config.GET_ALUMNI_ORG,param ).then(res=>{
+    return res;
+}).catch(err=>err);

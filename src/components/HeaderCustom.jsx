@@ -19,7 +19,7 @@ const MenuItemGroup = Menu.ItemGroup;
 class HeaderCustom extends Component {
     state = {
         user: '',
-        visible: false,
+        visible: false
     };
     componentDidMount() {
         const QueryString = queryString();
@@ -51,11 +51,11 @@ class HeaderCustom extends Component {
     };
     logout = () => {
         localStorage.removeItem('user');
-        this.props.history.push('/login')
+        this.props.history.push('/login');
     };
     popoverHide = () => {
         this.setState({
-            visible: false,
+            visible: false
         });
     };
     handleVisibleChange = (visible) => {
@@ -65,9 +65,19 @@ class HeaderCustom extends Component {
         const { responsive = { data: {} }, path } = this.props;
         return (
             <Header  className="custom-theme header" >
-              <img style={{marginLeft:"9px",width:"40px"}} src={img} alt=""/>
-              <span style={{color:'#ff1e26',fontSize: '25px',verticalAlign:"sub"}}>渤海装备钻井装备公司  注水泵远程智能诊断监控系统</span>
-
+                {
+                    responsive.data.isMobile ? (
+                        <Popover content={<SiderCustom path={path} popoverHide={this.popoverHide} />} trigger="click" placement="bottomLeft" visible={this.state.visible} onVisibleChange={this.handleVisibleChange}>
+                            <Icon type="bars" className="header__trigger custom-trigger" />
+                        </Popover>
+                    ) : (
+                        <Icon
+                            className="header__trigger custom-trigger"
+                            type={this.props.collapsed ? 'menu-unfold' : 'menu-fold'}
+                            onClick={this.props.toggle}
+                        />
+                    )
+                }
                 <Menu
                     mode="horizontal"
                     style={{ lineHeight: '64px', float: 'right' }}
@@ -94,7 +104,7 @@ class HeaderCustom extends Component {
                     </SubMenu>
                 </Menu>
             </Header>
-        )
+        );
     }
 }
 
