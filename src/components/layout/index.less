@@ -1,0 +1,30 @@
+.common-header{
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 16px;
+  padding-left: 40px;
+  line-height: 60px;
+  border-bottom: 1px solid #dedede;
+  position: relative;
+  &::before {
+      position: absolute;
+      display: block;
+      width: 5px;
+      content: "";
+      height: 20px;
+      top: 20px;
+      left: 20px;            
+      background-color: rgba(0, 102, 255, 1);
+  }
+  .htitle{
+    display: inline-block;
+  }
+  .hcenter{
+    display: inline-block;
+    margin-left: 50px;
+  }
+  .hextr{
+    display: inline-block;
+    float: right;
+    margin-right: 20px;
+  }
+}

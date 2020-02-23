@@ -145,6 +145,9 @@ class AlumniUser extends Component {
             loading:true
         });
     }
+    onDetailClick(reecord){
+
+    }
     render() {
         let columns = [
             {
@@ -182,6 +185,12 @@ class AlumniUser extends Component {
                 dataIndex: 'workUnit',
                 key: 'workUnit',
                 render: (text,reecord) => <a>{(text||'')+'-'+(reecord.duty||'')}</a>
+            },
+            {
+                title: '操作',
+                dataIndex: 'detail',
+                key: 'detail',
+                render: (text,reecord) => <a onClick={this.onDetailClick.bind(this,reecord)} >详情>></a>
             }
         ];
         return (

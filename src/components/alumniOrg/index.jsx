@@ -1,9 +1,10 @@
 
 import React, { Component } from 'react';
-import { Tree,Row, Button,Col,Form,Input,Select,message} from 'antd';
+import { Tree,Row, Button,Modal,Col,Form,Input,Select,message} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
-import {getAlumniOrg,getSchoolList,getAlumniById,updateAlumniById,addAlumni} from './../../axios';
+import {getAlumniOrg,getSchoolList,delAlumniById,getAlumniById,updateAlumniById,addAlumni} from './../../axios';
 
+const { confirm } = Modal;
 const { Option } = Select;
 const { TreeNode } = Tree;
 const { TextArea } = Input;
@@ -216,6 +217,33 @@ class AlumniOrg extends Component {
         });
     }
     delOrg(){
+        console.log(this.state.id > 3);
+        let targetID = this.state.id;
+        let _this = this;
+        if(targetID > 3){
+            confirm({
+                title: `您确认删除 ${this.state.name} 组织吗？?`,
+                content: 'When clicked the OK button, this dialog will be closed after 1 second',
+                onOk() {
+                    console.log(22);
+                    delAlumniById({id:targetID}).then(res=>{
+                        console.log(res);
+
+                        if(res.success){
+                            message.success('删除成功！');
+                            window.location.reload();
+
+                        }else{
+                            message.error('删除失败！');
+                        }
+                    });
+                },
+                onCancel() {}
+            });
+
+        }else{
+            message.warning('您不能删除该组织！');
+        }
 
     }
     render() {

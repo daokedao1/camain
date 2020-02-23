@@ -32,6 +32,15 @@ export const addAlumni = (param = {}) => POST(config.ADD_ALUMNI,param ).then(res
 export const updateAlumniById = (param = {}) => POST(config.UPDATE_ALUMNIBYID,param ).then(res=>{
     return res;
 }).catch(err=>err);
+//删除组织by id
+export const delAlumniById = (param = {}) => POST(config.DEL_ALUMNIBYID+param.id,{} ).then(res=>{
+    return res;
+}).catch(err=>err);
+//查询全部协会待审核信息
+export const getAlumniAuditList = (param = {}) => POST(config.GET_ALUMNI_AUDIT_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+
 //获取学校list
 export const getSchoolList = (param = {}) => POST(config.GET_SCHOOL_LIST,param ).then(res=>{
     return res;

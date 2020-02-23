@@ -27,7 +27,9 @@ export const LOGIN_URL = domain+'/auth/login';
 export const GET_ALUMNI_ORG = domain+'/api/alumni/page';//校友组织
 export const GET_ALUMNIBYID = domain+'/api/alumni/detail/';//校友组织by id /api/alumni/detail/{id}
 export const UPDATE_ALUMNIBYID = domain+'/api/alumni/update';//校友组织by id
+export const DEL_ALUMNIBYID = domain+'/api/alumni/delete/';//删除组织by id /api/alumni/delete/{alumniId}
 export const ADD_ALUMNI = domain+'/api/alumni/create';// 新增校友组织  /api/alumni/create
+export const GET_ALUMNI_AUDIT_LIST = domain+'/api/alumni/query/audit/all';//查询全部协会待审核信息
 //学校
 export const GET_SCHOOL_LIST = domain+'/api/school/page';//学校list
 //用户
