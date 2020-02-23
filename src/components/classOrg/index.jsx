@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { Tree,Row, Button,Col,Form,Input,Select,message} from 'antd';
+import { Tree,Row,Switch, Button,Col,Form,Input,Select,message} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import {getAlumniOrg,getSchoolList,getAlumniById,updateAlumniById,addAlumni} from './../../axios';
 
@@ -9,7 +9,7 @@ const { TreeNode } = Tree;
 const { TextArea } = Input;
 
 import './index.less';
-class AlumniOrg extends Component {
+class ClassOrg extends Component {
     constructor(props){
         super(props);
         this.state={
@@ -19,9 +19,8 @@ class AlumniOrg extends Component {
             opttype:'query',//add
             partentId:'0',
             schoollist:[],
-            curNode:[],
             treeData:[
-                { title: '校友会', key: 2 }
+                { title: '院系组织', key: 1 }
             ],
             id:'',
             name:'',
@@ -46,6 +45,7 @@ class AlumniOrg extends Component {
     }
     componentDidMount(){
         //this.getOrgData();
+
         this.getSchoolList();
     }
     getSchoolList(){
@@ -69,6 +69,7 @@ class AlumniOrg extends Component {
     addAlumni(param){
         delete param.update_time;
         delete param.id;
+        param.status = 1;
         addAlumni(param).then(res=>{
             if(res.success){
                 message.success('保存成功！');
@@ -79,6 +80,7 @@ class AlumniOrg extends Component {
         });
     }
     updateAlumniById(param){
+        param.status = 1;
         updateAlumniById(param).then(res=>{
             if(res.success){
                 message.success('保存成功！');
@@ -87,6 +89,8 @@ class AlumniOrg extends Component {
                 message.warning(res.message);
             }
         });
+
+
     }
     getOrgById(id){
         let param = {
@@ -97,13 +101,13 @@ class AlumniOrg extends Component {
                 let orginfo = res.data;
                 this.setState({
                     id:orginfo.id,
-                    name:orginfo.name,
-                    description:orginfo.description,
+                    name:orginfo.name||'',
+                    description:orginfo.description||'',
                     school_id:orginfo.school_id||'1',
-                    organization:orginfo.organization,
-                    leader_desc:orginfo.leader_desc,
-                    tel:orginfo.tel,
-                    type:orginfo.type||'2',
+                    organization:orginfo.organization||'',
+                    leader_desc:orginfo.leader_desc||'',
+                    tel:orginfo.tel||'',
+                    type:orginfo.type||'1',
                     update_time:orginfo.update_time,
                     partentId:orginfo.partentId
 
@@ -165,13 +169,9 @@ class AlumniOrg extends Component {
                 }
             });
         }else if(this.state.opttype === 'add'){
-
-
             this.props.form.validateFields((err, values) => {
                 if (!err) {
-
                     this.addAlumni(values);
-
                     console.log('Received values of form: ', values);
                 }
             });
@@ -192,14 +192,12 @@ class AlumniOrg extends Component {
     onTreeNodeClick(keys, event){
         console.log(keys, event);
         this.setState({
-            curNode:event.node,
             opttype:'query',
             orgtitle:'组织信息'
         });
         this.getOrgById(keys);
     }
     addOrg(){
-
         this.setState({
             orgtitle:'新增组织',
             partentId:this.state.id,
@@ -214,9 +212,6 @@ class AlumniOrg extends Component {
             update_time:'',
             opttype:'add'
         });
-    }
-    delOrg(){
-
     }
     render() {
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
@@ -240,7 +235,7 @@ class AlumniOrg extends Component {
 
         return (
             <div>
-                <BreadcrumbCustom first="校友管理" second="校友会管理" />
+                <BreadcrumbCustom first="校友管理" second="院系班级管理" />
 
                 <Row gutter={16}>
                     <Col className="gutter-row" span={8}>
@@ -360,11 +355,22 @@ class AlumniOrg extends Component {
                                     initialValue:this.state.type+''
                                 })(
                                     <Select  >
-                                        {/* <Option value='1'>学校组织</Option> */}
-                                        <Option value='2'>校友会</Option>
+                                        <Option value='1'>学校组织</Option>
+                                        {/* <Option value='2'>校友会</Option> */}
                                         {/* <Option value='3'>协会</Option> */}
                                     </Select>)}
                             </Form.Item>
+                            {/* <Form.Item label="状态">
+                                {getFieldDecorator('status', {
+                                    rules: [
+                                        {
+                                            required: false,
+                                            message: ''
+                                        }
+                                    ],
+                                    initialValue:this.state.tel
+                                })(<Switch checkedChildren="开启" unCheckedChildren="禁用" defaultChecked />)}
+                            </Form.Item> */}
                             <Form.Item label="更新时间">
                                 {getFieldDecorator('update_time', {
                                     rules: [
@@ -385,9 +391,6 @@ class AlumniOrg extends Component {
                                 <Button type="primary" onClick={this.addOrg.bind(this)} >
                                          新增下级组织
                                 </Button>
-                                <Button type="danger" onClick={this.delOrg.bind(this)} >
-                                         删除
-                                </Button>
                             </Form.Item>
                         </Form>
                     </Col>
@@ -398,4 +401,4 @@ class AlumniOrg extends Component {
     }
 }
 
-export default Form.create()(AlumniOrg);
+export default Form.create()(ClassOrg);

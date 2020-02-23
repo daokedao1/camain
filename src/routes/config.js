@@ -9,12 +9,12 @@ export default {
         {
             key: '/app/operate', title: '校友管理',icon: 'area-chart',
             subs: [
-                { key: '/app/alumni/realNameAuthentication', title: '注册/审核', component: 'allData' },
+                { key: '/app/alumni/realNameAuthentication', title: '注册/审核', component: 'RealNameAuthentication' },
 
                 { key: '/app/alumni/user', title: '校友管理', component: 'AlumniUser' },
 
                 { key: '/app/alumni/organization', title: '校友会管理', component: 'AlumniOrg' },
-                { key: '/app/waterData/course', title: '院系组织', component: 'course' }
+                { key: '/app/alumni/class', title: '院系班级管理', component: 'ClassOrg' }
 
             ]},
         {

@@ -50,6 +50,7 @@ import DataOverView from './dataoverview';
 
 import AlumniUser from './alumniUser';
 import AlumniOrg from './alumniOrg';
+import ClassOrg from './classOrg';
 import RealNameAuthentication from './realNameAuthentication';
 
 const WysiwygBundle = Loadable({
@@ -103,5 +104,6 @@ export default {
 
     AlumniUser,
     AlumniOrg,
-    RealNameAuthentication
+    RealNameAuthentication,
+    ClassOrg
 };
