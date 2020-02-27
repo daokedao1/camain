@@ -7,7 +7,7 @@ export default {
             ]
         },
         {
-            key: '/app/operate', title: '校友管理',icon: 'area-chart',
+            key: '/app/alumni', title: '校友管理',icon: 'area-chart',
             subs: [
                 { key: '/app/alumni/realNameAuthentication', title: '注册/审核', component: 'RealNameAuthentication' },
 
@@ -18,26 +18,26 @@ export default {
 
             ]},
         {
-            key: '/app/dashboard/index', title: '运营管理', icon: 'mobile',
+            key: '/app/operate', title: '运营管理', icon: 'mobile',
             subs:[
-                { key: '/app/waterData/222', title: '公告管理', component: 'Gallery' },
-                { key: '/app/waterData/main', title: '新闻管理', component: 'Main' },
-                { key: '/app/waterData/main', title: '活动管理', component: 'Main' },
-                { key: '/app/waterData/main', title: '招聘管理', component: 'Main' },
-                { key: '/app/waterData/main', title: '基金管理', component: 'Main' },
-                { key: '/app/waterData/main', title: '校园捐赠', component: 'Main' }
+                { key: '/app/operate/notice', title: '公告管理', component: 'Notice' },
+                { key: '/app/operate/news', title: '新闻管理', component: 'Main' },
+                { key: '/app/operate/activity', title: '活动管理', component: 'Main' },
+                { key: '/app/operate/main1', title: '招聘管理', component: 'Main' },
+                { key: '/app/operate/main2', title: '基金管理', component: 'Main' },
+                { key: '/app/operate/main3', title: '校园捐赠', component: 'Main' }
             ]
         },
         {
-            key: '/app/dashboard/index', title: '数据统计', icon: 'mobile',
+            key: '/app/dashboard/index44', title: '数据统计', icon: 'mobile',
             subs:[
-                { key: '/app/waterData/main', title: '地图', component: 'Main' }
+                { key: '/app/waterData/main4', title: '地图', component: 'Main' }
             ]
         },
         {
-            key: '/app/dashboard/index', title: '财务统计', icon: 'mobile',
+            key: '/app/dashboard/index33', title: '财务统计', icon: 'mobile',
             subs:[
-                { key: '/app/waterData/main', title: '流水', component: 'Echarts' }
+                { key: '/app/waterData/main5', title: '流水', component: 'Echarts' }
             ]
         },
         {

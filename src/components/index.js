@@ -52,7 +52,7 @@ import AlumniUser from './alumniUser';
 import AlumniOrg from './alumniOrg';
 import ClassOrg from './classOrg';
 import RealNameAuthentication from './realNameAuthentication';
-
+import Notice from './notice';
 const WysiwygBundle = Loadable({
     // 按需加载富文本配置
     loader: () => import('./ui/Wysiwyg'),
@@ -105,5 +105,6 @@ export default {
     AlumniUser,
     AlumniOrg,
     RealNameAuthentication,
-    ClassOrg
+    ClassOrg,
+    Notice
 };

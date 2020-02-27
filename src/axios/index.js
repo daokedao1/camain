@@ -40,6 +40,14 @@ export const delAlumniById = (param = {}) => POST(config.DEL_ALUMNIBYID+param.id
 export const getAlumniAuditList = (param = {}) => POST(config.GET_ALUMNI_AUDIT_LIST,param ).then(res=>{
     return res;
 }).catch(err=>err);
+////审核通过加入协会（id为待审核记录ID）
+export const AlumniAuditPass = (param = {}) => GET(config.OPT_ALUMNI_AUDIT_PASS+param,{} ).then(res=>{
+    return res;
+}).catch(err=>err);
+//驳回加入协会申请（id为待审核记录ID）
+export const AlumniAuditRefuse = (param = {}) => GET(config.OPT_ALUMNI_AUDIT_PASS+param,{} ).then(res=>{
+    return res;
+}).catch(err=>err);
 
 //获取学校list
 export const getSchoolList = (param = {}) => POST(config.GET_SCHOOL_LIST,param ).then(res=>{
@@ -48,5 +56,10 @@ export const getSchoolList = (param = {}) => POST(config.GET_SCHOOL_LIST,param )
 
 //获取用户list
 export const getCaUserList = (param = {}) => POST(config.GET_CAUSER_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+
+//获取文章list
+export const getArticleList = (param = {}) => POST(config.GET_ARTICLE_LIST,param ).then(res=>{
     return res;
 }).catch(err=>err);

@@ -73,6 +73,8 @@ class AlumniOrg extends Component {
         addAlumni(param).then(res=>{
             if(res.success){
                 message.success('保存成功！');
+
+                console.log();
             }else{
                 console.log(res);
                 message.warning(res.message);

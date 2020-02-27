@@ -30,8 +30,13 @@ export const UPDATE_ALUMNIBYID = domain+'/api/alumni/update';//校友组织by id
 export const DEL_ALUMNIBYID = domain+'/api/alumni/delete/';//删除组织by id /api/alumni/delete/{alumniId}
 export const ADD_ALUMNI = domain+'/api/alumni/create';// 新增校友组织  /api/alumni/create
 export const GET_ALUMNI_AUDIT_LIST = domain+'/api/alumni/query/audit/all';//查询全部协会待审核信息
+export const OPT_ALUMNI_AUDIT_PASS = domain+'/api/alumni/audit/pass/';//审核通过加入协会（id为待审核记录ID）
+export const OPT_ALUMNI_AUDIT_REFUSE = domain+'/api/alumni/audit/exit/';//驳回加入协会申请（id为待审核记录ID）
 //学校
 export const GET_SCHOOL_LIST = domain+'/api/school/page';//学校list
 //用户
 
 export const GET_CAUSER_LIST = domain+'/api/user/page';//用户list
+
+//文章
+export const GET_ARTICLE_LIST = domain+'/api/article/page';//文章articlelist

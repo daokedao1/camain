@@ -1,80 +1,185 @@
 
 import React, { Component } from 'react';
-import { Row, Col, Table } from 'antd';
+import { Row, Col, Table,Input,Divider,Modal,message } from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import Header from './../layout/Header';
-import {getAlumniAuditList} from './../../axios';
+import {getAlumniAuditList,AlumniAuditPass,AlumniAuditRefuse} from './../../axios';
+const { confirm } = Modal;
 
 class RealNameAuthentication extends Component {
     constructor(props){
         super(props);
         this.state={
             loading:false,
+            page:1,
+            pageSize:10,
+            total:0,
             dataList:[]
         };
     }
     componentDidMount(){
         this.getList();
     }
+    componentDidUpdate(){
+        if(this.state.loading){
+            this.getList();
+        }
+    }
     getList(){
         let params = {
-
-            'auditStatus':0,
+            'auditStatus':1,
             'orderField': '',
             'orderType': '',
-            'page': 1,
-            'size': 10
-
-
+            'page': this.state.page,
+            'size': this.state.pageSize
         };
         getAlumniAuditList(params).then(res=>{
             if(res.success){
                 if(res.data){
                     this.setState({
-                        dataList:res.data.items
+                        dataList:this.buildData(res.data.items),
+                        total:res.data.totalCount,
+                        loading:false
                     });
                 }
 
             }
         });
     }
+    buildData(list){
+        let arr = [];
+        list.forEach(element => {
+
+            let userModel = element.userModel||{};
+            let alumniModel = element.alumniModel||{};
+
+            arr.push({
+                id:element.id||'',
+                username:userModel.name||'',
+                userid:userModel.id||'',
+                usercollegeName:userModel.collegeName||'',
+                userfacultyName:userModel.facultyName||'',
+                userModelworkUnit:userModel.workUnit||'',
+                userModelduty:userModel.duty||'',
+                userModelphone:userModel.phone||'',
+                alumniModelID:alumniModel.id||'',
+                alumniModelName:alumniModel.name||''
+            });
+        });
+        return arr;
+    }
+    onPageChange(page, pageSize){
+        console.log(page, pageSize);
+        this.setState({
+            page:page,
+            pageSize:pageSize,
+            loading:true
+        });
+    }
+    onPassClick(record){
+        let {key,id,username='',alumniModelName=''} = record;
+        let _this = this;
+        confirm({
+            title: '您确认审批通过该请求?',
+            content: '请您核实用户('+username+')基本信息，确认加入组织('+alumniModelName+')！',
+            onOk() {
+                AlumniAuditPass(id).then(res=>{
+                    if(res.success){
+                        const dataList = [..._this.state.dataList];
+                        _this.setState({ dataList: dataList.filter(item => item.id !== id) });
+                        message.success('审批通过！');
+                    }else{
+                        message.error('审批失败！');
+                    }
+                });
+
+            },
+            onCancel() {
+                console.log('取消');
+
+            }
+        });
+    }
+    onNoClick(id){
+        console.log(id);
+    }
     render() {
         let columns = [
             {
-                title: 'id',
+                title: '申请ID',
                 dataIndex: 'id',
-                key: 'id',
-                render: (text) => <a>{text}</a>
+                key: 'id'
             },
             {
-                title: '姓名',
-                dataIndex: 'name',
-                key: 'name',
-                render: (text) => <a>{text}</a>
+                title: '申请协会',
+                dataIndex: 'alumniModelName',
+                key: 'alumniModelName'
+            },
+            {
+                title: '申请人',
+                dataIndex: 'username',
+                key: 'username'
             },
             {
                 title: '院系专业',
-                dataIndex: 'facultyName',
-                key: 'facultyName',
-                render: (text) => <a>{text}</a>
+                dataIndex: 'usercollegeName',
+                key: 'usercollegeName',
+                render: (text,record) => <span>{text+'-'+record.userfacultyName}</span>
+            },
+            {
+                title: '工作单位',
+                dataIndex: 'userModelworkUnit',
+                key: 'userModelworkUnit',
+                render: (text,record) => <span>{text+'-'+record.userModelduty}</span>
+            },
+            {
+                title: '联系方式',
+                dataIndex: 'userModelphone',
+                key: 'userModelphone'
+            },
+            {
+                title: '操作',
+                dataIndex: 'opt',
+                key: 'opt',
+                render: (e,record)=>(
+                    <span>
+                        {/* <a>详情</a>
+                        <Divider type="vertical" /> */}
+                        <a onClick={this.onPassClick.bind(this,record)}>通过</a>
+                        <Divider type="vertical" />
+                        <a onClick={this.onNoClick.bind(this,record)}>驳回</a>
+                    </span>
+                )
+
             }
+
         ];
         return (
             <div>
                 <BreadcrumbCustom first="校友管理" second="注册/审核" />
-                <Row gutter={16} style={{backgroundColor:'#fff'}}>
-                    <Col className="gutter-row" md={24}>
-                        <Header title="ww"/>
+                <Header title="申请加入协会申请审批"/>
+                <Row gutter={16} style={{backgroundColor:'#fff',padding:'20px 40px'}}>
+
+                    <Col className="gutter-row" md={6}>
+                        ID：<Input placeholder="按id搜索" style={{width:'180px'}} />
                     </Col>
+                    <Col className="gutter-row" md={6}>
+                        姓名：<Input placeholder="按姓名搜索" style={{width:'180px'}}/>
+                    </Col>
+                    <Col className="gutter-row" md={6}>
+                        协会：<Input placeholder="按协会搜索" style={{width:'180px'}}/>
+                    </Col>
+
                 </Row>
                 <Row gutter={16} style={{backgroundColor:'#fff'}}>
                     <Col className="gutter-row" md={24}>
-                        搜索
-                    </Col>
-                </Row>
-                <Row gutter={16} style={{backgroundColor:'#fff'}}>
-                    <Col className="gutter-row" md={24}>
-                        <Table dataSource={this.state.dataList} columns={columns} />
+                        <Table
+                            dataSource={this.state.dataList}
+                            columns={columns}
+                            pagination={{total:this.state.total,page:this.state.page,pageSize:this.state.pageSize,onChange:this.onPageChange.bind(this)}}
+                            rowKey={'id'}
+                            scroll={{x:'max-content'}}
+                        />
                     </Col>
                 </Row>
             </div>
