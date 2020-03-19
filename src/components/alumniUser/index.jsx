@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Tree,Row, Button,Divider,Table,Col,Input,Select,message} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
-import {getAlumniOrg,getAlumniById,getCaUserList} from './../../axios';
+import {getAlumniOrg,getCaUserList} from './../../axios';
 
 const { Option } = Select;
 const { TreeNode } = Tree;
@@ -18,6 +18,8 @@ class AlumniUser extends Component {
             page:1,
             pageSize:10,
             total:0,
+            nodePos:'0-0',
+            curSelectedOrgid:1,
             dataList:[],
             treeData:[
                 { title: '院系组织', key: 1 }
@@ -50,11 +52,38 @@ class AlumniUser extends Component {
             'size': this.state.pageSize,
             'yn': 1
         };
+        let {nodePos,curSelectedOrgid} = this.state;
+        console.log(curSelectedOrgid);
+        console.log(nodePos);
+        nodePos = nodePos.split('-');
+        switch(nodePos.length) {
+            case 2:
+                console.log('组织');
+                
+                break;
+            case 3:
+                console.log('学院');
+                param.collegeId = curSelectedOrgid;
+                break;
+            case 4:
+                console.log('专业');
+                param.facultyId = curSelectedOrgid;
+                break;
+            case 5:
+                console.log('班级');
+                param.classId = curSelectedOrgid;
+                break;
+            default:
+              
+        } 
         getCaUserList(param).then(res=>{
             if(res.success){
                 this.setState({
                     dataList:res.data.items,
                     total:res.data.totalCount,
+                    page:1,
+                    pageSize:10,
+                   
                     loading:false
                 });
             }
@@ -62,36 +91,22 @@ class AlumniUser extends Component {
     }
 
 
-    getOrgById(id){
-        let param = {
-            id:id
-        };
-        getAlumniById(param).then(res=>{
-            if(res.success){
-                let orginfo = res.data;
-                this.setState({
-                    id:orginfo.id,
-                    name:orginfo.name,
-                    description:orginfo.description,
-                    school_id:orginfo.school_id||'1',
-                    organization:orginfo.organization,
-                    leader_desc:orginfo.leader_desc,
-                    tel:orginfo.tel,
-                    type:orginfo.type||'2',
-                    update_time:orginfo.update_time,
-                    partentId:orginfo.partentId
+    getOrgById(id,nodeEvent){
+        let nodePos = nodeEvent.node.props.pos;
+        
+        this.setState({
+            nodePos:nodePos,
+            curSelectedOrgid:id[0],
+            loading:true
+        })
+       
+        
 
-                });
-            }else{
-                console.log(res);
-
-            }
-        });
     }
 
     onLoadData = treeNode =>{
         console.log(treeNode);
-        return         new Promise(resolve => {
+        return new Promise(resolve => {
             if (treeNode.props.children) {
                 resolve();
                 return;
@@ -135,7 +150,8 @@ class AlumniUser extends Component {
             return <TreeNode key={item.key} {...item} dataRef={item} />;
         });
     onTreeNodeClick(keys, event){
-        this.getOrgById(keys);
+        console.log(keys, event)
+        this.getOrgById(keys,event);
     }
     onPageChange(page, pageSize){
         console.log(page, pageSize);
