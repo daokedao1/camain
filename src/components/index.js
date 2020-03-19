@@ -53,6 +53,9 @@ import AlumniOrg from './alumniOrg';
 import ClassOrg from './classOrg';
 import RealNameAuthentication from './realNameAuthentication';
 import Notice from './notice';
+import News from './News';//新闻
+import Actions from './Actions';//活动
+
 const WysiwygBundle = Loadable({
     // 按需加载富文本配置
     loader: () => import('./ui/Wysiwyg'),
@@ -65,6 +68,7 @@ export default {
     AdvancedTable,
     AsynchronousTable,
     Echarts,
+    News,
     Recharts,
     Icons,
     Buttons,
@@ -84,8 +88,7 @@ export default {
     Cssmodule,
     MapUi,
     QueryParams,
-
-
+    Actions,
     Main,
     DataOverView,
 

@@ -21,8 +21,8 @@ export default {
             key: '/app/operate', title: '运营管理', icon: 'mobile',
             subs:[
                 { key: '/app/operate/notice', title: '公告管理', component: 'Notice' },
-                { key: '/app/operate/news', title: '新闻管理', component: 'Main' },
-                { key: '/app/operate/activity', title: '活动管理', component: 'Main' },
+                { key: '/app/operate/news', title: '新闻管理', component: 'News' },
+                { key: '/app/operate/Actions', title: '活动管理', component: 'Actions' },
                 { key: '/app/operate/main1', title: '招聘管理', component: 'Main' },
                 { key: '/app/operate/main2', title: '基金管理', component: 'Main' },
                 { key: '/app/operate/main3', title: '校园捐赠', component: 'Main' }

@@ -2,7 +2,7 @@
  * Created by hao.cheng on 2017/4/16.
  */
 import axios from 'axios';
-import { GET, POST } from './tools';
+import { GET, POST,DEL,PUT } from './tools';
 import * as config from './config';
 
 export const getBbcNews = () => GET(config.NEWS_BBC).then(res=>res);
@@ -63,3 +63,20 @@ export const getCaUserList = (param = {}) => POST(config.GET_CAUSER_LIST,param )
 export const getArticleList = (param = {}) => POST(config.GET_ARTICLE_LIST,param ).then(res=>{
     return res;
 }).catch(err=>err);
+//新建文章list
+export const addArticleList = (param = {}) => POST(config.ADD_ARTICLE_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+//新建文章list
+export const editArticleList = (param = {}) => PUT(config.ADD_ARTICLE_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+//删除文章list
+export const delArticleList = (param = {}) => DEL(config.DEL_ARTICLE_LIST+''+param.id ).then(res=>{
+    return res;
+}).catch(err=>err);
+//活动列表
+export const activityList = (param = {}) => POST(config.LIST_ACTIVITY_LIST ).then(res=>{
+    return res;
+}).catch(err=>err);
+

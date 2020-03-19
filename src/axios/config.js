@@ -40,3 +40,9 @@ export const GET_CAUSER_LIST = domain+'/api/user/page';//用户list
 
 //文章
 export const GET_ARTICLE_LIST = domain+'/api/article/page';//文章articlelist
+export const ADD_ARTICLE_LIST = domain+'/api/article';//新建文章
+export const DEL_ARTICLE_LIST = domain+'/api/article/';//删除文章
+//活动
+export const LIST_ACTIVITY_LIST = domain+'/api/activity/page';//文章列表
+
+

@@ -114,8 +114,103 @@ export const POST = (url, data = {}) => {
         });
     });
 };
+export const PUT = (url, data = {}) => {
+    // query.tk = sessionStorage.getItem("accessToken") || decodeURIComponent(cookieGet('accessToken')) || ''
+    // query.code = sessionStorage.getItem("accessToken") || decodeURIComponent(cookieGet('accessToken')) || ''
+    // query.p = sessionStorage.getItem("source") || cookieGet('source') || ''
+    // query.v = sessionStorage.getItem("version") || cookieGet('version') || ''
 
+
+    if (!data) {
+        data = {};
+    }
+    let headers = {
+        'content-type': 'application/json',
+        'Authorization':token
+    };
+    return new Promise((resolve, reject) => {
+        axios({
+            url,
+            data,
+            headers,
+            params: query,
+            method: 'PUT',
+            timeout: 30000
+        }).then(res => {
+            if (res.data.code !== 0) {
+                reject(res.data);
+            } else {
+                resolve(res.data);
+            }
+
+            if (env === 'development') {
+                console.group('调用网络接口成功');
+                console.log('[请求的status]:', res.status);
+                console.log('[请求的Url]:', url);
+                console.log('[请求的Data]:', data);
+                console.log('[请求的Result]:', res.data);
+                console.groupEnd();
+            }
+        }).catch(error => {
+            let isTimeout = JSON.stringify(error).includes('timeout') || '';
+            if (isTimeout) {
+                resolve({msg: '请求超时'});
+            } else {
+                resolve(error);
+            }
+        });
+    });
+};
+export const DEL = (url, data = {}) => {
+    // query.tk = sessionStorage.getItem("accessToken") || decodeURIComponent(cookieGet('accessToken')) || ''
+    // query.code = sessionStorage.getItem("accessToken") || decodeURIComponent(cookieGet('accessToken')) || ''
+    // query.p = sessionStorage.getItem("source") || cookieGet('source') || ''
+    // query.v = sessionStorage.getItem("version") || cookieGet('version') || ''
+
+
+    if (!data) {
+        data = {};
+    }
+    let headers = {
+        'content-type': 'application/json',
+        'Authorization':token
+    };
+    return new Promise((resolve, reject) => {
+        axios({
+            url,
+            data,
+            headers,
+            params: query,
+            method: 'DELETE',
+            timeout: 30000
+        }).then(res => {
+            if (res.data.code !== 0) {
+                reject(res.data);
+            } else {
+                resolve(res.data);
+            }
+
+            if (env === 'development') {
+                console.group('调用网络接口成功');
+                console.log('[请求的status]:', res.status);
+                console.log('[请求的Url]:', url);
+                console.log('[请求的Data]:', data);
+                console.log('[请求的Result]:', res.data);
+                console.groupEnd();
+            }
+        }).catch(error => {
+            let isTimeout = JSON.stringify(error).includes('timeout') || '';
+            if (isTimeout) {
+                resolve({msg: '请求超时'});
+            } else {
+                resolve(error);
+            }
+        });
+    });
+};
 export default {
     GET,
-    POST
+    POST,
+    DEL,
+    PUT
 };

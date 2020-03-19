@@ -25,7 +25,7 @@ class News extends React.Component {
                 creator:'',
                 isPublish:false,
                 content:'',
-                type:2
+                type:1
             },
             text: '',
             objData:{},
@@ -34,7 +34,7 @@ class News extends React.Component {
     }
     componentDidMount(){
         const data={};
-        this.init();
+        this.init(data);
     }
     async searchWay(e,v){
         const { value } = e.target;
@@ -47,10 +47,10 @@ class News extends React.Component {
         }
         this.init(paramData);
     }
-    async init(){
+    async init(data){
         let yAxisData,
             arrTable=[...tableData];
-        const res= await getArticleList({type:2});
+        const res= await getArticleList();
         if(res){
             yAxisData=[...res.data.items];
             yAxisData=this.stateWay(yAxisData);
@@ -167,7 +167,7 @@ class News extends React.Component {
                 <div>
                     <Row >
                         <Col span={24}>
-                            <Card title="公告管理" extra={<Button onClick={()=>this.add('新建')} type="primary">新建</Button>} bordered={false}>
+                            <Card title="新闻管理" extra={<Button onClick={()=>this.add('新建')} type="primary">新建</Button>} bordered={false}>
                                 <ListTable
                                     loading={loading}
                                     yAxisData={yAxisData}
