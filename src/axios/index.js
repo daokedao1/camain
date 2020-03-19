@@ -97,3 +97,30 @@ export const publishActivityList = (param = {}) => PUT(config.PUBLISTH_ACTIVITY_
 export const retractActivityList = (param = {}) => PUT(config.RETRACT_ACTIVITY_LIST+param.id ).then(res=>{
     return res;
 }).catch(err=>err);
+//轮播图
+export const bannerList = (param = {}) => POST(config.BANNER_ACTIVITY_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+export const addBannerList = (param = {}) => POST(config.ADD_BANNER_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+//删除
+export const delBannerList = (param = {}) => DEL(config.DEL_BANNER_LIST+param.id,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+export const editBannerList = (param = {}) => PUT(config.ADD_BANNER_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+//主页导航
+export const navBannerList = (param = {}) => POST(config.NAV_ACTIVITY_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+export const addNavList = (param = {}) => POST(config.ADD_NAV_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+export const editNavList = (param = {}) => PUT(config.ADD_NAV_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+export const delNavList = (param = {}) => DEL(config.DEL_NAV_LIST+param.id ).then(res=>{
+    return res;
+}).catch(err=>err);

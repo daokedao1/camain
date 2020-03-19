@@ -55,6 +55,8 @@ import RealNameAuthentication from './realNameAuthentication';
 import Notice from './notice';
 import News from './News';//新闻
 import Actions from './Actions';//活动
+import Navigation from './Navigation';//活动
+import WheelPlanting from './WheelPlanting';//活动
 
 const WysiwygBundle = Loadable({
     // 按需加载富文本配置
@@ -91,8 +93,8 @@ export default {
     Actions,
     Main,
     DataOverView,
-
-
+    WheelPlanting,
+    Navigation,
     allData,
     course,
     historyData,

@@ -63,6 +63,15 @@ export default {
                 { key: '/app/operate/overview2', title: '组织管理', component: 'open' },
                 { key: '/app/operate/overview2', title: '首页配置', component: 'open' }
             ]
+        },
+        {
+            key: '/app/sys',
+            title: '系统管理',
+            icon: 'scan',
+            subs: [
+                { key: '/app/sys/nav', title: '首页轮播图', component: 'Navigation' },
+                { key: '/app/sys/wheelPlanting', title: '主页导航', component: 'WheelPlanting' }
+            ]
         }
 
     ],

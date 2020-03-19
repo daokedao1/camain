@@ -48,5 +48,17 @@ export const ADD_ACTIVITY_LIST = domain+'/api/activity';//新建活动
 export const DEL_ACTIVITY_LIST = domain+'/api/activity/';//删除活动
 export const PUBLISTH_ACTIVITY_LIST = domain+'/api/activity/publish/';//发布活动
 export const RETRACT_ACTIVITY_LIST = domain+'/api/activity/retract/';//撤回活动
+//banner图
+export const BANNER_ACTIVITY_LIST = domain+'/api/home/banner/page';//轮播图列表
+export const ADD_BANNER_LIST = domain+'/api/home/banner';//新建
+export const DEL_BANNER_LIST = domain+'/api/home/banner/';//新建
+//主页导航
+export const NAV_ACTIVITY_LIST = domain+'/api/home/guide/page';//列表
+export const ADD_NAV_LIST = domain+'/api/home/guide';//新建
+export const DEL_NAV_LIST = domain+'/api/home/guide/';//新建
+
+
+
+
 
 
