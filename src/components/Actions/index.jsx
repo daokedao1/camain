@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import ListTable from '@/components/table/List_table';
 import InputForm from '@/components/input';
-import {activityList,addArticleList,delArticleList,editArticleList} from '@/axios';
+import {activityList,addActivityList,delActivityList,editActivityList,retractActivityList,publishActivityList} from '@/axios';
 import {tableData,initParams,arr} from './serve';
 import './index.less';
 import 'react-quill/dist/quill.snow.css'; // ES6
@@ -21,11 +21,10 @@ class News extends React.Component {
             params:{
                 title:'',
                 subTitle:'',
-                publishTime:'',
-                creator:'',
-                isPublish:false,
                 content:'',
-                type:2
+                startTime:'',
+                endTime:''
+
             },
             text: '',
             objData:{},
@@ -84,7 +83,7 @@ class News extends React.Component {
 
     }
     async confirm(id) {
-        await delArticleList({id:id});
+        await delActivityList({id:id});
 
         this.setState({loading:true},()=>{
             this.init();
@@ -104,6 +103,22 @@ class News extends React.Component {
         text.content=value;
         this.setState({ params: text });
     }
+    async publish(id,row){
+        await publishActivityList({id:id});
+        if(res){
+            this.init();
+            message.success('发布成功');
+        }
+
+    }
+    async retract(id,row){
+        const res=await retractActivityList({id:id});
+        if(res){
+            this.init();
+            message.success('撤回成功');
+        }
+
+    }
     option(){
         return    {
             title: '操作',
@@ -112,6 +127,7 @@ class News extends React.Component {
             render: (id,row) => {
                 return (<div className="option">
                     <Button size="small" onClick={()=>this.editWay('编辑',row)} type="primary">编辑</Button>
+                    {row.status===1?<Button size="small" onClick={()=>this.publish(id,row)} type="primary">发布活动</Button>:<Button size="small" onClick={()=>this.retract(id,row)} type="primary">撤回活动</Button>}
                     <Popconfirm
                         title="确定要删除本条数据吗?"
                         onConfirm={()=>this.confirm(id)}
@@ -141,11 +157,12 @@ class News extends React.Component {
     }
     async handleOk(){
         const {params,operationName}=this.state;
+        console.log(params);
         let data={...params};
         if(operationName==='新建'){
-            await addArticleList(data);
+            await addActivityList(data);
         }else{
-            await editArticleList(data);
+            await editActivityList(data);
         }
 
         this.setState({visible:false},()=>{
@@ -186,12 +203,6 @@ class News extends React.Component {
                     // searchData={searchData}
                 >
                     <InputForm styleCss={{height:'100%'}}  indexWay={this.indexWay.bind(this)} params={params} arr={arr}></InputForm>
-                    <div className="delayedSwitch" >
-                        <p style={{width:'33.33%',color:' #000'}}>
-                                是否发布:
-                        </p>
-                        <Switch  checked={params.isPublish} onChange={this.switch.bind(this)}/>
-                    </div>
                     <div className="delayedSwitch" >
                         <p style={{width:'23.33%',color:' #000'}}>
                                 发布内容:

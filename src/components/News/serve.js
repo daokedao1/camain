@@ -23,7 +23,8 @@ export const tableData=[
         render: (text, record) =>{
             return (
                 <div >
-                    <img style={{width:'90px',height:'40px',paddingRight:'9px'}} src={text} alt=""/>
+                    {text}
+                    {/* <img style={{width:'90px',height:'40px',paddingRight:'9px'}} src={text} alt=""/> */}
                 </div>
             );
         }
