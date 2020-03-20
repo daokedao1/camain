@@ -62,6 +62,7 @@ import Actions from './Actions'; //活动
 import Navigation from './Navigation';//活动
 import WheelPlanting from './WheelPlanting';//活动
 import Donation from './donation'//捐赠
+import MentorProgram from './mentor-program'//导师计划
 
 const WysiwygBundle = Loadable({
     // 按需加载富文本配置
@@ -72,6 +73,7 @@ const WysiwygBundle = Loadable({
 
 export default {
     BasicForm,
+    MentorProgram,
     Employment,
     Jijin,
     Donation,

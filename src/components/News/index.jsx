@@ -51,7 +51,7 @@ class News extends React.Component {
     async init(data){
         let yAxisData,
             arrTable=[...tableData];
-        const res= await getArticleList();
+        const res= await getArticleList({type:1});
         if(res){
             yAxisData=[...res.data.items];
             yAxisData=this.stateWay(yAxisData);
