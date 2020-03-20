@@ -48,19 +48,20 @@ import XcAlertRecord from './waterData/XcAlertRecord';
 import Main from './main';
 import DataOverView from './dataoverview';
 
+
 import Role from './role' //角色管理
 import AlumniUser from './alumniUser';
 import AlumniOrg from './alumniOrg';
 import ClassOrg from './classOrg';
 import RealNameAuthentication from './realNameAuthentication';
 import Notice from './notice';
-
+import Employment from './employee'//招聘
+import Jijin from './jijinmanage'//基金
 import News from './News'; //新闻
 import Actions from './Actions'; //活动
-
 import Navigation from './Navigation';//活动
 import WheelPlanting from './WheelPlanting';//活动
-
+import Donation from './donation'//捐赠
 
 const WysiwygBundle = Loadable({
     // 按需加载富文本配置
@@ -71,6 +72,9 @@ const WysiwygBundle = Loadable({
 
 export default {
     BasicForm,
+    Employment,
+    Jijin,
+    Donation,
     BasicTable,
     AdvancedTable,
     AsynchronousTable,

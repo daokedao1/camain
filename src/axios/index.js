@@ -124,3 +124,10 @@ export const editNavList = (param = {}) => PUT(config.ADD_NAV_LIST,param ).then(
 export const delNavList = (param = {}) => DEL(config.DEL_NAV_LIST+param.id ).then(res=>{
     return res;
 }).catch(err=>err);
+//系统配置
+export const updateConfigBykey = (param = {}) => PUT(config.UPDATE_configBYID,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+export const getConfigBykey = (param = {}) => GET(config.GET_CONFIGBYKEY+param,{} ).then(res=>{
+    return res;
+}).catch(err=>err);

@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import ListTable from '@/components/table/List_table';
 import InputForm from '@/components/input';
+import Header from './../layout/Header';
 import {getArticleList,addArticleList,delArticleList,editArticleList} from '@/axios';
 import {tableData,initParams,arr} from './serve';
 import './index.less';
@@ -167,7 +168,8 @@ class News extends React.Component {
                 <div>
                     <Row >
                         <Col span={24}>
-                            <Card title="新闻管理" extra={<Button onClick={()=>this.add('新建')} type="primary">新建</Button>} bordered={false}>
+                        <Header title="新闻管理" extra={<Button onClick={()=>this.add('新建')} type="primary">新建</Button>}/>
+                            <Card bordered={false}>
                                 <ListTable
                                     loading={loading}
                                     yAxisData={yAxisData}

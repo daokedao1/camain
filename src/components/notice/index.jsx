@@ -6,6 +6,7 @@ import ListTable from '@/components/table/List_table';
 import InputForm from '@/components/input';
 import {getArticleList,addArticleList,delArticleList,editArticleList} from '@/axios';
 import {tableData,initParams,arr} from './serve';
+import Header from './../layout/Header';
 import './index.less';
 import 'react-quill/dist/quill.snow.css'; // ES6
 class News extends React.Component {
@@ -165,9 +166,11 @@ class News extends React.Component {
         return (
             <div  className="content">
                 <div>
+              
                     <Row >
                         <Col span={24}>
-                            <Card title="公告管理" extra={<Button onClick={()=>this.add('新建')} type="primary">新建</Button>} bordered={false}>
+                        <Header title="公告管理" extra={<Button onClick={()=>this.add('新建')} type="primary">新建</Button>}/>
+                            <Card  bordered={false}>
                                 <ListTable
                                     loading={loading}
                                     yAxisData={yAxisData}
