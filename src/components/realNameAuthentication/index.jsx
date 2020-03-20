@@ -156,7 +156,7 @@ class RealNameAuthentication extends Component {
         ];
         return (
             <div>
-                <BreadcrumbCustom first="校友管理" second="注册/审核" />
+                
                 <Header title="申请加入协会申请审批"/>
                 <Row gutter={16} style={{backgroundColor:'#fff',padding:'20px 40px'}}>
 
