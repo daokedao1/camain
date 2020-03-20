@@ -16,15 +16,14 @@ export const tableData=[
         width:'20%'
     },
     {
-        title: '子标题',
+        title: '主图',
         width:'10%',
         align:'center',
         dataIndex: 'subTitle',
         render: (text, record) =>{
             return (
                 <div >
-                    {text}
-                    {/* <img style={{width:'90px',height:'40px',paddingRight:'9px'}} src={text} alt=""/> */}
+                    <img style={{width:'90px',height:'40px',paddingRight:'9px'}} src={text} alt=""/>
                 </div>
             );
         }
@@ -68,10 +67,10 @@ export const arr=[
         placeholder:'请输入新闻标题'
     },
     {
-        name:'子标题',
+        name:'主图',
         val:'subTitle',
         type:'text',
-        placeholder:'请输入子标题'
+        placeholder:'请输入主图'
     }
     // {
     //     name:'发布时间',
