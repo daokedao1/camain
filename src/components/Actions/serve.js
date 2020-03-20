@@ -3,11 +3,9 @@ import React from 'react';
 export const initParams={
     title:'',
     subTitle:'',
-    publishTime:'',
-    creator:'',
-    isPublish:false,
-    type:2,
-    content:''
+    content:'',
+    startTime:'',
+    endTime:''
 };
 export const tableData=[
     {
@@ -23,41 +21,69 @@ export const tableData=[
         render: (text, record) =>{
             return (
                 <div >
-                    <img style={{width:'90px',height:'40px',paddingRight:'9px'}} src={text} alt=""/>
+                    {text}
+                    {/* <img style={{width:'90px',height:'40px',paddingRight:'9px'}} src={text} alt=""/> */}
                 </div>
             );
         }
     },
     {
-        title: '发布时间',
-        dataIndex: 'publishTime',
+        title: '开始时间',
+        dataIndex: 'startTime',
         width:'10%'
     },
     {
-        title: '创建人',
-        dataIndex: 'creator',
+        title: '结束时间',
+        dataIndex: 'endTime',
         width:'10%'
     },
     {
-        title: '更新时间',
-        dataIndex: 'updateTime',
-        width:'10%'
-    },
-    {
-        title: '更新人',
-        dataIndex: 'updater',
-        width:'10%'
-    },
-    {
-        title: '是否发布',
-        dataIndex: 'isPublish',
-        render(v){
+        title: '活动进度',
+        dataIndex: 'flowStatus',
+        width:'10%',
+        render: (text, record) =>{
             let a='';
-            v?a='已发布':a='未发布';
-            return a;
-        },
-        width:'10%'
+            switch (text) {
+            case 1:
+                a='未开始';
+                break;
+            case 2:
+                a='进行中';
+                break;
+            case 3:
+                a='已结束';
+                break;
+            default:
+                break;
+            }
+            return (
+                a
+            );
+        }
+    },
+    {
+        title: '活动状态',
+        dataIndex: 'status',
+        width:'10%',
+        render: (text, record) =>{
+            let a='';
+            switch (text) {
+            case 1:
+                a='待发布';
+                break;
+            case 2:
+                a='已发布';
+                break;
+            case 3:
+                a='已撤回';
+                break;
+            default:
+                break;
+            }
+            return   a;
+        }
     }
+
 ];
 export const arr=[
     {
@@ -71,28 +97,21 @@ export const arr=[
         val:'subTitle',
         type:'text',
         placeholder:'请输入子标题'
+    },
+    {
+        name:'开始时间',
+        type:'time',
+        placeholder:'请输入开始时间',
+        required:true,
+        val:'startTime'
+    },
+    {
+        name:'结束时间',
+        type:'time',
+        placeholder:'请输入结束时间',
+        required:true,
+        val:'endTime'
     }
-    // {
-    //     name:'发布时间',
-    //     type:'text',
-    //     placeholder:'请输入发布时间',
-    //     required:true,
-    //     val:'publishTime'
-    // },
-    // {
-    //     name:'是否发布',
-    //     type:'text',
-    //     placeholder:'请输入是否发布',
-    //     required:true,
-    //     val:'isPublish'
-    // },
-    // {
-    //     name:'发布内容',
-    //     type:'area',
-    //     placeholder:'请输入发布内容',
-    //     required:true,
-    //     val:'content'
-    // }
 
 ];
 

@@ -79,4 +79,21 @@ export const delArticleList = (param = {}) => DEL(config.DEL_ARTICLE_LIST+''+par
 export const activityList = (param = {}) => POST(config.LIST_ACTIVITY_LIST ).then(res=>{
     return res;
 }).catch(err=>err);
-
+export const addActivityList = (param = {}) => POST(config.ADD_ACTIVITY_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+export const editActivityList = (param = {}) => PUT(config.ADD_ACTIVITY_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+//删除文章list
+export const delActivityList = (param = {}) => DEL(config.DEL_ACTIVITY_LIST+''+param.id ).then(res=>{
+    return res;
+}).catch(err=>err);
+//发布活动
+export const publishActivityList = (param = {}) => PUT(config.PUBLISTH_ACTIVITY_LIST+param.id ).then(res=>{
+    return res;
+}).catch(err=>err);
+//撤回活动
+export const retractActivityList = (param = {}) => PUT(config.RETRACT_ACTIVITY_LIST+param.id ).then(res=>{
+    return res;
+}).catch(err=>err);

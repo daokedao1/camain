@@ -48,17 +48,20 @@ import XcAlertRecord from './waterData/XcAlertRecord';
 import Main from './main';
 import DataOverView from './dataoverview';
 
+import Role from './role' //角色管理
 import AlumniUser from './alumniUser';
 import AlumniOrg from './alumniOrg';
 import ClassOrg from './classOrg';
 import RealNameAuthentication from './realNameAuthentication';
 import Notice from './notice';
-import News from './News';//新闻
-import Actions from './Actions';//活动
+import News from './News'; //新闻
+import Actions from './Actions'; //活动
+
 
 const WysiwygBundle = Loadable({
     // 按需加载富文本配置
-    loader: () => import('./ui/Wysiwyg'),
+    loader: () =>
+        import ('./ui/Wysiwyg'),
     loading: Loading
 });
 
@@ -105,6 +108,7 @@ export default {
     XcAlertRecord,
     XcalertSet,
 
+    Role,
     AlumniUser,
     AlumniOrg,
     RealNameAuthentication,

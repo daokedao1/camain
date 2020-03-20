@@ -43,6 +43,10 @@ export const GET_ARTICLE_LIST = domain+'/api/article/page';//文章articlelist
 export const ADD_ARTICLE_LIST = domain+'/api/article';//新建文章
 export const DEL_ARTICLE_LIST = domain+'/api/article/';//删除文章
 //活动
-export const LIST_ACTIVITY_LIST = domain+'/api/activity/page';//文章列表
+export const LIST_ACTIVITY_LIST = domain+'/api/activity/page';//活动列表
+export const ADD_ACTIVITY_LIST = domain+'/api/activity';//新建活动
+export const DEL_ACTIVITY_LIST = domain+'/api/activity/';//删除活动
+export const PUBLISTH_ACTIVITY_LIST = domain+'/api/activity/publish/';//发布活动
+export const RETRACT_ACTIVITY_LIST = domain+'/api/activity/retract/';//撤回活动
 
 
