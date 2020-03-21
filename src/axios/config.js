@@ -69,6 +69,9 @@ export const DEL_ROLE_LIST = domain+'/api/role/';//新建
 export const ADD_MENU_LIST = domain+'/api/menu';//新建
 export const LIST_MENU_LIST = domain+'/api/menu/list';//新建
 export const DEL_MENU_LIST = domain+'/api/menu/';//新建
+//用户反馈
+export const GET_FEEDBACK_LIST = domain+'/api/feedback/page';//list
+export const SET_FEEDBACK_OK = domain+'/api/feedback';//处理反馈意见
 
 
 

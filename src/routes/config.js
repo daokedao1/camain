@@ -34,6 +34,7 @@ export default {
                 { key: '/app/operate/Employee', title: '招聘管理', component: 'Employment' },
                 { key: '/app/operate/Jijin', title: '基金管理', component: 'Jijin' },
                 { key: '/app/operate/MentorProgram', title: '导师计划', component: 'MentorProgram' },
+                { key: '/app/operate/FeedBack', title: '用户反馈', component: 'FeedBack' },
                 { key: '/app/operate/Donation', title: '校园捐赠', component: 'Donation' }
             ]
         },
@@ -58,11 +59,9 @@ export default {
             title: '平台管理',
             icon: 'scan',
             subs: [
-                { key: '/app/operate/main', title: '用户管理', component: 'open' },
-                { key: '/app/operate/Role', title: '角色管理', component: 'Role' },
-                { key: '/app/operate/Menu', title: '菜单管理', component: 'Menu' },
-                { key: '/app/operate/overview2', title: '组织管理', component: 'open' },
-                { key: '/app/operate/overview2', title: '首页配置', component: 'open' }
+               
+                { key: '/app/sys/nav', title: '首页轮播图', component: 'Navigation' },
+                { key: '/app/sys/wheelPlanting', title: '主页导航', component: 'WheelPlanting' }
             ]
         },
         {
@@ -70,8 +69,11 @@ export default {
             title: '系统管理',
             icon: 'scan',
             subs: [
-                { key: '/app/sys/nav', title: '首页轮播图', component: 'Navigation' },
-                { key: '/app/sys/wheelPlanting', title: '主页导航', component: 'WheelPlanting' }
+                { key: '/app/operate/main', title: '用户管理', component: 'open' },
+                { key: '/app/operate/Role', title: '角色管理', component: 'Role' },
+                { key: '/app/operate/Menu', title: '菜单管理', component: 'Menu' },
+                // { key: '/app/operate/overview2', title: '组织管理', component: 'open' },
+                // { key: '/app/operate/overview2', title: '首页配置', component: 'open' }
             ]
         }
 

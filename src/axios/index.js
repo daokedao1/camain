@@ -165,3 +165,11 @@ export const updateConfigBykey = (param = {}) => PUT(config.UPDATE_configBYID,pa
 export const getConfigBykey = (param = {}) => GET(config.GET_CONFIGBYKEY+param,{} ).then(res=>{
     return res;
 }).catch(err=>err);
+//用户反馈
+export const getFeedBackList = (param = {}) => POST(config.GET_FEEDBACK_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+//处理用户反馈
+export const setFeedBackOk = (param = {}) => PUT(config.SET_FEEDBACK_OK,param ).then(res=>{
+    return res;
+}).catch(err=>err);

@@ -64,6 +64,7 @@ import WheelPlanting from './WheelPlanting';//活动
 import Menu from './Menu';//菜单
 import Donation from './donation';//捐赠
 import MentorProgram from './mentor-program';//导师计划
+import FeedBack from './feedback'//用户反馈
 
 const WysiwygBundle = Loadable({
     // 按需加载富文本配置
@@ -78,6 +79,7 @@ export default {
     Employment,
     Jijin,
     Donation,
+    FeedBack,
     BasicTable,
     AdvancedTable,
     AsynchronousTable,
