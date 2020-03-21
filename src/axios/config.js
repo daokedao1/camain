@@ -45,6 +45,8 @@ export const GET_CAUSER_LIST = domain+'/api/user/page';//用户list
 export const GET_ARTICLE_LIST = domain+'/api/article/page';//文章articlelist
 export const ADD_ARTICLE_LIST = domain+'/api/article';//新建文章
 export const DEL_ARTICLE_LIST = domain+'/api/article/';//删除文章
+export const PUBLISH_ARTICLE_BYID = domain+'/api/article/publish/';//发布文章
+export const RETRACT_ARTICLE_BYID = domain+'/api/article/retract/';//撤回文章
 //活动
 export const LIST_ACTIVITY_LIST = domain+'/api/activity/page';//活动列表
 export const ADD_ACTIVITY_LIST = domain+'/api/activity';//新建活动

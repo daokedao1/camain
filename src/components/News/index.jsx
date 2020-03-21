@@ -5,7 +5,7 @@ import ReactQuill from 'react-quill';
 import ListTable from '@/components/table/List_table';
 import InputForm from '@/components/input';
 import Header from './../layout/Header';
-import {getArticleList,addArticleList,delArticleList,editArticleList} from '@/axios';
+import {getArticleList,addArticleList,delArticleList,editArticleList,pubArticleByid,retArticleByid} from '@/axios';
 import {tableData,initParams,arr} from './serve';
 import './index.less';
 import 'react-quill/dist/quill.snow.css'; // ES6

@@ -75,6 +75,14 @@ export const editArticleList = (param = {}) => PUT(config.ADD_ARTICLE_LIST,param
 export const delArticleList = (param = {}) => DEL(config.DEL_ARTICLE_LIST+''+param.id ).then(res=>{
     return res;
 }).catch(err=>err);
+//发布文章
+export const pubArticleByid = (param = {}) => PUT(config.PUBLISH_ARTICLE_BYID+param.id ).then(res=>{
+    return res;
+}).catch(err=>err);
+//撤回文章
+export const retArticleByid = (param = {}) => PUT(config.RETRACT_ARTICLE_BYID+param.id ).then(res=>{
+    return res;
+}).catch(err=>err);
 //活动列表
 export const activityList = (param = {}) => POST(config.LIST_ACTIVITY_LIST ).then(res=>{
     return res;
