@@ -4,9 +4,8 @@ import { withRouter } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import ListTable from '@/components/table/List_table';
 import InputForm from '@/components/input';
-import {getArticleList,addArticleList,delArticleList,editArticleList} from '@/axios';
+import {getArticleList,addArticleList,delArticleList,editArticleList,pubArticleByid,retArticleByid} from '@/axios';
 import {tableData,initParams,arr} from './serve';
-import Header from './../layout/Header';
 import './index.less';
 import 'react-quill/dist/quill.snow.css'; // ES6
 class News extends React.Component {
@@ -105,6 +104,22 @@ class News extends React.Component {
         text.content=value;
         this.setState({ params: text });
     }
+    async publish(id,row){
+        const res= await pubArticleByid({id:id});
+        if(res.success){
+            this.init();
+            message.success('发布成功');
+        }
+
+    }
+    async retract(id,row){
+        const res=await retArticleByid({id:id});
+        if(res.success){
+            this.init();
+            message.success('撤回成功');
+        }
+
+    }
     option(){
         return    {
             title: '操作',
@@ -113,6 +128,8 @@ class News extends React.Component {
             render: (id,row) => {
                 return (<div className="option">
                     <Button size="small" onClick={()=>this.editWay('编辑',row)} type="primary">编辑</Button>
+                    {!row.isPublish?<Button size="small" onClick={()=>this.publish(id,row)} type="primary">发布公告</Button>:<Button size="small" onClick={()=>this.retract(id,row)} type="primary">撤回公告</Button>}
+
                     <Popconfirm
                         title="确定要删除本条数据吗?"
                         onConfirm={()=>this.confirm(id)}
@@ -166,11 +183,9 @@ class News extends React.Component {
         return (
             <div  className="content">
                 <div>
-              
                     <Row >
                         <Col span={24}>
-                        <Header title="公告管理" extra={<Button onClick={()=>this.add('新建')} type="primary">新建</Button>}/>
-                            <Card  bordered={false}>
+                            <Card title="公告管理" extra={<Button onClick={()=>this.add('新建')} type="primary">新建</Button>} bordered={false}>
                                 <ListTable
                                     loading={loading}
                                     yAxisData={yAxisData}

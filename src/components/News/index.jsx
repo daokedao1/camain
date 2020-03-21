@@ -105,6 +105,22 @@ class News extends React.Component {
         text.content=value;
         this.setState({ params: text });
     }
+    async publish(id,row){
+        const res= await pubArticleByid({id:id});
+        if(res.success){
+            this.init();
+            message.success('发布成功');
+        }
+
+    }
+    async retract(id,row){
+        const res=await retArticleByid({id:id});
+        if(res.success){
+            this.init();
+            message.success('撤回成功');
+        }
+
+    }
     option(){
         return    {
             title: '操作',
@@ -113,6 +129,8 @@ class News extends React.Component {
             render: (id,row) => {
                 return (<div className="option">
                     <Button size="small" onClick={()=>this.editWay('编辑',row)} type="primary">编辑</Button>
+                    {!row.isPublish?<Button size="small" onClick={()=>this.publish(id,row)} type="primary">发布活动</Button>:<Button size="small" onClick={()=>this.retract(id,row)} type="primary">撤回活动</Button>}
+
                     <Popconfirm
                         title="确定要删除本条数据吗?"
                         onConfirm={()=>this.confirm(id)}
@@ -168,7 +186,7 @@ class News extends React.Component {
                 <div>
                     <Row >
                         <Col span={24}>
-                        <Header title="新闻管理" extra={<Button onClick={()=>this.add('新建')} type="primary">新建</Button>}/>
+                            <Header title="新闻管理" extra={<Button onClick={()=>this.add('新建')} type="primary">新建</Button>}/>
                             <Card bordered={false}>
                                 <ListTable
                                     loading={loading}
