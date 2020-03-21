@@ -129,7 +129,7 @@ class News extends React.Component {
             render: (id,row) => {
                 return (<div className="option">
                     <Button size="small" onClick={()=>this.editWay('编辑',row)} type="primary">编辑</Button>
-                    {!row.isPublish?<Button size="small" onClick={()=>this.publish(id,row)} type="primary">发布活动</Button>:<Button size="small" onClick={()=>this.retract(id,row)} type="primary">撤回活动</Button>}
+                    {!row.isPublish?<Button size="small" onClick={()=>this.publish(id,row)} type="primary">发布新闻</Button>:<Button size="small" onClick={()=>this.retract(id,row)} type="primary">撤回新闻</Button>}
 
                     <Popconfirm
                         title="确定要删除本条数据吗?"
