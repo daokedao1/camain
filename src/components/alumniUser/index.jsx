@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { Tree,Row, Button,Divider,Table,Col,Input,Select,message} from 'antd';
+import { Tree,Row, Button,Divider,Table,Col,Input,Select,message,Modal} from 'antd';
+import InputForm from '@/components/input';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import {getAlumniOrg,getCaUserList} from './../../axios';
 import Header from './../layout/Header';
+import {tableData,initParams,arr} from './serve';
+
 const { Option } = Select;
 const { TreeNode } = Tree;
 const { TextArea } = Input;
@@ -12,11 +15,21 @@ class AlumniUser extends Component {
     constructor(props){
         super(props);
         this.state={
-
+            operationName:'详情',
             treeheight:window.innerHeight-150,
             loading:false,
+            visible:false,
             page:1,
             pageSize:10,
+            params:{
+                title:'',
+                subTitle:'',
+                publishTime:'',
+                creator:'',
+                isPublish:false,
+                content:'',
+                type:1
+            },
             total:0,
             nodePos:'0-0',
             curSelectedOrgid:1,
@@ -57,25 +70,25 @@ class AlumniUser extends Component {
         console.log(nodePos);
         nodePos = nodePos.split('-');
         switch(nodePos.length) {
-            case 2:
-                console.log('组织');
-                
-                break;
-            case 3:
-                console.log('学院');
-                param.collegeId = curSelectedOrgid;
-                break;
-            case 4:
-                console.log('专业');
-                param.facultyId = curSelectedOrgid;
-                break;
-            case 5:
-                console.log('班级');
-                param.classId = curSelectedOrgid;
-                break;
-            default:
-              
-        } 
+        case 2:
+            console.log('组织');
+
+            break;
+        case 3:
+            console.log('学院');
+            param.collegeId = curSelectedOrgid;
+            break;
+        case 4:
+            console.log('专业');
+            param.facultyId = curSelectedOrgid;
+            break;
+        case 5:
+            console.log('班级');
+            param.classId = curSelectedOrgid;
+            break;
+        default:
+
+        }
         getCaUserList(param).then(res=>{
             if(res.success){
                 this.setState({
@@ -83,7 +96,7 @@ class AlumniUser extends Component {
                     total:res.data.totalCount,
                     page:1,
                     pageSize:10,
-                   
+
                     loading:false
                 });
             }
@@ -93,14 +106,14 @@ class AlumniUser extends Component {
 
     getOrgById(id,nodeEvent){
         let nodePos = nodeEvent.node.props.pos;
-        
+
         this.setState({
             nodePos:nodePos,
             curSelectedOrgid:id[0],
             loading:true
-        })
-       
-        
+        });
+
+
 
     }
 
@@ -150,7 +163,7 @@ class AlumniUser extends Component {
             return <TreeNode key={item.key} {...item} dataRef={item} />;
         });
     onTreeNodeClick(keys, event){
-        console.log(keys, event)
+        console.log(keys, event);
         this.getOrgById(keys,event);
     }
     onPageChange(page, pageSize){
@@ -161,8 +174,30 @@ class AlumniUser extends Component {
             loading:true
         });
     }
-    onDetailClick(reecord){
+    async  onDetailClick(title,row){
+        let param={...row};
+        this.setState({
+            visible:true,
+            operationName:title,
+            params:param
+        });
 
+    }
+    handleCancel(){
+        this.setState({visible:false});
+    }
+    async handleOk(){
+        const {params,operationName}=this.state;
+        let data={...params};
+        if(operationName==='新建'){
+            await addArticleList(data);
+        }else{
+            await editArticleList(data);
+        }
+
+        this.setState({visible:false},()=>{
+            this.init();
+        });
     }
     render() {
         let columns = [
@@ -206,12 +241,13 @@ class AlumniUser extends Component {
                 title: '操作',
                 dataIndex: 'detail',
                 key: 'detail',
-                render: (text,reecord) => <a onClick={this.onDetailClick.bind(this,reecord)} >详情>></a>
+                render: (text,row) => <a  onClick={()=>this.onDetailClick('详情',row)} >详情>></a>
             }
         ];
+        const {operationName,visible,params}=this.state;
         return (
             <div>
-                
+
                 <Header title="校友管理"/>
                 <Row gutter={16} style={{backgroundColor:'#fff',padding:'20px 40px'}}>
                     <Col className="gutter-row" span={5}>
@@ -219,7 +255,7 @@ class AlumniUser extends Component {
                     </Col>
 
                     <Col className="gutter-row" span={19} >
-                       
+
                         <Table
                             style={{backgroundColor:'#fff'}}
                             pagination={{total:this.state.total,page:this.state.page,pageSize:this.state.pageSize,onChange:this.onPageChange.bind(this)}}
@@ -230,7 +266,32 @@ class AlumniUser extends Component {
                         />
                     </Col>
                 </Row>
+                <Modal
+                    title={operationName}
+                    visible={visible}
+                    onOk={this.handleOk.bind(this)}
+                    onCancel={this.handleCancel.bind(this)}
+                    footer={''}
+                    okButtonProps={{ disabled: true }}
+                    cancelButtonProps={{ disabled: true }}
+                    // searchData={searchData}
+                    className="alum"
 
+                >
+                    <div className="delayedSwitch" >
+                        <p style={{width:'33.33%',color:' #000'}}>
+                                头像:
+                        </p>
+                        <img  src={params.photoImg} alt=""/>
+
+                    </div>
+                    <InputForm
+
+                        styleCss={{height:'600px',overflowY: 'auto'}}   params={params} arr={arr}></InputForm>
+
+
+
+                </Modal>
             </div>
         );
     }

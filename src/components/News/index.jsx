@@ -93,11 +93,11 @@ class News extends React.Component {
         });
     }
     switch(){
-        const {params}=this.state;
-        params.isPublish=!params.isPublish;
-        this.setState({
-            params:params
-        });
+        // const {params}=this.state;
+        // params.isPublish=!params.isPublish;
+        // this.setState({
+        //     params:params
+        // });
     }
     handleChange(value) {
         const {params}=this.state;
