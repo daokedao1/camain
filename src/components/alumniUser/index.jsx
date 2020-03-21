@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Tree,Row, Button,Divider,Table,Col,Input,Select,message} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import {getAlumniOrg,getCaUserList} from './../../axios';
-
+import Header from './../layout/Header';
 const { Option } = Select;
 const { TreeNode } = Tree;
 const { TextArea } = Input;
@@ -211,15 +211,15 @@ class AlumniUser extends Component {
         ];
         return (
             <div>
-                <BreadcrumbCustom first="校友管理" second="校友管理" />
-                <Row gutter={16}>
+                
+                <Header title="校友管理"/>
+                <Row gutter={16} style={{backgroundColor:'#fff',padding:'20px 40px'}}>
                     <Col className="gutter-row" span={5}>
-                    院系班级组织：
                         <Tree style={{height:this.state.treeheight+'px',overflow: 'auto',backgroundColor:'#fff'}} onSelect={this.onTreeNodeClick.bind(this)} loadData={this.onLoadData.bind(this)}>{this.renderTreeNodes(this.state.treeData)}</Tree>
                     </Col>
 
                     <Col className="gutter-row" span={19} >
-                        用户列表：
+                       
                         <Table
                             style={{backgroundColor:'#fff'}}
                             pagination={{total:this.state.total,page:this.state.page,pageSize:this.state.pageSize,onChange:this.onPageChange.bind(this)}}

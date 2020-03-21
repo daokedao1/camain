@@ -119,7 +119,7 @@ class Main extends React.Component {
                     }, ]
                 },
             ];
-            return ( < div className = "gutter-example" > < /div>)
+            return ( < div className = "gutter-example" > 首页 < /div>)
             }
         }
 

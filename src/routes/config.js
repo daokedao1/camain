@@ -31,9 +31,10 @@ export default {
                 { key: '/app/operate/notice', title: '公告管理', component: 'Notice' },
                 { key: '/app/operate/news', title: '新闻管理', component: 'News' },
                 { key: '/app/operate/Actions', title: '活动管理', component: 'Actions' },
-                { key: '/app/operate/main1', title: '招聘管理', component: 'Main' },
-                { key: '/app/operate/main2', title: '基金管理', component: 'Main' },
-                { key: '/app/operate/main3', title: '校园捐赠', component: 'Main' }
+                { key: '/app/operate/Employee', title: '招聘管理', component: 'Employment' },
+                { key: '/app/operate/Jijin', title: '基金管理', component: 'Jijin' },
+                { key: '/app/operate/MentorProgram', title: '导师计划', component: 'MentorProgram' },
+                { key: '/app/operate/Donation', title: '校园捐赠', component: 'Donation' }
             ]
         },
         {

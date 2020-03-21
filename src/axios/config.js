@@ -23,6 +23,9 @@ const domain = 'http://47.105.149.158:8090';
 export const GEE_HISTORY_LIST = domain+'/api/alarmlog/list';
 //登录
 export const LOGIN_URL = domain+'/auth/login';
+//系统配置
+export const UPDATE_configBYID = domain+'/api/config';
+export const GET_CONFIGBYKEY = '/api/config/key/';
 //组织
 export const GET_ALUMNI_ORG = domain+'/api/alumni/page';//校友组织
 export const GET_ALUMNIBYID = domain+'/api/alumni/detail/';//校友组织by id /api/alumni/detail/{id}
@@ -42,6 +45,8 @@ export const GET_CAUSER_LIST = domain+'/api/user/page';//用户list
 export const GET_ARTICLE_LIST = domain+'/api/article/page';//文章articlelist
 export const ADD_ARTICLE_LIST = domain+'/api/article';//新建文章
 export const DEL_ARTICLE_LIST = domain+'/api/article/';//删除文章
+export const PUBLISH_ARTICLE_BYID = domain+'/api/article/publish/';//发布文章
+export const RETRACT_ARTICLE_BYID = domain+'/api/article/retract/';//撤回文章
 //活动
 export const LIST_ACTIVITY_LIST = domain+'/api/activity/page';//活动列表
 export const ADD_ACTIVITY_LIST = domain+'/api/activity';//新建活动
@@ -64,6 +69,7 @@ export const DEL_ROLE_LIST = domain+'/api/role/';//新建
 export const ADD_MENU_LIST = domain+'/api/menu';//新建
 export const LIST_MENU_LIST = domain+'/api/menu/list';//新建
 export const DEL_MENU_LIST = domain+'/api/menu/';//新建
+
 
 
 

@@ -4,7 +4,8 @@ import { withRouter } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import ListTable from '@/components/table/List_table';
 import InputForm from '@/components/input';
-import {getArticleList,addArticleList,delArticleList,editArticleList} from '@/axios';
+import Header from './../layout/Header';
+import {getArticleList,addArticleList,delArticleList,editArticleList,pubArticleByid,retArticleByid} from '@/axios';
 import {tableData,initParams,arr} from './serve';
 import './index.less';
 import 'react-quill/dist/quill.snow.css'; // ES6
@@ -50,7 +51,7 @@ class News extends React.Component {
     async init(data){
         let yAxisData,
             arrTable=[...tableData];
-        const res= await getArticleList();
+        const res= await getArticleList({type:1});
         if(res){
             yAxisData=[...res.data.items];
             yAxisData=this.stateWay(yAxisData);
@@ -167,7 +168,8 @@ class News extends React.Component {
                 <div>
                     <Row >
                         <Col span={24}>
-                            <Card title="新闻管理" extra={<Button onClick={()=>this.add('新建')} type="primary">新建</Button>} bordered={false}>
+                        <Header title="新闻管理" extra={<Button onClick={()=>this.add('新建')} type="primary">新建</Button>}/>
+                            <Card bordered={false}>
                                 <ListTable
                                     loading={loading}
                                     yAxisData={yAxisData}

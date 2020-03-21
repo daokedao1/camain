@@ -75,6 +75,14 @@ export const editArticleList = (param = {}) => PUT(config.ADD_ARTICLE_LIST,param
 export const delArticleList = (param = {}) => DEL(config.DEL_ARTICLE_LIST+''+param.id ).then(res=>{
     return res;
 }).catch(err=>err);
+//发布文章
+export const pubArticleByid = (param = {}) => PUT(config.PUBLISH_ARTICLE_BYID+param.id ).then(res=>{
+    return res;
+}).catch(err=>err);
+//撤回文章
+export const retArticleByid = (param = {}) => PUT(config.RETRACT_ARTICLE_BYID+param.id ).then(res=>{
+    return res;
+}).catch(err=>err);
 //活动列表
 export const activityList = (param = {}) => POST(config.LIST_ACTIVITY_LIST ).then(res=>{
     return res;
@@ -148,5 +156,12 @@ export const editMenuList = (param = {}) => PUT(config.ADD_MENU_LIST,param ).the
     return res;
 }).catch(err=>err);
 export const delMenuList = (param = {}) => PUT(config.DEL_MENU_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+//系统配置
+export const updateConfigBykey = (param = {}) => PUT(config.UPDATE_configBYID,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+export const getConfigBykey = (param = {}) => GET(config.GET_CONFIGBYKEY+param,{} ).then(res=>{
     return res;
 }).catch(err=>err);

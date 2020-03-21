@@ -11,7 +11,7 @@ class Header extends React.Component {
     }
     render(){
         return(
-            <Row gutter={16} style={{backgroundColor:'#fff'}}>
+            <Row gutter={14} style={{backgroundColor:'#fff',marginLeft:'0px',marginRight:'0px'}}>
                 <Col className="gutter-row" md={24}>
                     <div className="common-header">
                         <div className="htitle">{this.props.title}</div>

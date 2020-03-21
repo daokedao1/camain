@@ -48,26 +48,36 @@ import XcAlertRecord from './waterData/XcAlertRecord';
 import Main from './main';
 import DataOverView from './dataoverview';
 
+
+import Role from './Role/index.jsx'; //角色管理
 import AlumniUser from './alumniUser';
 import AlumniOrg from './alumniOrg';
 import ClassOrg from './classOrg';
 import RealNameAuthentication from './realNameAuthentication';
 import Notice from './notice';
-import News from './News';//新闻
-import Actions from './Actions';//活动
+import Employment from './employee';//招聘
+import Jijin from './jijinmanage';//基金
+import News from './News'; //新闻
+import Actions from './Actions'; //活动
 import Navigation from './Navigation';//活动
 import WheelPlanting from './WheelPlanting';//活动
 import Menu from './Menu';//菜单
-import Role from './Role';//菜单
+import Donation from './donation';//捐赠
+import MentorProgram from './mentor-program';//导师计划
 
 const WysiwygBundle = Loadable({
     // 按需加载富文本配置
-    loader: () => import('./ui/Wysiwyg'),
+    loader: () =>
+        import('./ui/Wysiwyg'),
     loading: Loading
 });
 
 export default {
     BasicForm,
+    MentorProgram,
+    Employment,
+    Jijin,
+    Donation,
     BasicTable,
     AdvancedTable,
     AsynchronousTable,
@@ -109,6 +119,7 @@ export default {
     XcAlertRecord,
     XcalertSet,
     Menu,
+
     AlumniUser,
     AlumniOrg,
     RealNameAuthentication,
