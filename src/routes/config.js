@@ -58,8 +58,8 @@ export default {
             icon: 'scan',
             subs: [
                 { key: '/app/operate/main', title: '用户管理', component: 'open' },
-                { key: '/app/operate/overview1', title: '角色管理', component: 'open' },
-                { key: '/app/operate/overview1', title: '菜单管理', component: 'open' },
+                { key: '/app/operate/Role', title: '角色管理', component: 'Role' },
+                { key: '/app/operate/Menu', title: '菜单管理', component: 'Menu' },
                 { key: '/app/operate/overview2', title: '组织管理', component: 'open' },
                 { key: '/app/operate/overview2', title: '首页配置', component: 'open' }
             ]

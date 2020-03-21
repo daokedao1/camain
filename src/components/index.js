@@ -57,6 +57,8 @@ import News from './News';//新闻
 import Actions from './Actions';//活动
 import Navigation from './Navigation';//活动
 import WheelPlanting from './WheelPlanting';//活动
+import Menu from './Menu';//菜单
+import Role from './Role';//菜单
 
 const WysiwygBundle = Loadable({
     // 按需加载富文本配置
@@ -106,10 +108,11 @@ export default {
     open,
     XcAlertRecord,
     XcalertSet,
-
+    Menu,
     AlumniUser,
     AlumniOrg,
     RealNameAuthentication,
     ClassOrg,
+    Role,
     Notice
 };

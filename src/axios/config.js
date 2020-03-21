@@ -56,6 +56,16 @@ export const DEL_BANNER_LIST = domain+'/api/home/banner/';//新建
 export const NAV_ACTIVITY_LIST = domain+'/api/home/guide/page';//列表
 export const ADD_NAV_LIST = domain+'/api/home/guide';//新建
 export const DEL_NAV_LIST = domain+'/api/home/guide/';//新建
+//角色
+export const ADD_ROLE_LIST = domain+'/api/role';//新建
+export const LIST_ROLE_LIST = domain+'/api/role/all';//新建
+export const DEL_ROLE_LIST = domain+'/api/role/';//新建
+//菜单
+export const ADD_MENU_LIST = domain+'/api/menu';//新建
+export const LIST_MENU_LIST = domain+'/api/menu/list';//新建
+export const DEL_MENU_LIST = domain+'/api/menu/';//新建
+
+
 
 
 

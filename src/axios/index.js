@@ -124,3 +124,29 @@ export const editNavList = (param = {}) => PUT(config.ADD_NAV_LIST,param ).then(
 export const delNavList = (param = {}) => DEL(config.DEL_NAV_LIST+param.id ).then(res=>{
     return res;
 }).catch(err=>err);
+//角色模块
+export const listRoleList = (param = {}) => GET(config.LIST_ROLE_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+export const addtRoleList = (param = {}) => POST(config.ADD_ROLE_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+export const delRoleList = (param = {}) => DEL(config.DEL_ROLE_LIST+param.id ).then(res=>{
+    return res;
+}).catch(err=>err);
+export const editRoleList = (param = {}) => PUT(config.ADD_ROLE_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+//菜单
+export const addMenuList = (param = {}) => POST(config.ADD_MENU_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+export const listMenuList = (param = {}) => POST(config.LIST_MENU_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+export const editMenuList = (param = {}) => PUT(config.ADD_MENU_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+export const delMenuList = (param = {}) => PUT(config.DEL_MENU_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
