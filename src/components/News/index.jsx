@@ -190,6 +190,7 @@ class News extends React.Component {
                             <Card bordered={false}>
                                 <ListTable
                                     loading={loading}
+                                    pagination={true}
                                     yAxisData={yAxisData}
                                     total={total}
                                     xAxisData={xAxisData}

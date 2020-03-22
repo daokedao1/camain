@@ -173,6 +173,8 @@ class News extends React.Component {
                                 <ListTable
                                     loading={loading}
                                     yAxisData={yAxisData}
+                                    pagination={true}
+
                                     total={total}
                                     xAxisData={xAxisData}
                                 />

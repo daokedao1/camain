@@ -11,53 +11,40 @@ export const initParams={
 };
 export const tableData=[
     {
-        title: '新闻标题',
-        dataIndex: 'title',
+        title: '姓名',
+        dataIndex: 'userName',
         width:'20%'
     },
     {
-        title: '主图',
-        width:'10%',
-        align:'center',
-        dataIndex: 'subTitle',
-        render: (text, record) =>{
-            return (
-                <div >
-                    <img style={{width:'90px',height:'40px',paddingRight:'9px'}} src={text} alt=""/>
-                </div>
-            );
-        }
-    },
-    {
-        title: '发布时间',
-        dataIndex: 'publishTime',
+        title: '反馈信息',
+        dataIndex: 'feedbackDesc',
         width:'10%'
     },
     {
-        title: '创建人',
-        dataIndex: 'creator',
+        title: '状态',
+        dataIndex: 'status',
+        render(text){
+            let a='';
+            switch (text) {
+            case 1:
+                a='未处理';
+                break;
+            case 0:
+                a='已处理';
+                break;
+            default:
+                break;
+            }
+            return a;
+        },
         width:'10%'
     },
     {
         title: '更新时间',
         dataIndex: 'updateTime',
         width:'10%'
-    },
-    {
-        title: '更新人',
-        dataIndex: 'updater',
-        width:'10%'
-    },
-    {
-        title: '是否发布',
-        dataIndex: 'isPublish',
-        render(v){
-            let a='';
-            v?a='已发布':a='未发布';
-            return a;
-        },
-        width:'10%'
     }
+
 ];
 export const arr=[
     {

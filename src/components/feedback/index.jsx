@@ -5,7 +5,7 @@ import ReactQuill from 'react-quill';
 import ListTable from '@/components/table/List_table';
 import InputForm from '@/components/input';
 import Header from './../layout/Header';
-import {getArticleList,addArticleList,delArticleList,editArticleList,pubArticleByid,retArticleByid} from '@/axios';
+import {getFeedBackList,setFeedBackOk,delArticleList,editArticleList,pubArticleByid,retArticleByid} from '@/axios';
 import {tableData,initParams,arr} from './serve';
 import './index.less';
 import 'react-quill/dist/quill.snow.css'; // ES6
@@ -51,7 +51,7 @@ class FeedBack extends React.Component {
     async init(data){
         let yAxisData,
             arrTable=[...tableData];
-        const res= await getArticleList({type:1});
+        const res= await getFeedBackList({type:1});
         if(res){
             yAxisData=[...res.data.items];
             yAxisData=this.stateWay(yAxisData);
@@ -106,19 +106,24 @@ class FeedBack extends React.Component {
         this.setState({ params: text });
     }
     async publish(id,row){
-        const res= await pubArticleByid({id:id});
-        if(res.success){
-            this.init();
-            message.success('发布成功');
-        }
+        // const res= await setFeedBackOk({id:id});
+        // if(res.success){
+        //     this.init();
+        //     message.success('成功');
+        // }
 
     }
     async retract(id,row){
-        const res=await retArticleByid({id:id});
+        const res= await setFeedBackOk({id:id});
         if(res.success){
             this.init();
-            message.success('撤回成功');
+            message.success('成功');
         }
+        // const res=await retArticleByid({id:id});
+        // if(res.success){
+        //     this.init();
+        //     message.success('撤回成功');
+        // }
 
     }
     option(){
@@ -128,10 +133,10 @@ class FeedBack extends React.Component {
             width: '15%',
             render: (id,row) => {
                 return (<div className="option">
-                    <Button size="small" onClick={()=>this.editWay('编辑',row)} type="primary">编辑</Button>
-                    {!row.isPublish?<Button size="small" onClick={()=>this.publish(id,row)} type="primary">发布新闻</Button>:<Button size="small" onClick={()=>this.retract(id,row)} type="primary">撤回新闻</Button>}
+                    {/* <Button size="small" onClick={()=>this.editWay('编辑',row)} type="primary">编辑</Button> */}
+                    {!row.status?<Button size="small" onClick={()=>this.publish(id,row)} type="primary">以处理</Button>:<Button size="small" onClick={()=>this.retract(id,row)} type="primary">未处理</Button>}
 
-                    <Popconfirm
+                    {/* <Popconfirm
                         title="确定要删除本条数据吗?"
                         onConfirm={()=>this.confirm(id)}
                         // onCancel={this.cancel}
@@ -139,7 +144,7 @@ class FeedBack extends React.Component {
                         cancelText="No"
                     >
                         <Button size="small" type="danger">删除</Button>
-                    </Popconfirm>
+                    </Popconfirm> */}
                 </div>);
             }
         };
@@ -186,11 +191,12 @@ class FeedBack extends React.Component {
                 <div>
                     <Row >
                         <Col span={24}>
-                            <Header title="新闻管理" extra={<Button onClick={()=>this.add('新建')} type="primary">新建</Button>}/>
+                            <Header title="用户反馈" />
                             <Card bordered={false}>
                                 <ListTable
                                     loading={loading}
                                     yAxisData={yAxisData}
+                                    pagination={true}
                                     total={total}
                                     xAxisData={xAxisData}
                                 />

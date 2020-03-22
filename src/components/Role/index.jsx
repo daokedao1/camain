@@ -169,6 +169,8 @@ class News extends React.Component {
                             <Card title="角色管理" extra={<Button onClick={()=>this.add('新建')} type="primary">新建</Button>} bordered={false}>
                                 <ListTable
                                     loading={loading}
+                                    pagination={true}
+
                                     yAxisData={yAxisData}
                                     total={total}
                                     xAxisData={xAxisData}

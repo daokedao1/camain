@@ -190,6 +190,7 @@ class News extends React.Component {
                                     loading={loading}
                                     yAxisData={yAxisData}
                                     total={total}
+                                    pagination={true}
                                     xAxisData={xAxisData}
                                 />
                             </Card>

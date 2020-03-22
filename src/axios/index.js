@@ -170,6 +170,6 @@ export const getFeedBackList = (param = {}) => POST(config.GET_FEEDBACK_LIST,par
     return res;
 }).catch(err=>err);
 //处理用户反馈
-export const setFeedBackOk = (param = {}) => PUT(config.SET_FEEDBACK_OK,param ).then(res=>{
+export const setFeedBackOk = (param = {}) => PUT(config.SET_FEEDBACK_OK+param.id ).then(res=>{
     return res;
 }).catch(err=>err);

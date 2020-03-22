@@ -217,7 +217,7 @@ class AlumniUser extends Component {
                 title: '性别',
                 dataIndex: 'sex',
                 key: 'sex',
-                render: text => <a>{text===1?'男':'女'}</a>
+                render: text => <a>{text===0?'男':'女'}</a>
             },
             {
                 title: '专业',
