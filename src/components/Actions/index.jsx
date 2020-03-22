@@ -104,7 +104,7 @@ class News extends React.Component {
         this.setState({ params: text });
     }
     async publish(id,row){
-        await publishActivityList({id:id});
+        const res=await publishActivityList({id:id});
         if(res){
             this.init();
             message.success('发布成功');
