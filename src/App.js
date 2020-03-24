@@ -15,12 +15,12 @@ const { Content, Footer } = Layout;
 //         }
 // }, {})
 class App extends Component {
-  constructor(props) {
-      super(props)
-      this.state = {
-          collapsed: false,
-          title: '',
-      };
+    constructor(props) {
+        super(props);
+        this.state = {
+            collapsed: false,
+            title: ''
+        };
     }
     componentWillMount() {
         // const { setAlitaState } = this.props;
@@ -36,7 +36,7 @@ class App extends Component {
         };
     }
     componentDidMount() {
-      //console.log(this)
+        //console.log(this)
         // const isFirst = JSON.parse(localStorage.getItem('isFirst'));
     }
     getClientWidth = () => {
@@ -49,7 +49,7 @@ class App extends Component {
     };
     toggle = () => {
         this.setState({
-            collapsed: !this.state.collapsed,
+            collapsed: !this.state.collapsed
         });
     };
     render() {
@@ -59,7 +59,7 @@ class App extends Component {
         return (
             <DocumentTitle title={title}>
                 <Layout>
-                  {!responsive.data.isMobile && <SiderCustom collapsed={this.state.collapsed} />}
+                    {!responsive.data.isMobile && <SiderCustom collapsed={this.state.collapsed} />}
 
 
                     <Layout style={{ flexDirection: 'column' }}>
