@@ -93,6 +93,7 @@ export const addActivityList = (param = {}) => POST(config.ADD_ACTIVITY_LIST,par
 export const editActivityList = (param = {}) => PUT(config.ADD_ACTIVITY_LIST,param ).then(res=>{
     return res;
 }).catch(err=>err);
+
 //删除文章list
 export const delActivityList = (param = {}) => DEL(config.DEL_ACTIVITY_LIST+''+param.id ).then(res=>{
     return res;
@@ -171,5 +172,18 @@ export const getFeedBackList = (param = {}) => POST(config.GET_FEEDBACK_LIST,par
 }).catch(err=>err);
 //处理用户反馈
 export const setFeedBackOk = (param = {}) => PUT(config.SET_FEEDBACK_OK+param.id ).then(res=>{
+    return res;
+}).catch(err=>err);
+//项目列表
+export const projectyList = (param = {}) => POST(config.LIST_PROJECT_LIST ).then(res=>{
+    return res;
+}).catch(err=>err);
+export const addProjectList = (param = {}) => POST(config.ADD_PROJECT_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+export const editProjectList = (param = {}) => PUT(config.ADD_PROJECT_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+export const delProjectList = (param = {}) => DEL(config.DEL_PROJECT_LIST+param.id,param ).then(res=>{
     return res;
 }).catch(err=>err);
