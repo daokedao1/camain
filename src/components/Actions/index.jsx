@@ -125,9 +125,24 @@ class News extends React.Component {
             dataIndex: 'id',
             width: '15%',
             render: (id,row) => {
+                let statusAction='';
+                switch (row.status) {
+                case 1:
+                    statusAction=<Button size="small" onClick={()=>this.publish(id,row)} type="primary">发布活动</Button>;
+                    break;
+                case 2:
+                    statusAction=<Button size="small" onClick={()=>this.retract(id,row)} type="primary">撤回活动</Button>;
+                    break;
+                case 3:
+                    statusAction=<Button size="small" onClick={()=>this.publish(id,row)} type="primary">发布活动</Button>;
+
+                    break;
+                default:
+                    break;
+                }
                 return (<div className="option">
                     <Button size="small" onClick={()=>this.editWay('编辑',row)} type="primary">编辑</Button>
-                    {row.status===1?<Button size="small" onClick={()=>this.publish(id,row)} type="primary">发布活动</Button>:<Button size="small" onClick={()=>this.retract(id,row)} type="primary">撤回活动</Button>}
+                    {statusAction}
                     <Popconfirm
                         title="确定要删除本条数据吗?"
                         onConfirm={()=>this.confirm(id)}
