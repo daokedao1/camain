@@ -52,6 +52,7 @@ import DataOverView from './dataoverview';
 import Role from './Role/index.jsx'; //角色管理
 import AlumniUser from './alumniUser';
 import AlumniOrg from './alumniOrg';
+import AlumnixhOrg from './alumnixhOrg'//AlumnixhOrg
 import ClassOrg from './classOrg';
 import RealNameAuthentication from './realNameAuthentication';
 import Notice from './notice';
@@ -98,6 +99,7 @@ export default {
     Gallery,
     BasicAnimations,
     ExampleAnimations,
+    AlumnixhOrg,
     AuthBasic,
     RouterEnter,
     WysiwygBundle,

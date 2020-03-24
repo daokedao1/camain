@@ -19,6 +19,7 @@ export default {
                 { key: '/app/alumni/user', title: '校友管理', component: 'AlumniUser' },
 
                 { key: '/app/alumni/organization', title: '校友会管理', component: 'AlumniOrg' },
+                { key: '/app/alumni/AlumnixhOrg', title: '校友协会管理', component: 'AlumnixhOrg' },
                 { key: '/app/alumni/class', title: '院系班级管理', component: 'ClassOrg' }
 
             ]
