@@ -25,7 +25,7 @@ export const GEE_HISTORY_LIST = domain+'/api/alarmlog/list';
 export const LOGIN_URL = domain+'/auth/login';
 //系统配置
 export const UPDATE_configBYID = domain+'/api/config';
-export const GET_CONFIGBYKEY = '/api/config/key/';
+export const GET_CONFIGBYKEY = domain+'/api/config/key/';
 //组织
 export const GET_ALUMNI_ORG = domain+'/api/alumni/page';//校友组织
 export const GET_ALUMNIBYID = domain+'/api/alumni/detail/';//校友组织by id /api/alumni/detail/{id}
