@@ -35,8 +35,9 @@ export default {
                 { key: '/app/operate/Project', title: '项目管理', component: 'Project' },
                 { key: '/app/operate/Jijin', title: '基金管理', component: 'Jijin' },
                 { key: '/app/operate/MentorProgram', title: '导师计划', component: 'MentorProgram' },
-                { key: '/app/operate/FeedBack', title: '用户反馈', component: 'FeedBack' }
+                { key: '/app/operate/FeedBack', title: '用户反馈', component: 'FeedBack' },
                 // { key: '/app/operate/Donation', title: '校园捐赠', component: 'Donation' }
+                { key: '/app/operate/Donation', title: '校园捐赠', component: 'Donation' }
             ]
         },
         {
