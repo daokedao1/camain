@@ -106,6 +106,14 @@ export const publishActivityList = (param = {}) => PUT(config.PUBLISTH_ACTIVITY_
 export const retractActivityList = (param = {}) => PUT(config.RETRACT_ACTIVITY_LIST+param.id ).then(res=>{
     return res;
 }).catch(err=>err);
+//发布项目
+export const publishProjectList = (param = {}) => PUT(config.PUBLISH_PROJECT_LIST+param.id ).then(res=>{
+    return res;
+}).catch(err=>err);
+//撤回项目
+export const retractProjectList = (param = {}) => PUT(config.RETRACT_PROJECT_LIST+param.id ).then(res=>{
+    return res;
+}).catch(err=>err);
 //轮播图
 export const bannerList = (param = {}) => POST(config.BANNER_ACTIVITY_LIST,param ).then(res=>{
     return res;

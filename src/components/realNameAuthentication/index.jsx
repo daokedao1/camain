@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { Row, Col, Table,Input,Divider,Modal,message } from 'antd';
+import { Row, Col, Table,Input,Divider,Modal,message,Button } from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import Header from './../layout/Header';
 import {getAlumniAuditList,AlumniAuditPass,AlumniAuditRefuse} from './../../axios';
@@ -14,7 +14,17 @@ class RealNameAuthentication extends Component {
             page:1,
             pageSize:10,
             total:0,
-            dataList:[]
+            dataList:[],
+            param:{
+                id:'',
+                'name': '',
+                alumniName:'',
+                auditStatus:1,
+                orderField: '',
+                orderType: ''
+                // page: 1,
+                // size: 10
+            }
         };
     }
     componentDidMount(){
@@ -74,6 +84,19 @@ class RealNameAuthentication extends Component {
             page:page,
             pageSize:pageSize,
             loading:true
+        });
+    }
+    async searchs(){
+        const {param}=this.state;
+        // param.id=Number(param.id);
+        const res =getAlumniAuditList({...param});
+    }
+    IdChange(e,key){
+        const { param } = this.state;
+        // const params = Object.assign(searchParams,{});
+        param[key] = e.target.value;
+        this.setState({
+            param: {...param}
         });
     }
     onPassClick(record){
@@ -154,22 +177,26 @@ class RealNameAuthentication extends Component {
             }
 
         ];
+        const {param}=this.state;
         return (
             <div>
-                
+
                 <Header title="申请加入协会申请审批"/>
                 <Row gutter={16} style={{backgroundColor:'#fff',padding:'20px 40px'}}>
 
+                    {/* <Col className="gutter-row" md={6}>
+                        ID：<Input value={param.id} onChange={(e,v)=>this.IdChange(e,'id')}  placeholder="按id搜索" style={{width:'180px'}} />
+                    </Col> */}
                     <Col className="gutter-row" md={6}>
-                        ID：<Input placeholder="按id搜索" style={{width:'180px'}} />
+                        姓名：<Input value={param.name} onChange={(e,v)=>this.IdChange(e,'name')}   placeholder="按姓名搜索" style={{width:'180px'}}/>
                     </Col>
                     <Col className="gutter-row" md={6}>
-                        姓名：<Input placeholder="按姓名搜索" style={{width:'180px'}}/>
-                    </Col>
-                    <Col className="gutter-row" md={6}>
-                        协会：<Input placeholder="按协会搜索" style={{width:'180px'}}/>
+                        协会：<Input value={param.alumniName}  onChange={(e,v)=>this.IdChange(e,'alumniName')}   placeholder="按协会搜索" style={{width:'180px'}}/>
                     </Col>
 
+                    <Col className="gutter-row" md={6}>
+                        <Button onClick={this.searchs.bind(this)} type="primary">搜索</Button>
+                    </Col>
                 </Row>
                 <Row gutter={16} style={{backgroundColor:'#fff'}}>
                     <Col className="gutter-row" md={24}>

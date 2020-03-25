@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import ListTable from '@/components/table/List_table';
 import InputForm from '@/components/input';
-import {projectyList,addActivityList,delProjectList,editActivityList,retractActivityList,publishActivityList} from '@/axios';
+import {projectyList,addActivityList,delProjectList,editActivityList,retractProjectList,publishProjectList} from '@/axios';
 import {tableData,initParams,arr} from './serve';
 import './index.less';
 import 'react-quill/dist/quill.snow.css'; // ES6
@@ -104,7 +104,7 @@ class News extends React.Component {
         this.setState({ params: text });
     }
     async publish(id,row){
-        const res=await publishActivityList({id:id});
+        const res=await publishProjectList({id:id});
         if(res){
             this.init();
             message.success('发布成功');
@@ -112,7 +112,7 @@ class News extends React.Component {
 
     }
     async retract(id,row){
-        const res=await retractActivityList({id:id});
+        const res=await retractProjectList({id:id});
         if(res){
             this.init();
             message.success('撤回成功');
@@ -123,11 +123,13 @@ class News extends React.Component {
         return    {
             title: '操作',
             dataIndex: 'id',
-            width: '15%',
+            width: '20%',
             render: (id,row) => {
+
                 return (<div className="option">
                     {/* <Button size="small" onClick={()=>this.editWay('编辑',row)} type="primary">编辑</Button> */}
-                    {/* {statusAction} */}
+                    {!row.isPublish?<Button size="small" onClick={()=>this.publish(id,row)} type="primary">发布项目</Button>:<Button size="small" onClick={()=>this.retract(id,row)} type="primary">撤回项目</Button>}
+
                     <Popconfirm
                         title="确定要删除本条数据吗?"
                         onConfirm={()=>this.confirm(id)}

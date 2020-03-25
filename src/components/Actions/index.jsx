@@ -5,7 +5,7 @@ import ReactQuill from 'react-quill';
 import ListTable from '@/components/table/List_table';
 import InputForm from '@/components/input';
 import {activityList,addActivityList,delActivityList,editActivityList,retractActivityList,publishActivityList} from '@/axios';
-import {tableData,initParams,arr} from './serve';
+import {tableData,initParams,arr,toolbarOptions} from './serve';
 import './index.less';
 import 'react-quill/dist/quill.snow.css'; // ES6
 class News extends React.Component {
@@ -224,7 +224,9 @@ class News extends React.Component {
                         <p style={{width:'23.33%',color:' #000'}}>
                                 发布内容:
                         </p>
-                        <ReactQuill className="quill" value={params.content}
+                        <ReactQuill
+                            modules={{toolbar:toolbarOptions}}
+                            className="quill" value={params.content}
                             onChange={this.handleChange.bind(this)} />
                     </div>
 

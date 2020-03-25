@@ -57,6 +57,9 @@ export const RETRACT_ACTIVITY_LIST = domain+'/api/activity/retract/';//撤回活
 export const ADD_PROJECT_LIST = domain+'/api/project';//创建活动
 export const LIST_PROJECT_LIST = domain+'/api/project/page';//创建活动
 export const DEL_PROJECT_LIST = domain+'/api/project/';//创建活动
+export const PUBLISH_PROJECT_LIST = domain+'/api/project/publish/';//发布项目
+export const RETRACT_PROJECT_LIST = domain+'/api/project/retract/';//撤回活动
+
 //banner图
 export const BANNER_ACTIVITY_LIST = domain+'/api/home/banner/page';//轮播图列表
 export const ADD_BANNER_LIST = domain+'/api/home/banner';//新建

@@ -56,7 +56,16 @@ export const tableData=[
         }
     },
 
-
+    {
+        title: '是否发布',
+        dataIndex: 'isPublish',
+        render(v){
+            let a='';
+            v?a='已发布':a='未发布';
+            return a;
+        },
+        width:'10%'
+    },
     {
         title: '浏览次数',
         dataIndex: 'viewCount',

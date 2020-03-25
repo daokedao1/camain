@@ -48,7 +48,7 @@ class Donation extends React.Component {
         });
     }
     componentDidMount(){
-        
+
         this.init();
     }
     componentDidUpdate(){
@@ -64,10 +64,10 @@ class Donation extends React.Component {
                     key:res.data.key,
                     info:res.data.info,
                     value:res.data.value
-                })
-           
+                });
+
             }
-        })
+        });
     }
     save(){
         let {id,key,value,info} = this.state;
@@ -76,58 +76,58 @@ class Donation extends React.Component {
             key:key,
             info:info,
             value:value
-        }
+        };
         updateConfigBykey(param).then(res=>{
             if(res.success){
-                message.success('保存成功')
+                message.success('保存成功');
                 this.setState({
-                   loading:false
-                })
-           
+                    loading:false
+                });
+
             }else{
-                message.warn('保存失败')
+                message.warn('保存失败');
             }
-        })
+        });
     }
     onSaveClick(){
         this.setState({
             loading:true
-        })
+        });
     }
     onChange(value){
         this.setState({
             value:value
-        })
+        });
     }
     render() {
 
         return (
             <div className="content" >
                 <div>
-                <Spin spinning={this.state.loading}>
-                    <Row style={{background:'#fff'}}>
-                        <Col span={24}>
-                        <Header title="基金管理" />
-                            <Card  bordered={false} >
-                              
-                                <ReactQuill
-                                    theme="snow"
-                                    style={{height:this.state.height-200+'px'}}
-                                    value={this.state.value || ''}
-                                    onChange={this.onChange.bind(this)}
-                                    modules={{toolbar:toolbarOptions}}
+                    <Spin spinning={this.state.loading}>
+                        <Row style={{background:'#fff'}}>
+                            <Col span={24}>
+                                <Header title="基金管理" />
+                                <Card  bordered={false} >
+
+                                    <ReactQuill
+                                        theme="snow"
+                                        style={{height:this.state.height-200+'px'}}
+                                        value={this.state.value || ''}
+                                        onChange={this.onChange.bind(this)}
+                                        modules={{toolbar:toolbarOptions}}
                                     // formats={formats}
-                                />
-                               
-                            </Card>
-                            <div style={{marginTop:'30px',marginBottom:'20px',textAlign:'center'}}>
-                                <Button onClick={this.onSaveClick.bind(this)} type="primary">保存</Button>
-                            </div>
-                        </Col>
-                    </Row>
+                                    />
+
+                                </Card>
+                                <div style={{marginTop:'30px',marginBottom:'20px',textAlign:'center'}}>
+                                    <Button onClick={this.onSaveClick.bind(this)} type="primary">保存</Button>
+                                </div>
+                            </Col>
+                        </Row>
                     </Spin>
                 </div>
-              
+
             </div>
         );
     }
