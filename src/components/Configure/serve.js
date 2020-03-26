@@ -81,12 +81,7 @@ export const arr=[
         val:'id',
         placeholder:'请输入配置ID'
     },
-    {
-        name:'配置信息',
-        val:'info',
-        type:'text',
-        placeholder:'请输入配置信息'
-    },
+
     {
         name:'配置key',
         val:'key',
@@ -100,6 +95,12 @@ export const arr=[
         placeholder:'请输入配置value',
         required:true,
         val:'value'
+    },
+    {
+        name:'配置信息',
+        val:'info',
+        type:'text',
+        placeholder:'请输入配置信息'
     }
 ];
 
