@@ -83,17 +83,31 @@ export const pubArticleByid = (param = {}) => PUT(config.PUBLISH_ARTICLE_BYID+pa
 export const retArticleByid = (param = {}) => PUT(config.RETRACT_ARTICLE_BYID+param.id ).then(res=>{
     return res;
 }).catch(err=>err);
+
+//置顶活动
+export const topArticlesList = (param = {}) => PUT(config.LISTTOP_ARTICLE_LIST+'/'+param.id+'/top' ).then(res=>{
+    return res;
+}).catch(err=>err);
+export const unpinArticlesList = (param = {}) => PUT(config.LISTTOP_ARTICLE_LIST+'/'+param.id+'/unpin' ).then(res=>{
+    return res;
+}).catch(err=>err);
 //活动列表
 export const activityList = (param = {}) => POST(config.LIST_ACTIVITY_LIST ).then(res=>{
     return res;
 }).catch(err=>err);
+export const topListActivityList = (param = {}) => POST(config.TOPLIST_ARTICLE_LIST ).then(res=>{
+    return res;
+}).catch(err=>err);
+
 export const addActivityList = (param = {}) => POST(config.ADD_ACTIVITY_LIST,param ).then(res=>{
     return res;
 }).catch(err=>err);
 export const editActivityList = (param = {}) => PUT(config.ADD_ACTIVITY_LIST,param ).then(res=>{
     return res;
 }).catch(err=>err);
-
+export const listTopActivityList = (param = {}) => POST(config.LISTTOP_PROJECT_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
 //删除文章list
 export const delActivityList = (param = {}) => DEL(config.DEL_ACTIVITY_LIST+''+param.id ).then(res=>{
     return res;
@@ -104,6 +118,13 @@ export const publishActivityList = (param = {}) => PUT(config.PUBLISTH_ACTIVITY_
 }).catch(err=>err);
 //撤回活动
 export const retractActivityList = (param = {}) => PUT(config.RETRACT_ACTIVITY_LIST+param.id ).then(res=>{
+    return res;
+}).catch(err=>err);
+//置顶活动
+export const topActivityList = (param = {}) => PUT(config.TOP_ACTIVITY_LIST+'/'+param.id+'/top' ).then(res=>{
+    return res;
+}).catch(err=>err);
+export const unpinActivityList = (param = {}) => PUT(config.TOP_ACTIVITY_LIST+'/'+param.id+'/unpin' ).then(res=>{
     return res;
 }).catch(err=>err);
 //发布项目
@@ -193,5 +214,18 @@ export const editProjectList = (param = {}) => PUT(config.ADD_PROJECT_LIST,param
     return res;
 }).catch(err=>err);
 export const delProjectList = (param = {}) => DEL(config.DEL_PROJECT_LIST+param.id,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+//配置管理
+export const delConfigList = (param = {}) => DEL(config.DEL_CONFIG_LIST+param.id,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+export const addCongifList = (param = {}) => POST(config.ADD_CONFIG_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+export const CongifListData = (param = {}) => GET(config.LIST_CONFIG_LIST ).then(res=>{
+    return res;
+}).catch(err=>err);
+export const editConfigList = (param = {}) => PUT(config.ADD_CONFIG_LIST,param ).then(res=>{
     return res;
 }).catch(err=>err);

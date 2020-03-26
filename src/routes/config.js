@@ -32,6 +32,7 @@ export default {
                 { key: '/app/operate/notice', title: '公告管理', component: 'Notice' },
                 { key: '/app/operate/news', title: '新闻管理', component: 'News' },
                 { key: '/app/operate/Actions', title: '活动管理', component: 'Actions' },
+                { key: '/app/operate/Configure', title: '配置管理', component: 'Configure' },
                 { key: '/app/operate/Project', title: '项目管理', component: 'Project' },
                 { key: '/app/operate/Jijin', title: '基金管理', component: 'Jijin' },
                 { key: '/app/operate/MentorProgram', title: '导师计划', component: 'MentorProgram' },

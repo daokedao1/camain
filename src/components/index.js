@@ -67,6 +67,7 @@ import Menu from './Menu';//菜单
 import Donation from './donation';//捐赠
 import MentorProgram from './mentor-program';//导师计划
 import FeedBack from './feedback';//用户反馈
+import Configure from './Configure';//用户反馈
 
 const WysiwygBundle = Loadable({
     // 按需加载富文本配置
@@ -87,6 +88,7 @@ export default {
     AsynchronousTable,
     Echarts,
     News,
+    Configure,
     Recharts,
     Icons,
     Project,

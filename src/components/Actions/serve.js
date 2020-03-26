@@ -51,6 +51,22 @@ export const tableData=[
         width:'10%'
     },
     {
+        title: '权重',
+        dataIndex: 'weights',
+        width:'10%'
+    },
+    {
+        title: '是否置顶',
+        dataIndex: 'hasTop',
+        render: (text, record) =>{
+            let a='';
+            text?a='已置顶':a='未置顶';
+            return a;
+        },
+        width:'10%'
+    },
+
+    {
         title: '结束时间',
         dataIndex: 'endTime',
         width:'10%'
@@ -116,6 +132,13 @@ export const arr=[
         type:'text',
         placeholder:'请输入主图'
     },
+    {
+        name:'权重',
+        val:'weights',
+        type:'text',
+        placeholder:'请输入权重'
+    },
+
     {
         name:'开始时间',
         type:'time',

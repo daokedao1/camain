@@ -1,18 +1,22 @@
 import React from 'react';
-import {Card, Col, Row, Button, Modal,Switch,Popconfirm,message} from 'antd';
+import {Card, Col, Row, Button, Modal,Switch,Popconfirm,message,Tabs} from 'antd';
 import { withRouter } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import ListTable from '@/components/table/List_table';
 import InputForm from '@/components/input';
-import {getArticleList,addArticleList,delArticleList,editArticleList,pubArticleByid,retArticleByid} from '@/axios';
+import Header from './../layout/Header';
+import {getArticleList,addArticleList,delArticleList,editArticleList,pubArticleByid,retArticleByid,topArticlesList,unpinArticlesList,topListActivityList} from '@/axios';
 import {tableData,initParams,arr,toolbarOptions} from './serve';
 import './index.less';
 import 'react-quill/dist/quill.snow.css'; // ES6
+const { TabPane } = Tabs;
+
 class News extends React.Component {
     constructor(props){
         super(props);
         this.state={
             yAxisData:[],
+            yAxisData1:[],
             yArr:[],
             total:0,
             xAxisData:tableData,
@@ -25,7 +29,7 @@ class News extends React.Component {
                 creator:'',
                 isPublish:false,
                 content:'',
-                type:2
+                type:1
             },
             text: '',
             objData:{},
@@ -34,7 +38,7 @@ class News extends React.Component {
     }
     componentDidMount(){
         const data={};
-        this.init();
+        this.init(data);
     }
     async searchWay(e,v){
         const { value } = e.target;
@@ -47,17 +51,21 @@ class News extends React.Component {
         }
         this.init(paramData);
     }
-    async init(){
+    async init(data){
+
         let yAxisData,
+            yAxisData1,
             arrTable=[...tableData];
-        const res= await getArticleList({type:2});
+        const [res,res1]= await Promise.all([getArticleList({type:2}),topListActivityList({type:2})]);
+
         if(res){
             yAxisData=[...res.data.items];
+            yAxisData1=[...res1.data];
             yAxisData=this.stateWay(yAxisData);
             const option=this.option();
             arrTable.push(option);
         }
-        this.setState({yAxisData:yAxisData,xAxisData:arrTable,loading:false});
+        this.setState({yAxisData1:[...yAxisData1],yAxisData:yAxisData,xAxisData:arrTable,loading:false});
     }
     stateWay(data){
         let obj=[...data];
@@ -120,15 +128,32 @@ class News extends React.Component {
         }
 
     }
+    async top(id,row){
+        const res=await topArticlesList({id:id});
+        if(res){
+            this.init();
+            message.success('置顶成功');
+        }
+
+    }
+    async unpin(id,row){
+        const res=await unpinArticlesList({id:id});
+        if(res){
+            this.init();
+            message.success('取消置顶');
+        }
+
+    }
     option(){
         return    {
             title: '操作',
             dataIndex: 'id',
-            width: '15%',
+            width: '25%',
             render: (id,row) => {
                 return (<div className="option">
                     <Button size="small" onClick={()=>this.editWay('编辑',row)} type="primary">编辑</Button>
                     {!row.isPublish?<Button size="small" onClick={()=>this.publish(id,row)} type="primary">发布公告</Button>:<Button size="small" onClick={()=>this.retract(id,row)} type="primary">撤回公告</Button>}
+                    {!row.hasTop?<Button size="small" onClick={()=>this.top(id,row)} type="primary">置顶</Button>:<Button size="small" onClick={()=>this.unpin(id,row)} type="primary">取消置顶</Button>}
 
                     <Popconfirm
                         title="确定要删除本条数据吗?"
@@ -179,20 +204,36 @@ class News extends React.Component {
         });
     }
     render() {
-        const {yAxisData,total,xAxisData,operationName,visible,loading,params}=this.state;
+        const {yAxisData,yAxisData1,total,xAxisData,operationName,visible,loading,params}=this.state;
         return (
             <div  className="content">
                 <div>
                     <Row >
                         <Col span={24}>
-                            <Card title="公告管理" extra={<Button onClick={()=>this.add('新建')} type="primary">新建</Button>} bordered={false}>
-                                <ListTable
-                                    loading={loading}
-                                    yAxisData={yAxisData}
-                                    total={total}
-                                    pagination={true}
-                                    xAxisData={xAxisData}
-                                />
+                            <Header title="公告管理" extra={<Button onClick={()=>this.add('新建')} type="primary">新建</Button>}/>
+                            <Card bordered={false}>
+                                <Tabs defaultActiveKey="1" onChange={this.callback}>
+                                    <TabPane tab="非置顶" key="1">
+                                        <ListTable
+                                            loading={loading}
+                                            yAxisData={yAxisData}
+                                            total={total}
+                                            pagination={true}
+
+                                            xAxisData={xAxisData}
+                                        />
+                                    </TabPane>
+                                    <TabPane tab="置顶" key="2">
+                                        <ListTable
+                                            loading={loading}
+                                            yAxisData={yAxisData1}
+                                            total={total}
+                                            pagination={true}
+
+                                            xAxisData={xAxisData}
+                                        />
+                                    </TabPane>
+                                </Tabs>
                             </Card>
                         </Col>
                     </Row>

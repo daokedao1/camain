@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import ListTable from '@/components/table/List_table';
 import InputForm from '@/components/input';
-import {activityList,addActivityList,delActivityList,editActivityList,retractActivityList,publishActivityList,topActivityList,unpinActivityList,listTopActivityList} from '@/axios';
+import {CongifListData,addCongifList,delConfigList,editConfigList,retractActivityList,publishActivityList,topActivityList,unpinActivityList,listTopActivityList} from '@/axios';
 import {tableData,initParams,arr,toolbarOptions} from './serve';
 import './index.less';
 import 'react-quill/dist/quill.snow.css'; // ES6
@@ -51,17 +51,14 @@ class News extends React.Component {
     }
     async init(){
         let yAxisData,
-            yAxisData1,
             arrTable=[...tableData];
-        const [res,res1]= await Promise.all([activityList({}),listTopActivityList()]);
-        if(res&&res1){
-            yAxisData=[...res.data.items];
-            yAxisData1=[...res1.data];
-            yAxisData=this.stateWay(yAxisData);
+        const [res]= await Promise.all([CongifListData({})]);
+        if(res){
+            yAxisData=[...res.data];
             const option=this.option();
             arrTable.push(option);
         }
-        this.setState({yAxisData:yAxisData,xAxisData:arrTable,loading:false,yAxisData1:[...yAxisData1]});
+        this.setState({yAxisData:yAxisData,xAxisData:arrTable,loading:false});
     }
     stateWay(data){
         let obj=[...data];
@@ -88,7 +85,7 @@ class News extends React.Component {
 
     }
     async confirm(id) {
-        await delActivityList({id:id});
+        await delConfigList({id:id});
 
         this.setState({loading:true},()=>{
             this.init();
@@ -146,25 +143,8 @@ class News extends React.Component {
             dataIndex: 'id',
             width: '25%',
             render: (id,row) => {
-                let statusAction='';
-                switch (row.status) {
-                case 1:
-                    statusAction=<Button size="small" onClick={()=>this.publish(id,row)} type="primary">发布活动</Button>;
-                    break;
-                case 2:
-                    statusAction=<Button size="small" onClick={()=>this.retract(id,row)} type="primary">撤回活动</Button>;
-                    break;
-                case 3:
-                    statusAction=<Button size="small" onClick={()=>this.publish(id,row)} type="primary">发布活动</Button>;
-
-                    break;
-                default:
-                    break;
-                }
                 return (<div className="option">
                     <Button size="small" onClick={()=>this.editWay('编辑',row)} type="primary">编辑</Button>
-                    {statusAction}
-                    {!row.hasTop?<Button size="small" onClick={()=>this.top(id,row)} type="primary">置顶</Button>:<Button size="small" onClick={()=>this.unpin(id,row)} type="primary">取消置顶</Button>}
 
                     <Popconfirm
                         title="确定要删除本条数据吗?"
@@ -198,9 +178,9 @@ class News extends React.Component {
         console.log(params);
         let data={...params};
         if(operationName==='新建'){
-            await addActivityList(data);
+            await addCongifList(data);
         }else{
-            await editActivityList(data);
+            await editConfigList(data);
         }
 
         this.setState({visible:false},()=>{
@@ -225,29 +205,16 @@ class News extends React.Component {
                 <div>
                     <Row >
                         <Col span={24}>
-                            <Card title="活动管理" extra={<Button onClick={()=>this.add('新建')} type="primary">新建</Button>} bordered={false}>
-                                <Tabs defaultActiveKey="1" onChange={this.callback}>
-                                    <TabPane tab="非置顶" key="1">
-                                        <ListTable
-                                            loading={loading}
-                                            yAxisData={yAxisData}
-                                            total={total}
-                                            pagination={true}
+                            <Card title="配置管理" extra={<Button onClick={()=>this.add('新建')} type="primary">新建</Button>} bordered={false}>
+                                <ListTable
+                                    loading={loading}
+                                    yAxisData={yAxisData}
+                                    total={total}
+                                    pagination={true}
 
-                                            xAxisData={xAxisData}
-                                        />
-                                    </TabPane>
-                                    <TabPane tab="置顶" key="2">
-                                        <ListTable
-                                            loading={loading}
-                                            yAxisData={yAxisData1}
-                                            total={total}
-                                            pagination={true}
+                                    xAxisData={xAxisData}
+                                />
 
-                                            xAxisData={xAxisData}
-                                        />
-                                    </TabPane>
-                                </Tabs>
 
                             </Card>
                         </Col>
@@ -261,15 +228,6 @@ class News extends React.Component {
                     // searchData={searchData}
                 >
                     <InputForm styleCss={{height:'100%'}}  indexWay={this.indexWay.bind(this)} params={params} arr={arr}></InputForm>
-                    <div className="delayedSwitch" >
-                        <p style={{width:'23.33%',color:' #000'}}>
-                                发布内容:
-                        </p>
-                        <ReactQuill
-                            modules={{toolbar:toolbarOptions}}
-                            className="quill" value={params.content}
-                            onChange={this.handleChange.bind(this)} />
-                    </div>
 
                 </Modal>
             </div>

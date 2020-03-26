@@ -7,7 +7,6 @@ import InputForm from '@/components/input';
 import {projectyList,addActivityList,delProjectList,editActivityList,retractProjectList,publishProjectList} from '@/axios';
 import {tableData,initParams,arr} from './serve';
 import './index.less';
-import 'react-quill/dist/quill.snow.css'; // ES6
 class News extends React.Component {
     constructor(props){
         super(props);
