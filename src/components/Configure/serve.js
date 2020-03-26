@@ -30,11 +30,16 @@ export const tableData=[
         dataIndex: 'id',
         width:'20%'
     },
+
     {
-        title: '配置信息',
-        width:'10%',
-        align:'center',
-        dataIndex: 'info',
+        title: '配置key',
+        dataIndex: 'key',
+        width:'10%'
+    },
+    {
+        title: '配置value',
+        dataIndex: 'value',
+        width:'60%',
         render: (text, record) =>{
             return (
                 <div style={{display: 'inlineBlock',
@@ -50,14 +55,10 @@ export const tableData=[
         }
     },
     {
-        title: '配置key',
-        dataIndex: 'key',
-        width:'10%'
-    },
-    {
-        title: '配置value',
-        dataIndex: 'value',
-        width:'60%',
+        title: '配置信息',
+        width:'20%',
+        align:'center',
+        dataIndex: 'info',
         render: (text, record) =>{
             return (
                 <div style={{display: 'inlineBlock',
@@ -99,7 +100,7 @@ export const arr=[
     {
         name:'配置信息',
         val:'info',
-        type:'text',
+        type:'area',
         placeholder:'请输入配置信息'
     }
 ];
