@@ -3,27 +3,12 @@ import {Card, Col, Row, message,Button,Spin} from 'antd';
 import ReactQuill from 'react-quill';
 import {getConfigBykey,updateConfigBykey} from '@/axios';
 import Header from './../layout/Header';
+import Quill from 'quill';
 
 import 'react-quill/dist/quill.snow.css'; // ES6
-const toolbarOptions = [
-    ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-    ['blockquote', 'code-block'],
+import {toolbarOptions} from '@/serve.js';
 
-    [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-    [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-    [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-    [{ 'direction': 'rtl' }],                         // text direction
 
-    [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-
-    [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-    [{ 'font': [] }],
-    [{ 'align': [] }],
-    ['link', 'image', 'video'],
-    ['clean']                                         // remove formatting button
-];
 
 class Donation extends React.Component {
     constructor(props){
@@ -100,7 +85,10 @@ class Donation extends React.Component {
         });
     }
     render() {
-
+        var Size = Quill.import('attributors/style/size');
+        // Size.whitelist = ['10px', '12px', '14px', '16px', '18px', '20px'];
+        Size.whitelist = ['0.26rem', '0.31rem', '0.37rem', '0.41rem', '0.47rem', '0.52rem'];
+        Quill.register(Size, true);
         return (
             <div className="content" >
                 <div>

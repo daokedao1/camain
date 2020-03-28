@@ -2,11 +2,15 @@ import React from 'react';
 import {Card, Col, Row, Button, Modal,Switch,Popconfirm,message,Tabs} from 'antd';
 import { withRouter } from 'react-router-dom';
 import ReactQuill from 'react-quill';
+import Quill from 'quill';
+
 import ListTable from '@/components/table/List_table';
 import InputForm from '@/components/input';
 import Header from './../layout/Header';
 import {getArticleList,addArticleList,delArticleList,editArticleList,pubArticleByid,retArticleByid,topArticlesList,unpinArticlesList,topListActivityList} from '@/axios';
-import {tableData,initParams,arr,toolbarOptions} from './serve';
+import {tableData,initParams,arr} from './serve';
+import {toolbarOptions} from '@/serve.js';
+
 import './index.less';
 import 'react-quill/dist/quill.snow.css'; // ES6
 const { TabPane } = Tabs;
@@ -205,6 +209,10 @@ class News extends React.Component {
     }
     render() {
         const {yAxisData,yAxisData1,total,xAxisData,operationName,visible,loading,params}=this.state;
+        var Size = Quill.import('attributors/style/size');
+        // Size.whitelist = ['10px', '12px', '14px', '16px', '18px', '20px'];
+        Size.whitelist = ['0.26rem', '0.31rem', '0.37rem', '0.41rem', '0.47rem', '0.52rem'];
+        Quill.register(Size, true);
         return (
             <div  className="content">
                 <div>
