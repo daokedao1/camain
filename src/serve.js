@@ -8,11 +8,11 @@ export const toolbarOptions = [
     [{ 'indent': '-1'}, { 'indent': '+1' }],          // 缩进
     [{ 'direction': 'rtl' }],                         // 文本方向
     [{
-        // 'size': ['10px', '12px', '14px', '16px', '18px', '20px']
+        'size': [ '12px', '14px', '16px', '18px', '20px']
         //1/75 *2
         //1px =0.026rem
         //1rem=36px
-        'size': ['0.26rem', '0.31rem', '0.37rem', '0.41rem', '0.47rem', '0.52rem']
+        // 'size': ['0.26rem', '0.31rem', '0.37rem', '0.41rem', '0.47rem', '0.52rem']
     }],
     // [{ 'size': ['small', false, 'large', 'huge', '0.52rem'] }],  // 字体大小
     [{ 'header': [1, 2, 3, 4, 5, 6, false] }],//几级标题

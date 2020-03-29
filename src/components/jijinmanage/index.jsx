@@ -84,8 +84,8 @@ class Jijin extends React.Component {
     }
     render() {
         var Size = Quill.import('attributors/style/size');
-        // Size.whitelist = ['10px', '12px', '14px', '16px', '18px', '20px'];
-        Size.whitelist = ['0.26rem', '0.31rem', '0.37rem', '0.41rem', '0.47rem', '0.52rem'];
+        Size.whitelist = ['12px', '14px', '16px', '18px', '20px'];
+        // Size.whitelist = ['0.26rem', '0.31rem', '0.37rem', '0.41rem', '0.47rem', '0.52rem'];
         Quill.register(Size, true);
         return (
             <div className="content" >
