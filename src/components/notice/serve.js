@@ -53,6 +53,11 @@ export const tableData=[
         width:'10%'
     },
     {
+        title: '权重',
+        dataIndex: 'weights',
+        width:'10%'
+    },
+    {
         title: '创建人',
         dataIndex: 'creator',
         width:'10%'
@@ -84,6 +89,12 @@ export const arr=[
         type:'text',
         val:'title',
         placeholder:'请输入公告标题'
+    },
+    {
+        name:'权重',
+        val:'weights',
+        type:'text',
+        placeholder:'请输入权重'
     },
     {
         name:'主图',
