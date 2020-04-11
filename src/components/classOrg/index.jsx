@@ -77,7 +77,6 @@ class ClassOrg extends Component {
                 message.success('保存成功！');
                 _this.props.form.resetFields(); 
             }else{
-                console.log(res);
                 message.warning(res.message);
             }
         });
@@ -101,12 +100,9 @@ class ClassOrg extends Component {
 
                 });
             }else{
-                console.log(res);
                 message.warning(res.message);
             }
         });
-
-
     }
     getOrgById(id){
         let param = {
@@ -126,15 +122,12 @@ class ClassOrg extends Component {
                     type:orginfo.type||'1',
                     update_time:orginfo.update_time,
                     partentId:orginfo.partentId
-
                 });
             }else{
                 console.log(res);
-
             }
         });
     }
-
     onLoadData = treeNode =>{
         console.log(treeNode);
         return         new Promise(resolve => {
@@ -172,7 +165,6 @@ class ClassOrg extends Component {
         return Object.keys(fieldsError).some(field => fieldsError[field]);
     }
     delOrg(){
-        console.log(this.state.id > 3);
         let targetID = this.state.id;
         let _this = this;
         if(targetID > 3){
@@ -236,7 +228,7 @@ class ClassOrg extends Component {
             return <TreeNode key={item.key} {...item} dataRef={item} />;
         });
     onTreeNodeClick(keys, event){
-        console.log(keys, event);
+        this.props.form.resetFields(); 
         this.setState({
             opttype:'query',
             orgtitle:'组织信息'
