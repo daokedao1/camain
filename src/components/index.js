@@ -68,6 +68,7 @@ import Donation from './donation';//捐赠
 import MentorProgram from './mentor-program';//导师计划
 import FeedBack from './feedback';//用户反馈
 import Configure from './Configure';//用户反馈
+import Recruit from './recruit'//招聘
 
 const WysiwygBundle = Loadable({
     // 按需加载富文本配置
@@ -79,6 +80,7 @@ const WysiwygBundle = Loadable({
 export default {
     BasicForm,
     MentorProgram,
+    Recruit,
     Employment,
     Jijin,
     Donation,
