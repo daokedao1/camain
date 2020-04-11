@@ -176,7 +176,7 @@ class ClassOrg extends Component {
         let _this = this;
         if(targetID > 3){
             confirm({
-                title: `您确认删除 ${this.state.name} 组织吗？?`,
+                title: `您确认删除 ${_this.state.name} 组织吗？?`,
                 content: 'When clicked the OK button, this dialog will be closed after 1 second',
                 onOk() {
                     console.log(22);
