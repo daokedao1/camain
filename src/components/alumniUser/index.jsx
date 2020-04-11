@@ -164,6 +164,7 @@ class AlumniUser extends Component {
         });
     onTreeNodeClick(keys, event){
         console.log(keys, event);
+        this.props.form.resetFields(); 
         this.getOrgById(keys,event);
     }
     onPageChange(page, pageSize){

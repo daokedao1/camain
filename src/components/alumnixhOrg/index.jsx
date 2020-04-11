@@ -82,9 +82,11 @@ class AlumnixhOrg extends Component {
         });
     }
     updateAlumniById(param){
+        let _this = this;
         updateAlumniById(param).then(res=>{
             if(res.success){
                 message.success('保存成功！');
+                _this.props.form.resetFields(); 
             }else{
                 console.log(res);
                 message.warning(res.message);
@@ -194,6 +196,7 @@ class AlumnixhOrg extends Component {
         });
     onTreeNodeClick(keys, event){
         console.log(keys, event);
+        this.props.form.resetFields(); 
         this.setState({
             curNode:event.node,
             opttype:'query',

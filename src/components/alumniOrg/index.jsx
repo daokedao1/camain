@@ -70,11 +70,11 @@ class AlumniOrg extends Component {
     addAlumni(param){
         delete param.update_time;
         delete param.id;
+        let _this = this;
         addAlumni(param).then(res=>{
             if(res.success){
                 message.success('保存成功！');
-
-                console.log();
+                _this.props.form.resetFields(); 
             }else{
                 console.log(res);
                 message.warning(res.message);
@@ -194,6 +194,7 @@ class AlumniOrg extends Component {
         });
     onTreeNodeClick(keys, event){
         console.log(keys, event);
+        this.props.form.resetFields(); 
         this.setState({
             curNode:event.node,
             opttype:'query',
