@@ -1,9 +1,10 @@
 
 import React, { Component } from 'react';
-import { Tree,Row,Switch, Button,Col,Form,Input,Select,message} from 'antd';
+import { Tree,Row,Switch, Button,Modal,Col,Form,Input,Select,message} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
-import {getAlumniOrg,getSchoolList,getAlumniById,updateAlumniById,addAlumni} from './../../axios';
+import {getAlumniOrg,getSchoolList,delAlumniById,getAlumniById,updateAlumniById,addAlumni} from './../../axios';
 
+const { confirm } = Modal;
 const { Option } = Select;
 const { TreeNode } = Tree;
 const { TextArea } = Input;
