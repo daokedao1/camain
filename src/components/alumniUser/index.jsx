@@ -129,7 +129,7 @@ class AlumniUser extends Component {
                 'orderType': '',
                 'page': 1,
                 'partentId': treeNode.props.dataRef.key,
-                'size': 100
+                'size': 2000
             };
             getAlumniOrg(param).then(res=>{
                 if(res.success){

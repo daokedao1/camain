@@ -69,10 +69,12 @@ class ClassOrg extends Component {
     addAlumni(param){
         delete param.update_time;
         delete param.id;
+        let _this = this;
         param.status = 1;
         addAlumni(param).then(res=>{
             if(res.success){
                 message.success('保存成功！');
+                _this.props.form.resetFields(); 
             }else{
                 console.log(res);
                 message.warning(res.message);
@@ -84,6 +86,19 @@ class ClassOrg extends Component {
         updateAlumniById(param).then(res=>{
             if(res.success){
                 message.success('保存成功！');
+                this.setState({
+                    id:orginfo.id,
+                    name:orginfo.name||'',
+                    description:orginfo.description||'',
+                    school_id:orginfo.school_id||'1',
+                    organization:orginfo.organization||'',
+                    leader_desc:orginfo.leader_desc||'',
+                    tel:orginfo.tel||'',
+                    type:orginfo.type||'1',
+                    update_time:orginfo.update_time,
+                    partentId:orginfo.partentId
+
+                });
             }else{
                 console.log(res);
                 message.warning(res.message);
@@ -131,7 +146,7 @@ class ClassOrg extends Component {
                 'orderType': '',
                 'page': 1,
                 'partentId': treeNode.props.dataRef.key,
-                'size': 100
+                'size': 2000
             };
             getAlumniOrg(param).then(res=>{
                 if(res.success){
@@ -154,6 +169,36 @@ class ClassOrg extends Component {
     }
     hasErrors(fieldsError) {
         return Object.keys(fieldsError).some(field => fieldsError[field]);
+    }
+    delOrg(){
+        console.log(this.state.id > 3);
+        let targetID = this.state.id;
+        let _this = this;
+        if(targetID > 3){
+            confirm({
+                title: `您确认删除 ${this.state.name} 组织吗？?`,
+                content: 'When clicked the OK button, this dialog will be closed after 1 second',
+                onOk() {
+                    console.log(22);
+                    delAlumniById({id:targetID}).then(res=>{
+                        console.log(res);
+
+                        if(res.success){
+                            message.success('删除成功！');
+                            window.location.reload();
+
+                        }else{
+                            message.error('删除失败！');
+                        }
+                    });
+                },
+                onCancel() {}
+            });
+
+        }else{
+            message.warning('您不能删除该组织！');
+        }
+
     }
     handleSubmit(e){
         e.preventDefault();
@@ -208,7 +253,7 @@ class ClassOrg extends Component {
             organization:'',
             leader_desc:'',
             tel:'',
-            type:'2',
+            type:'1',
             update_time:'',
             opttype:'add'
         });
@@ -283,7 +328,7 @@ class ClassOrg extends Component {
                                 {getFieldDecorator('description', {
                                     rules: [
                                         {
-                                            required: true,
+                                            required: false,
                                             message: '请输入简介！'
                                         }
                                     ],
@@ -390,6 +435,9 @@ class ClassOrg extends Component {
                                 </Button>
                                 <Button type="primary" onClick={this.addOrg.bind(this)} >
                                          新增下级组织
+                                </Button>
+                                <Button type="danger" onClick={this.delOrg.bind(this)} >
+                                         删除
                                 </Button>
                             </Form.Item>
                         </Form>
