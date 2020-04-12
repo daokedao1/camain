@@ -3,19 +3,11 @@
  *
  */
 
-import Loadable from 'react-loadable';
-
 
 import Echarts from './charts/Echarts';
 import Recharts from './charts/Recharts';
 
-
-
-
-
 import Main from './main';
-
-
 
 import Role from './Role/index.jsx'; //角色管理
 import AlumniUser from './alumniUser';
