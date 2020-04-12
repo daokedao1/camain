@@ -5,24 +5,16 @@
 
 import Loadable from 'react-loadable';
 
-import BasicForm from './forms/BasicForm';
 
 import Echarts from './charts/Echarts';
 import Recharts from './charts/Recharts';
 
 
-import AuthBasic from './auth/Basic';
-import RouterEnter from './auth/RouterEnter';
-import Cssmodule from './cssmodule';
-
-import QueryParams from './extension/QueryParams';
-//*********************
 
 
 
-//*************
 import Main from './main';
-import DataOverView from './dataoverview';
+
 
 
 import Role from './Role/index.jsx'; //角色管理
@@ -49,7 +41,6 @@ import Recruit from './recruit'//招聘
 
 
 export default {
-    BasicForm,
     MentorProgram,
     Recruit,
     Employment,
@@ -65,13 +56,9 @@ export default {
     Project,
 
     AlumnixhOrg,
-    AuthBasic,
-    RouterEnter,
-    Cssmodule,
-    QueryParams,
+
     Actions,
     Main,
-    DataOverView,
     WheelPlanting,
     Navigation,
 
