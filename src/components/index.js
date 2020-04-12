@@ -9,21 +9,12 @@ import BasicForm from './forms/BasicForm';
 
 import Echarts from './charts/Echarts';
 import Recharts from './charts/Recharts';
-import Icons from './ui/Icons';
-import Buttons from './ui/Buttons';
-import Spins from './ui/Spins';
-import Modals from './ui/Modals';
-import Notifications from './ui/Notifications';
-import Tabs from './ui/Tabs';
-import Banners from './ui/banners';
-import Drags from './ui/Draggable';
-import Dashboard from './dashboard/Dashboard';
-import Gallery from './ui/Gallery';
+
 
 import AuthBasic from './auth/Basic';
 import RouterEnter from './auth/RouterEnter';
 import Cssmodule from './cssmodule';
-import MapUi from './ui/map';
+
 import QueryParams from './extension/QueryParams';
 //*********************
 
@@ -70,23 +61,13 @@ export default {
     News,
     Configure,
     Recharts,
-    Icons,
+
     Project,
-    Buttons,
-    Spins,
-    Modals,
-    Notifications,
-    Tabs,
-    Banners,
-    Drags,
-    Dashboard,
-    Gallery,
 
     AlumnixhOrg,
     AuthBasic,
     RouterEnter,
     Cssmodule,
-    MapUi,
     QueryParams,
     Actions,
     Main,
