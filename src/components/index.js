@@ -4,11 +4,9 @@
  */
 
 import Loadable from 'react-loadable';
-import Loading from './widget/Loading';
+
 import BasicForm from './forms/BasicForm';
-import BasicTable from './tables/BasicTables';
-import AdvancedTable from './tables/AdvancedTables';
-import AsynchronousTable from './tables/AsynchronousTable';
+
 import Echarts from './charts/Echarts';
 import Recharts from './charts/Recharts';
 import Icons from './ui/Icons';
@@ -30,18 +28,6 @@ import MapUi from './ui/map';
 import QueryParams from './extension/QueryParams';
 //*********************
 
-
-import allData from './waterData/allData.jsx';
-import course from './waterData/course';
-import historyData from './waterData/historyData';
-import historyLine from './waterData/historyLine';
-import realData from './waterData/realData';
-import realLine from './waterData/realLine';
-import alertSet from './waterData/alertSet';
-import alertRecord from './waterData/alertRecord';
-import open from './waterData/open';
-import XcalertSet from './waterData/XcalertSet';
-import XcAlertRecord from './waterData/XcAlertRecord';
 
 
 //*************
@@ -70,12 +56,7 @@ import FeedBack from './feedback';//用户反馈
 import Configure from './Configure';//用户反馈
 import Recruit from './recruit'//招聘
 
-const WysiwygBundle = Loadable({
-    // 按需加载富文本配置
-    loader: () =>
-        import('./ui/Wysiwyg'),
-    loading: Loading
-});
+
 
 export default {
     BasicForm,
@@ -85,9 +66,7 @@ export default {
     Jijin,
     Donation,
     FeedBack,
-    BasicTable,
-    AdvancedTable,
-    AsynchronousTable,
+
     Echarts,
     News,
     Configure,
@@ -108,7 +87,6 @@ export default {
     AlumnixhOrg,
     AuthBasic,
     RouterEnter,
-    WysiwygBundle,
     Cssmodule,
     MapUi,
     QueryParams,
@@ -117,17 +95,8 @@ export default {
     DataOverView,
     WheelPlanting,
     Navigation,
-    allData,
-    course,
-    historyData,
-    realData,
-    historyLine,
-    realLine,
-    alertSet,
-    alertRecord,
-    open,
-    XcAlertRecord,
-    XcalertSet,
+
+ 
     Menu,
 
     AlumniUser,
