@@ -19,8 +19,7 @@ import Banners from './ui/banners';
 import Drags from './ui/Draggable';
 import Dashboard from './dashboard/Dashboard';
 import Gallery from './ui/Gallery';
-import BasicAnimations from './animation/BasicAnimations';
-import ExampleAnimations from './animation/ExampleAnimations';
+
 import AuthBasic from './auth/Basic';
 import RouterEnter from './auth/RouterEnter';
 import Cssmodule from './cssmodule';
@@ -82,8 +81,7 @@ export default {
     Drags,
     Dashboard,
     Gallery,
-    BasicAnimations,
-    ExampleAnimations,
+
     AlumnixhOrg,
     AuthBasic,
     RouterEnter,
