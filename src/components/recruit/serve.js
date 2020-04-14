@@ -24,7 +24,7 @@ export const initParams={
     publishTime:'',
     creator:'',
     isPublish:false,
-    type:1,
+    type:3,
     content:''
 };
 export const tableData=[

@@ -156,15 +156,15 @@ class Recruit extends React.Component {
             render: (id,row) => {
                 return (<div className="option">
                     <Button size="small" onClick={()=>this.editWay('编辑',row)} type="primary">编辑</Button>
-                    {!row.isPublish?<Button size="small" onClick={()=>this.publish(id,row)} type="primary">发布新闻</Button>:<Button size="small" onClick={()=>this.retract(id,row)} type="primary">撤回新闻</Button>}
+                    {!row.isPublish?<Button size="small" onClick={()=>this.publish(id,row)} type="primary">发布</Button>:<Button size="small" onClick={()=>this.retract(id,row)} type="primary">撤回</Button>}
                     {!row.hasTop?<Button size="small" onClick={()=>this.top(id,row)} type="primary">置顶</Button>:<Button size="small" onClick={()=>this.unpin(id,row)} type="primary">取消置顶</Button>}
 
                     <Popconfirm
                         title="确定要删除本条数据吗?"
                         onConfirm={()=>this.confirm(id)}
                         // onCancel={this.cancel}
-                        okText="Yes"
-                        cancelText="No"
+                        okText="确定"
+                        cancelText="取消"
                     >
                         <Button size="small" type="danger">删除</Button>
                     </Popconfirm>
