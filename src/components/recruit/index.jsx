@@ -254,12 +254,12 @@ class Recruit extends React.Component {
                     // searchData={searchData}
                 >
                     <InputForm styleCss={{height:'100%'}}  indexWay={this.indexWay.bind(this)} params={params} arr={arr}></InputForm>
-                    <div className="delayedSwitch" >
+                    {/* <div className="delayedSwitch" >
                         <p style={{width:'33.33%',color:' #000'}}>
                                 是否发布:
                         </p>
                         <Switch  checked={params.isPublish} onChange={this.switch.bind(this)}/>
-                    </div>
+                    </div> */}
                     <div className="delayedSwitch" >
                         <p style={{width:'23.33%',color:' #000'}}>
                                 发布内容:
