@@ -10,10 +10,10 @@ import Recharts from './charts/Recharts';
 import Main from './main';
 
 import Role from './Role/index.jsx'; //角色管理
-import AlumniUser from './alumniUser';
-import AlumniOrg from './alumniOrg';
+import AlumniUser from './alumniUser'; // 校友
+import AlumniOrg from './alumniOrg'; // 校友会
 import AlumnixhOrg from './alumnixhOrg';//AlumnixhOrg
-import ClassOrg from './classOrg';
+import ClassOrg from './classOrg'; // 班级
 import RealNameAuthentication from './realNameAuthentication';
 import Notice from './notice';
 import Employment from './employee';//招聘

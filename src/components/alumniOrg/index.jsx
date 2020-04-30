@@ -75,6 +75,7 @@ class AlumniOrg extends Component {
             if(res.success){
                 message.success('保存成功！');
                 _this.props.form.resetFields(); 
+                window.location.reload();
             }else{
                 console.log(res);
                 message.warning(res.message);
@@ -186,7 +187,7 @@ class AlumniOrg extends Component {
             if (item.children) {
                 return (
                     <TreeNode title={item.title} key={item.key} dataRef={item}>
-                        {this.renderTreeNodes(item.children)}
+                        {this.renderTreeNodes(item.children)}̀
                     </TreeNode>
                 );
             }
@@ -200,7 +201,10 @@ class AlumniOrg extends Component {
             opttype:'query',
             orgtitle:'组织信息'
         });
-        this.getOrgById(keys);
+        if(!keys || !keys.length) {
+            return message.error(`查看${event.node.props.title}失败，请联系开发人员`);
+        }
+        this.getOrgById(keys[0]);
     }
     addOrg(){
 
@@ -226,7 +230,7 @@ class AlumniOrg extends Component {
         if(targetID > 3){
             confirm({
                 title: `您确认删除 ${this.state.name} 组织吗？?`,
-                content: 'When clicked the OK button, this dialog will be closed after 1 second',
+                content: '',
                 onOk() {
                     console.log(22);
                     delAlumniById({id:targetID}).then(res=>{
@@ -317,12 +321,6 @@ class AlumniOrg extends Component {
                             </Form.Item>
                             <Form.Item label="简介">
                                 {getFieldDecorator('description', {
-                                    rules: [
-                                        {
-                                            required: true,
-                                            message: '请输入简介！'
-                                        }
-                                    ],
                                     initialValue:this.state.description
                                 })(<TextArea autoSize={true}/>)}
                             </Form.Item>
@@ -379,10 +377,6 @@ class AlumniOrg extends Component {
                             <Form.Item label="类型">
                                 {getFieldDecorator('type', {
                                     rules: [
-                                        {
-
-                                            message: 'The input is not valid E-mail!'
-                                        },
                                         {
                                             required: false,
                                             message: ''

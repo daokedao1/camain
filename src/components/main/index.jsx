@@ -26,7 +26,7 @@ class Main extends React.Component {
                     title: '名称',
                     dataIndex: 'name',
                     key: 'name',
-                    render: text => < a > { text } < /a>,
+                    render: text => < a > { text } </a>,
                 },
                 {
                     title: '设备数量',
@@ -42,19 +42,18 @@ class Main extends React.Component {
                 {
                     title: '操作',
                     key: 'action',
-                    render: (text, record) => ( <
-                        span > {
+                    render: (text, record) => ( 
+                        <span > {
                             record.action.map((v, i) => {
                                 return <Link style = {
                                     { color: "#1890ff" }
                                 }
                                 to = { '/app/waterData/allData' }
-                                key = { i } > { v } < /Link>
+                                key = { i } > { v } </Link>
                             })
                         }
 
-                        <
-                        /span>
+                        </span>
                     )
 
                 },
@@ -119,7 +118,7 @@ class Main extends React.Component {
                     }, ]
                 },
             ];
-            return ( < div className = "gutter-example" > 首页 < /div>)
+            return ( <div className = "gutter-example" > 首页 </div>)
             }
         }
 
