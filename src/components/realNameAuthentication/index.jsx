@@ -35,8 +35,8 @@ class RealNameAuthentication extends Component {
             this.getList();
         }
     }
-    getList(){
-        let params = {
+    getList(params){
+        params = params || {
             'auditStatus':1,
             'orderField': '',
             'orderType': '',
@@ -45,14 +45,12 @@ class RealNameAuthentication extends Component {
         };
         getAlumniAuditList(params).then(res=>{
             if(res.success){
-                if(res.data){
-                    this.setState({
-                        dataList:this.buildData(res.data.items),
-                        total:res.data.totalCount,
-                        loading:false
-                    });
-                }
-
+                res.data = res.data || {};
+                this.setState({
+                    dataList:this.buildData(res.data.items || []),
+                    total:res.data.totalCount || 0,
+                    loading:false
+                });
             }
         });
     }
@@ -86,10 +84,10 @@ class RealNameAuthentication extends Component {
             loading:true
         });
     }
-    async searchs(){
+    
+    searchs(){
         const {param}=this.state;
-        // param.id=Number(param.id);
-        const res =getAlumniAuditList({...param});
+        this.getList({...param});
     }
     IdChange(e,key){
         const { param } = this.state;
@@ -123,8 +121,29 @@ class RealNameAuthentication extends Component {
             }
         });
     }
-    onNoClick(id){
-        console.log(id);
+    onNoClick(record){
+        let {key,id,username='',alumniModelName=''} = record;
+        let _this = this;
+        confirm({
+            title: '您确认驳回该请求?',
+            content: '请您核实用户('+username+')基本信息，确认驳回其加入组织('+alumniModelName+')！',
+            onOk() {
+                AlumniAuditRefuse(id).then(res=>{
+                    if(res.success){
+                        const dataList = [..._this.state.dataList];
+                        _this.setState({ dataList: dataList.filter(item => item.id !== id) });
+                        message.success('驳回通过！');
+                    }else{
+                        message.error('审批失败！');
+                    }
+                });
+
+            },
+            onCancel() {
+                console.log('取消');
+
+            }
+        });
     }
     render() {
         let columns = [
