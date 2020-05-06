@@ -4,7 +4,8 @@ import { withRouter } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import ListTable from '@/components/table/List_table';
 import InputForm from '@/components/input';
-import {listRoleList,addtRoleList,delRoleList,editRoleList} from '@/axios';
+import TableTransferWithSwitch from '@/components/modal/roleAssociateUsers'
+import {listRoleList,addtRoleList,delRoleList,editRoleList, roleAssociateUsers} from '@/axios';
 import {tableData,initParams,arr} from './serve';
 import './index.less';
 import 'react-quill/dist/quill.snow.css'; // ES6
@@ -17,6 +18,7 @@ class News extends React.Component {
             total:0,
             xAxisData:tableData,
             visible:false,
+            associateVisible: false,
             operationName:'新建',
             params:{
                 name:'',
@@ -81,6 +83,16 @@ class News extends React.Component {
         });
 
     }
+
+    associateUsers(title, row) {
+        let param={...row};
+        this.setState({
+            associateVisible:true,
+            operationName:title,
+            params:param
+        });
+    }
+
     async confirm(id) {
         await delRoleList({id:id});
 
@@ -110,12 +122,13 @@ class News extends React.Component {
             render: (id,row) => {
                 return (<div className="option">
                     <Button size="small" onClick={()=>this.editWay('编辑',row)} type="primary">编辑</Button>
+                    <Button size="small" onClick={()=>this.associateUsers('关联用户',row)} type="primary">关联用户</Button>
                     <Popconfirm
                         title="确定要删除本条数据吗?"
                         onConfirm={()=>this.confirm(id)}
                         // onCancel={this.cancel}
-                        okText="Yes"
-                        cancelText="No"
+                        okText="是"
+                        cancelText="否"
                     >
                         <Button size="small" type="danger">删除</Button>
                     </Popconfirm>
@@ -136,15 +149,23 @@ class News extends React.Component {
 
     handleCancel(){
         this.setState({visible:false});
+        this.setState({associateVisible: false});
     }
-    async handleOk(){
+    async handleOk(e){
         const {params,operationName}=this.state;
         console.log(params);
+        console.log('data:', e);
         let data={...params};
         if(operationName==='新建'){
             await addtRoleList(data);
-        }else{
+        }else if(operationName==='编辑'){
             await editRoleList(data);
+        }else {
+            if (params.associateUserKeys) {
+                await roleAssociateUsers(data.id, params.associateUserKeys);
+            }
+            
+            return this.setState({associateVisible: false});
         }
 
         this.setState({visible:false},()=>{
@@ -160,7 +181,7 @@ class News extends React.Component {
         });
     }
     render() {
-        const {yAxisData,total,xAxisData,operationName,visible,loading,params}=this.state;
+        const {yAxisData,total,xAxisData,operationName,visible, associateVisible, loading,params}=this.state;
         return (
             <div  className="content">
                 <div>
@@ -189,6 +210,16 @@ class News extends React.Component {
                     <InputForm styleCss={{height:'100%'}}  indexWay={this.indexWay.bind(this)} params={params} arr={arr}></InputForm>
 
 
+                </Modal>
+                <Modal
+                    title={operationName}
+                    visible={associateVisible}
+                    width={800}
+                    destroyOnClose={true}
+                    onOk={this.handleOk.bind(this)}
+                    onCancel={this.handleCancel.bind(this)}
+                >
+                    <TableTransferWithSwitch params={params}/>
                 </Modal>
             </div>
         );

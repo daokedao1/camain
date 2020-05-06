@@ -175,6 +175,14 @@ export const delRoleList = (param = {}) => DEL(config.DEL_ROLE_LIST+param.id ).t
 export const editRoleList = (param = {}) => PUT(config.ADD_ROLE_LIST,param ).then(res=>{
     return res;
 }).catch(err=>err);
+    // 权限关联用户
+    export const roleAssociateUsers = (id, param = {}) => POST(`${config.ADD_ROLE_LIST}/${id}/users`, param).then(res=>{
+        return res;
+    }).catch(err=>err);
+    // 获取角色关联的用户
+    export const getRoleAssociateUsers = (id, param = {}) => GET(`${config.ADD_ROLE_LIST}/${id}/users`, param).then(res=>{
+        return res;
+    }).catch(err=>err);
 //菜单
 export const addMenuList = (param = {}) => POST(config.ADD_MENU_LIST,param ).then(res=>{
     return res;
