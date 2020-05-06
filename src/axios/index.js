@@ -172,7 +172,7 @@ export const addtRoleList = (param = {}) => POST(config.ADD_ROLE_LIST,param ).th
 export const delRoleList = (param = {}) => DEL(config.DEL_ROLE_LIST+param.id ).then(res=>{
     return res;
 }).catch(err=>err);
-export const editRoleList = (param = {}) => PUT(config.ADD_ROLE_LIST,param ).then(res=>{
+export const editRoleList = (param = {}) => POST(config.ADD_ROLE_LIST,param ).then(res=>{
     return res;
 }).catch(err=>err);
     // 权限关联用户

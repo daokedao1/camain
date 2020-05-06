@@ -50,6 +50,12 @@ class TableTransferWithSwitch extends React.Component {
     }
 
     getCaUserList(pageObj = {}) {
+<<<<<<< HEAD
+=======
+        // TODO size设置为10000是因为这个ant的转换组件有一部分局限，在转换时就应该查出左边显示和右边显示的数据，但是现在
+        // 查询用户只有分页接口，无法保证查回来的第一页数据就包含已关联的用户
+        // 解决方案 换掉这个组件操作，这个组件适合量那么大的交换数据，建议切换成表单，然后在关联数据
+>>>>>>> 2c61611feb77bbbcc92e11424bcaba7f553bda83
         let param = {
             'orderField': '',
             'orderType': '',
@@ -101,6 +107,23 @@ class TableTransferWithSwitch extends React.Component {
     render() {
         const { targetKeys, dataSource } = this.state;
         return (
+<<<<<<< HEAD
+=======
+            //   <div>
+            //     <TableTransfer
+            //       dataSource={mockData}
+            //       targetKeys={targetKeys}
+            //       showSearch={true}
+            //       onChange={this.onChange}
+            //       filterOption={(inputValue, item) =>
+            //         item.title.indexOf(inputValue) !== -1 || item.tag.indexOf(inputValue) !== -1
+            //       }
+            //       leftColumns={leftTableColumns}
+            //       rightColumns={rightTableColumns}
+            //     />
+            //   </div>
+
+>>>>>>> 2c61611feb77bbbcc92e11424bcaba7f553bda83
             <Transfer
                 dataSource={dataSource}
                 rowKey={record => record.id}
