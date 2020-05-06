@@ -75,7 +75,8 @@ class ClassOrg extends Component {
         addAlumni(param).then(res=>{
             if(res.success){
                 message.success('保存成功！');
-                _this.props.form.resetFields(); 
+                _this.props.form.resetFields();
+                window.location.reload();
             }else{
                 message.warning(res.message);
             }
@@ -172,7 +173,6 @@ class ClassOrg extends Component {
                 title: `您确认删除 ${_this.state.name} 组织吗？?`,
                 content: 'When clicked the OK button, this dialog will be closed after 1 second',
                 onOk() {
-                    console.log(22);
                     delAlumniById({id:targetID}).then(res=>{
                         console.log(res);
 

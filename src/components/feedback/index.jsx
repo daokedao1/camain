@@ -134,7 +134,7 @@ class FeedBack extends React.Component {
             render: (id,row) => {
                 return (<div className="option">
                     {/* <Button size="small" onClick={()=>this.editWay('编辑',row)} type="primary">编辑</Button> */}
-                    {!row.status?<Button size="small" onClick={()=>this.publish(id,row)} type="primary">以处理</Button>:<Button size="small" onClick={()=>this.retract(id,row)} type="primary">未处理</Button>}
+                    {!row.status?<Button size="small" onClick={()=>this.publish(id,row)} type="default">已处理</Button>:<Button size="small" onClick={()=>this.retract(id,row)} type="primary">未处理</Button>}
 
                     {/* <Popconfirm
                         title="确定要删除本条数据吗?"

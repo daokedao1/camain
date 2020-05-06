@@ -73,7 +73,7 @@ export default {
             title: '系统管理',
             icon: 'scan',
             subs: [
-                { key: '/app/operate/main', title: '用户管理', component: 'open' },
+                // { key: '/app/operate/main', title: '用户管理', component: 'User' },
                 { key: '/app/operate/Role', title: '角色管理', component: 'Role' },
                 { key: '/app/operate/Menu', title: '菜单管理', component: 'Menu' }
                 // { key: '/app/operate/overview2', title: '组织管理', component: 'open' },
