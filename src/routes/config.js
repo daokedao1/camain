@@ -29,6 +29,7 @@ export default {
             title: '运营管理',
             icon: 'mobile',
             subs: [
+                { key: '/app/config/nav', title: '首页轮播图', component: 'Navigation' },
                 { key: '/app/operate/notice', title: '公告管理', component: 'Notice' },
                 { key: '/app/operate/news', title: '新闻管理', component: 'News' },
                 { key: '/app/operate/Actions', title: '活动管理', component: 'Actions' },
@@ -62,8 +63,6 @@ export default {
             title: 'APP管理',
             icon: 'scan',
             subs: [
-
-                { key: '/app/config/nav', title: '首页轮播图', component: 'Navigation' },
                 { key: '/app/config/wheelPlanting', title: '主页导航', component: 'WheelPlanting' },
                 { key: '/app/config/Configure', title: '配置管理', component: 'Configure' },
             ]
