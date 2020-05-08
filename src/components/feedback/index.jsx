@@ -1,111 +1,82 @@
 import React from 'react';
-import {Card, Col, Row, Button, Modal,Switch,Popconfirm,message} from 'antd';
+import { Card, Col, Row, Button, Modal, Input, Table, message, Select } from 'antd';
 import { withRouter } from 'react-router-dom';
-import ReactQuill from 'react-quill';
-import ListTable from '@/components/table/List_table';
-import InputForm from '@/components/input';
 import Header from './../layout/Header';
-import {getFeedBackList,setFeedBackOk,delArticleList,editArticleList,pubArticleByid,retArticleByid} from '@/axios';
-import {tableData,initParams,arr} from './serve';
+import { getFeedBackList, setFeedBackOk, delArticleList, editArticleList, pubArticleByid, retArticleByid } from '@/axios';
+import { tableData, initParams, arr } from './serve';
 import './index.less';
 import 'react-quill/dist/quill.snow.css'; // ES6
+const { Option } = Select;
 class FeedBack extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            yAxisData:[],
-            yArr:[],
-            total:0,
-            xAxisData:tableData,
-            visible:false,
-            operationName:'新建',
-            params:{
-                title:'',
-                subTitle:'',
-                publishTime:'',
-                creator:'',
-                isPublish:false,
-                content:'',
-                type:1
+        this.state = {
+            page: 1,
+            total: 0,
+            xAxisData: tableData,
+            dataSource: [],
+            visible: false,
+            param: {
+                userName: '',
+                status: 1,
+                size: 20
             },
             text: '',
-            objData:{},
-            loading:true
+            objData: {},
+            loading: true
         };
     }
-    componentDidMount(){
-        const data={};
-        this.init(data);
+    componentDidMount() {
+        let { xAxisData } = this.state;
+        xAxisData.push(this.option());
+        this.setState({ xAxisData });
+        this.getFeedBackList(1)
     }
-    async searchWay(e,v){
-        const { value } = e.target;
 
-        const paramData={};
-        for(let key in paramData){
-            if(key===v){
-                paramData[key]=value;
+    pageChange = (page) => {
+        this.setState({page});
+        this.getFeedBackList();
+    }
+
+    getFeedBackList() {
+        let {param, page} = this.state;
+        param['page'] = page;
+        getFeedBackList(param).then(res => {
+            if (res) {
+                this.setState({ dataSource: [...res.data.items], total: res.data.totalCount, loading: false });
             }
-        }
-        this.init(paramData);
-    }
-    async init(data){
-        let yAxisData,
-            arrTable=[...tableData];
-        const res= await getFeedBackList({type:1});
-        if(res){
-            yAxisData=[...res.data.items];
-            yAxisData=this.stateWay(yAxisData);
-            const option=this.option();
-            arrTable.push(option);
-        }
-        this.setState({yAxisData:yAxisData,xAxisData:arrTable,loading:false});
-    }
-    stateWay(data){
-        let obj=[...data];
-        for(let v of data){
-            for(let key in v){
-                if(key==='state'){
-                    if(v.state===0){
-                        v.state='开';
-                    }else{
-                        v.state='关';
-                    }
-                }
-            }
-        }
-        return obj;
-    }
-    async editWay(title,row){
-        let param={...row};
-        this.setState({
-            visible:true,
-            operationName:title,
-            params:param
         });
 
     }
-    async confirm(id) {
-        await delArticleList({id:id});
 
-        this.setState({loading:true},()=>{
+    IdChange = (e, type) => {
+        let {param} = this.state;
+        let value;
+        
+        if(type !== 'status') {
+            value = e.target.value;
+        }else {
+            value = e;
+        }
+
+        param[type] = value;
+        this.setState({param});
+    }
+
+    searchs() {
+        this.getFeedBackList();
+    }
+
+    async confirm(id) {
+        await delArticleList({ id: id });
+
+        this.setState({ loading: true }, () => {
             this.init();
             message.success('删除成功');
         });
     }
-    switch(){
-        // const {params}=this.state;
-        // params.isPublish=!params.isPublish;
-        // this.setState({
-        //     params:params
-        // });
-    }
-    handleChange(value) {
-        const {params}=this.state;
-        let text={...params};
-        text.content=value;
-        this.setState({ params: text });
-    }
-    async publish(id,row){
+
+    async publish(id, row) {
         // const res= await setFeedBackOk({id:id});
         // if(res.success){
         //     this.init();
@@ -113,9 +84,9 @@ class FeedBack extends React.Component {
         // }
 
     }
-    async retract(id,row){
-        const res= await setFeedBackOk({id:id});
-        if(res.success){
+    async retract(id, row) {
+        const res = await setFeedBackOk({ id: id });
+        if (res.success) {
             this.init();
             message.success('成功');
         }
@@ -126,107 +97,55 @@ class FeedBack extends React.Component {
         // }
 
     }
-    option(){
-        return    {
+    option() {
+        return {
             title: '操作',
             dataIndex: 'id',
             width: '15%',
-            render: (id,row) => {
+            render: (id, row) => {
                 return (<div className="option">
                     {/* <Button size="small" onClick={()=>this.editWay('编辑',row)} type="primary">编辑</Button> */}
-                    {!row.status?<Button size="small" onClick={()=>this.publish(id,row)} type="default">已处理</Button>:<Button size="small" onClick={()=>this.retract(id,row)} type="primary">未处理</Button>}
-
-                    {/* <Popconfirm
-                        title="确定要删除本条数据吗?"
-                        onConfirm={()=>this.confirm(id)}
-                        // onCancel={this.cancel}
-                        okText="Yes"
-                        cancelText="No"
-                    >
-                        <Button size="small" type="danger">删除</Button>
-                    </Popconfirm> */}
+                    {!row.status ? <Button size="small" disabled={true} onClick={() => this.publish(id, row)} type="default">已处理</Button> : <Button size="small" onClick={() => this.retract(id, row)} type="primary">处理</Button>}
                 </div>);
             }
         };
-
-    }
-    indexWay(v){
-        const {params}=this.state;
-        if(params.field===''){
-            return '';
-        }else{
-            // return paramsObj[v.val](params);
-        }
-
     }
 
-    handleCancel(){
-        this.setState({visible:false});
-    }
-    async handleOk(){
-        const {params,operationName}=this.state;
-        let data={...params};
-        if(operationName==='新建'){
-            await addArticleList(data);
-        }else{
-            await editArticleList(data);
-        }
-
-        this.setState({visible:false},()=>{
-            this.init();
-        });
-    }
-    add(){
-        let params={...initParams};
-        this.setState({
-            visible:true,
-            operationName:'新建',
-            params:params//初始化
-        });
-    }
     render() {
-        const {yAxisData,total,xAxisData,operationName,visible,loading,params}=this.state;
+        const { xAxisData, param } = this.state;
         return (
-            <div  className="content">
+            <div className="content">
                 <div>
+                    <Header title="管理用户反馈" />
+                    <Row gutter={16} style={{ backgroundColor: '#fff', padding: '20px 40px' }}>
+                        <Col className="gutter-row" md={6}>
+                            姓名：<Input value={param.userName} onChange={(e, v) => this.IdChange(e, 'userName')} placeholder="按姓名搜索" style={{ width: '180px' }} />
+                        </Col>
+                        <Col className="gutter-row" md={6}>
+                            状态：<Select defaultValue={param.status} style={{ width: 180 }} onChange={(e) => this.IdChange(e, 'status')}>
+                                    <Option value={1}>未处理</Option>
+                                    <Option value={0}>已处理</Option>
+                                </Select>
+                        </Col>
+
+                        <Col className="gutter-row" md={6}>
+                            <Button onClick={this.searchs.bind(this)} type="primary">搜索</Button>
+                        </Col>
+                    </Row>
                     <Row >
                         <Col span={24}>
-                            <Header title="用户反馈" />
                             <Card bordered={false}>
-                                <ListTable
-                                    loading={loading}
-                                    yAxisData={yAxisData}
-                                    pagination={true}
-                                    total={total}
-                                    xAxisData={xAxisData}
+                                <Table
+                                    pagination={{ total: this.state.total, onChange: this.pageChange, pageSize: 20 }}
+                                    columns={xAxisData}
+                                    dataSource={this.state.dataSource}
+                                    rowKey={record => record.id}
+                                    loading={this.state.loading}
                                 />
                             </Card>
                         </Col>
                     </Row>
                 </div>
-                <Modal
-                    title={operationName}
-                    visible={visible}
-                    onOk={this.handleOk.bind(this)}
-                    onCancel={this.handleCancel.bind(this)}
-                    // searchData={searchData}
-                >
-                    <InputForm styleCss={{height:'100%'}}  indexWay={this.indexWay.bind(this)} params={params} arr={arr}></InputForm>
-                    <div className="delayedSwitch" >
-                        <p style={{width:'33.33%',color:' #000'}}>
-                                是否发布:
-                        </p>
-                        <Switch  checked={params.isPublish} onChange={this.switch.bind(this)}/>
-                    </div>
-                    <div className="delayedSwitch" >
-                        <p style={{width:'23.33%',color:' #000'}}>
-                                发布内容:
-                        </p>
-                        <ReactQuill className="quill" value={params.content}
-                            onChange={this.handleChange.bind(this)} />
-                    </div>
-
-                </Modal>
             </div>
         );
     }

@@ -32,6 +32,7 @@ class VisitDate extends React.Component {
             loading: true,
             xAxisData: [
             ],
+            yAxisData: [],
             legend: [],
             scrollW: 0,
             searchText: '',
@@ -39,7 +40,7 @@ class VisitDate extends React.Component {
         };
     }
     componentDidMount() {
-        this.props.xAxisData ? this.init(this.props.xAxisData) : console.log('没有找到xAxisData这个参数');
+        this.props.xAxisData ? this.init(this.props.xAxisData, this.props.yAxisData) : console.log('没有找到xAxisData这个参数');
     }
     componentWillReceiveProps(nextProps) {
         nextProps.xAxisData && nextProps.xAxisData.length > 0 ? this.init(nextProps.xAxisData) : console.log('没有找到xAxisData这个参数');
@@ -82,7 +83,7 @@ class VisitDate extends React.Component {
         } else {
             box.style.width = '100%';
         }
-        this.setState({xAxisData: arr, scrollW,loading:false});
+        this.setState({xAxisData: arr, yAxisData: yData, scrollW,loading:false});
     }
     getColumnSearchProps = dataIndex => ({
         filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
@@ -167,11 +168,11 @@ class VisitDate extends React.Component {
                   style={this.props.styleData ? this.props.styleData : {maxWidth: '100%'}}
               >
                   <Table
-                      pagination={this.props.pagination?this.props.pagination:false}
+                      pagination={this.props.pagination?{total: this.props.total}:false}
                       bordered
                       size="small"
                       columns={this.state.xAxisData}
-                      dataSource={this.props.yAxisData}
+                      dataSource={this.state.yAxisData}
                       scroll={{x: this.state.scrollW}}
                       loading={this.props.loading}
                       onRow	={(v,i)=>{

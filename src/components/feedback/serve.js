@@ -1,4 +1,5 @@
 import React from 'react';
+import {Button} from 'antd';
 
 export const initParams={
     title:'',
@@ -44,7 +45,6 @@ export const tableData=[
         dataIndex: 'updateTime',
         width:'10%'
     }
-
 ];
 export const arr=[
     {
