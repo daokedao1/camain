@@ -1,6 +1,6 @@
 import React from 'react';
 import { Transfer, Pagination, message } from 'antd';
-import { uniqBy, filter, remove } from 'lodash';
+import { uniqBy, filter, remove, debounce } from 'lodash';
 import { getRoleAssociateUsers, getCaUserList, roleAssociateUsers } from './../../axios'
 
 class TableTransferWithSwitch extends React.Component {
@@ -13,6 +13,7 @@ class TableTransferWithSwitch extends React.Component {
             showSearch: true,
             associateUsers: [],
             page: 1,
+            keyword: '',
         };
     }
 
@@ -50,11 +51,13 @@ class TableTransferWithSwitch extends React.Component {
     }
 
     getCaUserList(pageObj = {}) {
+        let {keyword} = this.state;
         let param = {
             'orderField': '',
             'orderType': '',
             'page': pageObj.page || 1,
             'size': 20,
+            keyword,
             'yn': 1
         };
 
@@ -98,6 +101,13 @@ class TableTransferWithSwitch extends React.Component {
         }
     }
 
+    search = (dir, keyword) => {
+        if(dir === 'left') {
+            this.setState({keyword});
+            this.getCaUserList();
+        }
+    }
+
     render() {
         const { targetKeys, dataSource } = this.state;
         return (
@@ -117,7 +127,7 @@ class TableTransferWithSwitch extends React.Component {
                     item.name.indexOf(inputValue) !== -1 || (item.alumniName && item.alumniName.indexOf(inputValue) !== -1)
                 }
                 style={{}}
-                onSearch={this.search}
+                onSearch={debounce(this.search, 500)}
                 render={item => `${item.name}${item.alumniName ? `-${item.alumniName}` : ''}${item.className ? `-${item.className}` : ''}`}
                 footer={this.renderFooter}
             />

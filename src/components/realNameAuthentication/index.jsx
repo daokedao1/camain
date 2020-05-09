@@ -1,10 +1,11 @@
 
 import React, { Component } from 'react';
-import { Row, Col, Table,Input,Divider,Modal,message,Button } from 'antd';
+import { Row, Col, Table,Input,Divider,Modal,message,Button, Select } from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import Header from './../layout/Header';
 import {getAlumniAuditList,AlumniAuditPass,AlumniAuditRefuse} from './../../axios';
 const { confirm } = Modal;
+const { Option } = Select;
 
 class RealNameAuthentication extends Component {
     constructor(props){
@@ -86,13 +87,19 @@ class RealNameAuthentication extends Component {
     }
     
     searchs(){
-        const {param}=this.state;
+        const {param, pageSize}=this.state;
+        param['size'] = pageSize;
+        param['page'] = 1;
         this.getList({...param});
     }
     IdChange(e,key){
         const { param } = this.state;
         // const params = Object.assign(searchParams,{});
-        param[key] = e.target.value;
+        let value = e;
+        if(key !== 'auditStatus') {
+            value = e.target.value;
+        }
+        param[key] = value;
         this.setState({
             param: {...param}
         });
@@ -211,6 +218,12 @@ class RealNameAuthentication extends Component {
                     </Col>
                     <Col className="gutter-row" md={6}>
                         协会：<Input value={param.alumniName}  onChange={(e,v)=>this.IdChange(e,'alumniName')}   placeholder="按协会搜索" style={{width:'180px'}}/>
+                    </Col>
+                    <Col className="gutter-row" md={6}>
+                        状态：<Select defaultValue={param.auditStatus} style={{ width: 180 }} onChange={(e) => this.IdChange(e, 'auditStatus')}>
+                                <Option value={1}>未处理</Option>
+                                <Option value={0}>已处理</Option>
+                             </Select>
                     </Col>
 
                     <Col className="gutter-row" md={6}>

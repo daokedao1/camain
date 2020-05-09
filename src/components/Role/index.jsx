@@ -51,7 +51,7 @@ class News extends React.Component {
         let yAxisData,
             arrTable=[...tableData];
         const res= await listRoleList({});
-        if(res){
+        if(res && res.data){
             yAxisData=[...res.data];
             yAxisData=this.stateWay(yAxisData);
             const option=this.option();

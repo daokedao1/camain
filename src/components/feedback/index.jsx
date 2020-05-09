@@ -87,15 +87,9 @@ class FeedBack extends React.Component {
     async retract(id, row) {
         const res = await setFeedBackOk({ id: id });
         if (res.success) {
-            this.init();
+            this.getFeedBackList();
             message.success('成功');
         }
-        // const res=await retArticleByid({id:id});
-        // if(res.success){
-        //     this.init();
-        //     message.success('撤回成功');
-        // }
-
     }
     option() {
         return {
