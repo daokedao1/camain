@@ -73,11 +73,36 @@ class ClassOrg extends Component {
         delete param.id;
         let _this = this;
         param.status = 1;
+        let curNode = this.state.curNode.node;
         addAlumni(param).then(res=>{
             if(res.success){
                 message.success('保存成功！');
+               
+                let param = {
+                    'orderField': '',
+                    'orderType': '',
+                    'page': 1,
+                    'partentId': curNode.props.dataRef.key,
+                    'size': 2000
+                };
+                getAlumniOrg(param).then(res=>{
+                    if(res.success){
+                        let children = [];
+                        res.data.items.forEach(element => {
+                            children.push({title:element.name,key:element.id});
+                        });
+                        curNode.props.dataRef.children = children;
+                        this.setState({
+                            treeData: [...this.state.treeData]
+                        });
+                        
+                       
+                    }else{
+                        console.log(res);
+    
+                    }
+                });
                 _this.props.form.resetFields();
-                window.location.reload();
             }else{
                 message.warning(res.message);
             }
@@ -166,6 +191,8 @@ class ClassOrg extends Component {
     delOrg(){
         let targetID = this.state.id;
         let _this = this;
+        let curNode = this.state.curNode.node;
+        console.log(curNode);
         if(targetID > 3){
             confirm({
                 title: `您确认删除 ${_this.state.name} 组织吗？?`,
@@ -176,7 +203,7 @@ class ClassOrg extends Component {
 
                         if(res.success){
                             message.success('删除成功！');
-                            window.location.reload();
+     
 
                         }else{
                             message.error('删除失败！');
