@@ -306,12 +306,12 @@ class ClassOrg extends Component {
                                     initialValue:this.state.partentId
                                 })(<Input disabled />)}
                             </Form.Item>
-                            <Form.Item label="校友会名称">
+                            <Form.Item label="名称">
                                 {getFieldDecorator('name', {
                                     rules: [
                                         {
                                             required: true,
-                                            message: '请输入校友会名称！'
+                                            message: '请输入名称！'
                                         }
                                     ],
                                     initialValue:this.state.name
