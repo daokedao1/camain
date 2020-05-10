@@ -16,6 +16,7 @@ class ClassOrg extends Component {
         this.state={
             orgtitle:'组织信息',
             treeheight:window.innerHeight-150,
+            curNode:'',
             loading:false,
             opttype:'query',//add
             partentId:'0',
@@ -83,23 +84,19 @@ class ClassOrg extends Component {
         });
     }
     updateAlumniById(param){
+        let _this = this;
         param.status = 1;
         updateAlumniById(param).then(res=>{
             if(res.success){
                 message.success('保存成功！');
-                this.setState({
-                    id:orginfo.id,
-                    name:orginfo.name||'',
-                    description:orginfo.description||'',
-                    school_id:orginfo.school_id||'1',
-                    organization:orginfo.organization||'',
-                    leader_desc:orginfo.leader_desc||'',
-                    tel:orginfo.tel||'',
-                    type:orginfo.type||'1',
-                    update_time:orginfo.update_time,
-                    partentId:orginfo.partentId
-
-                });
+                if(param.name){
+                    _this.state.curNode.node.props.dataRef.title = param.name
+                    this.setState({
+                        treeData: [...this.state.treeData]
+                    });
+                }
+                
+               
             }else{
                 message.warning(res.message);
             }
@@ -153,6 +150,7 @@ class ClassOrg extends Component {
                     this.setState({
                         treeData: [...this.state.treeData]
                     });
+                    console.log(this.state.treeData)
                     resolve();
                 }else{
                     console.log(res);
@@ -228,12 +226,18 @@ class ClassOrg extends Component {
             return <TreeNode key={item.key} {...item} dataRef={item} />;
         });
     onTreeNodeClick(keys, event){
+        console.log(keys, event)
+        // let cn = event.node;
+        // cn.props.dataRef.title = cn.props.dataRef.title+'*'
         this.props.form.resetFields(); 
         this.setState({
             opttype:'query',
-            orgtitle:'组织信息'
+            orgtitle:'组织信息',
+            curNode:event
+        },()=>{
+            this.getOrgById(keys);
         });
-        this.getOrgById(keys);
+       
     }
     addOrg(){
         this.setState({
