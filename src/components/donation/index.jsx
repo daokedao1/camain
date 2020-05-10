@@ -95,7 +95,7 @@ class Donation extends React.Component {
                     <Spin spinning={this.state.loading}>
                         <Row style={{background:'#fff'}}>
                             <Col span={24}>
-                                <Header title="基金管理" />
+                                <Header title="校园捐赠" />
                                 <Card  bordered={false} >
 
                                     <ReactQuill
