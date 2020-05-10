@@ -67,7 +67,7 @@ export const getArticleList = (param = {}) => POST(config.GET_ARTICLE_LIST,param
 export const addArticleList = (param = {}) => POST(config.ADD_ARTICLE_LIST,param ).then(res=>{
     return res;
 }).catch(err=>err);
-//新建文章list
+//编辑文章
 export const editArticleList = (param = {}) => PUT(config.ADD_ARTICLE_LIST,param ).then(res=>{
     return res;
 }).catch(err=>err);
@@ -83,6 +83,10 @@ export const pubArticleByid = (param = {}) => PUT(config.PUBLISH_ARTICLE_BYID+pa
 export const retArticleByid = (param = {}) => PUT(config.RETRACT_ARTICLE_BYID+param.id ).then(res=>{
     return res;
 }).catch(err=>err);
+//查询置顶文章
+export const getTopArticleList = (param = {}) => POST(config.TOPLIST_ARTICLE_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
 
 //置顶活动
 export const topArticlesList = (param = {}) => PUT(config.LISTTOP_ARTICLE_LIST+'/'+param.id+'/top' ).then(res=>{
@@ -95,6 +99,7 @@ export const unpinArticlesList = (param = {}) => PUT(config.LISTTOP_ARTICLE_LIST
 export const activityList = (param = {}) => POST(config.LIST_ACTIVITY_LIST ).then(res=>{
     return res;
 }).catch(err=>err);
+
 export const topListActivityList = (param = {}) => POST(config.TOPLIST_ARTICLE_LIST ).then(res=>{
     return res;
 }).catch(err=>err);

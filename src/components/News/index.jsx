@@ -7,7 +7,7 @@ import Quill from 'quill';
 import ListTable from '@/components/table/List_table';
 import InputForm from '@/components/input';
 import Header from './../layout/Header';
-import {getArticleList,addArticleList,delArticleList,editArticleList,pubArticleByid,retArticleByid,topArticlesList,unpinArticlesList,topListActivityList} from '@/axios';
+import {getArticleList,addArticleList,delArticleList,editArticleList,pubArticleByid,retArticleByid,topArticlesList,unpinArticlesList,getTopArticleList} from '@/axios';
 import {tableData,initParams,arr} from './serve';
 import {toolbarOptions} from '@/serve.js';
 
@@ -60,11 +60,11 @@ class News extends React.Component {
         let yAxisData,
             yAxisData1,
             arrTable=[...tableData];
-        const [res,res1]= await Promise.all([getArticleList({type:1}),topListActivityList()]);
-
+        const [res,res1]= await Promise.all([getArticleList({type:1}),getTopArticleList({type:1})]);
+        console.log(res1)
         if(res){
             yAxisData=[...res.data.items];
-            yAxisData1=[...res1.data];
+            yAxisData1=[...res1.data||[]]
             yAxisData=this.stateWay(yAxisData);
             const option=this.option();
             arrTable.push(option);

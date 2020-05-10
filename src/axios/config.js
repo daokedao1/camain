@@ -49,7 +49,7 @@ export const DEL_ARTICLE_LIST = domain+'/api/article/';//删除文章
 export const PUBLISH_ARTICLE_BYID = domain+'/api/article/publish/';//发布文章
 export const RETRACT_ARTICLE_BYID = domain+'/api/article/retract/';//撤回文章
 export const LISTTOP_ARTICLE_LIST = domain+'/api/article';//撤回活动
-export const TOPLIST_ARTICLE_LIST = domain+'/api/article/top';//撤回活动
+export const TOPLIST_ARTICLE_LIST = domain+'/api/article/top';//查询置顶list
 
 //活动
 export const LIST_ACTIVITY_LIST = domain+'/api/activity/page';//活动列表

@@ -61,7 +61,7 @@ class News extends React.Component {
         const [res,res1]= await Promise.all([activityList({}),listTopActivityList()]);
         if(res&&res1){
             yAxisData=[...res.data.items];
-            yAxisData1=[...res1.data];
+            yAxisData1=[...res1.data||[]];
             yAxisData=this.stateWay(yAxisData);
             const option=this.option();
             arrTable.push(option);
