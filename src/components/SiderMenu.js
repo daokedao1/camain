@@ -28,52 +28,96 @@ const renderSubMenu = item => (
     </Menu.SubMenu>
 );
 
-export default ({ menus, ...props }) => {
-    const [dragItems, setDragItems] = useState(menus);
-    const reorder = (list, startIndex, endIndex) => {
-        const result = Array.from(list);
-        const [removed] = result.splice(startIndex, 1);
-        result.splice(endIndex, 0, removed);
-        return result;
-    };
-    const onDragEnd = result => {
+const reorder = (list, startIndex, endIndex) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+    return result;
+};
+
+class SiderMenu extends React.Component {
+    constructor(props) {
+        super(props);
+        const {menus} = this.props;
+        this.state = {
+            dragItems: menus,
+            mode: 'inline',
+            openKey: '',
+            selectedKey: '',
+            firstHide: true // 点击收缩菜单，第一次隐藏展开子菜单，openMenu时恢复
+        }
+    }
+   
+    componentDidUpdate(prevProps, prevState) {
+        if(prevProps.menus !== this.props.menus) {
+            let dragItems = this.props.menus || [];
+            this.setState({dragItems});
+        }
+    }
+
+    onDragEnd = result => {
         // dropped outside the list
         if (!result.destination) {
             return;
         }
 
         const _items = reorder(dragItems, result.source.index, result.destination.index);
-        setDragItems(_items);
+        this.setState({dragItems: _items});
     };
-    return (
-        <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId="droppable">
-                {(provided, snapshot) => (
-                    <div ref={provided.innerRef} {...provided.droppableProps}>
-                        {dragItems.map((item, index) => (
-                            <Draggable key={item.key} draggableId={item.key} index={index}>
-                                {(provided, snapshot) => (
-                                    <div>
-                                        <div
-                                            ref={provided.innerRef}
-                                            {...provided.dragHandleProps}
-                                            {...provided.draggableProps}
-                                        >
-                                            <Menu {...props}>
-                                                {item.subs
-                                                    ? renderSubMenu(item)
-                                                    : renderMenuItem(item)}
-                                            </Menu>
+
+    menuClick = e => {
+        this.setState({
+            selectedKey: e.key
+        });
+        const { popoverHide } = this.props; // 响应式布局控制小屏幕点击菜单时隐藏菜单操作
+        popoverHide && popoverHide();
+    };
+
+    openMenu = v => {
+        this.setState({
+            openKey: v[v.length - 1],
+            firstHide: false
+        });
+    };
+    render() {
+        const {dragItems, restProps, selectedKey, firstHide, openKey} = this.state;
+        return (
+            <DragDropContext onDragEnd={this.onDragEnd}>
+                <Droppable droppableId="droppable">
+                    {(provided, snapshot) => (
+                        <div ref={provided.innerRef} {...provided.droppableProps}>
+                            {dragItems.map((item, index) => (
+                                <Draggable key={item.key} draggableId={item.key} index={index}>
+                                    {(provided, snapshot) => (
+                                        <div>
+                                            <div
+                                                ref={provided.innerRef}
+                                                {...provided.dragHandleProps}
+                                                {...provided.draggableProps}
+                                            >
+                                                <Menu 
+                                                    mode="inline"  
+                                                    onClick={this.menuClick}
+                                                    selectedKeys={[selectedKey]}
+                                                    openKeys={firstHide ? null : [openKey]}
+                                                    onOpenChange={this.openMenu}>
+                                                    {item.subs
+                                                        ? renderSubMenu(item)
+                                                        : renderMenuItem(item)}
+                                                </Menu>
+                                            </div>
+                                            {provided.placeholder}
                                         </div>
-                                        {provided.placeholder}
-                                    </div>
-                                )}
-                            </Draggable>
-                        ))}
-                        {provided.placeholder}
-                    </div>
-                )}
-            </Droppable>
-        </DragDropContext>
-    );
+                                    )}
+                                </Draggable>
+                            ))}
+                            {provided.placeholder}
+                        </div>
+                    )}
+                </Droppable>
+            </DragDropContext>
+        );
+    }
 };
+
+export default SiderMenu;

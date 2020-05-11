@@ -7,6 +7,9 @@ import {login} from '../../axios';
 import {setCookie} from './../../utils/index';
 import {connect} from 'react-redux';
 import Particles from 'reactparticles.js';
+import Storage from '../../utils/localStorage'
+import UserRes from './serve';
+import {get} from 'lodash';
 const bg = {
     backgroundImage:`url(${require('./img/login_bg1.jpg')})`,
     backgroundSize: '100% 100%'
@@ -46,14 +49,22 @@ class Login extends Component {
                     'password': values.password
 
                 };
-                console.log(param);
                 login(param).then(res=>{
                     if(res.success){
+                        // 了解redux 的工作原理
+                        const resUser = _.get(res, ['data', 'user']);
+                        if(!resUser.roles || !resUser.roles.length) {
+                            message.warning('请联系管理员开通权限');
+                            return;
+                        }
                         this.props.saveAuthInfo(res);
                         setCookie('token',res.data.token);
                         setCookie('usertokentime',new Date().getTime());
 
                         this.props.history.push('/');
+                        UserRes.data = res;
+                        Storage.set('userRes', res);
+                        console.log(this.props);
                     }else{
                         message.warning(res.message);
                     }

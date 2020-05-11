@@ -56,10 +56,10 @@ class News extends React.Component {
     }
     async init(){
         let yAxisData,
-            yAxisData1,
+            yAxisData1 = [],
             arrTable=[...tableData];
         const [res,res1]= await Promise.all([activityList({}),listTopActivityList()]);
-        if(res&&res1){
+        if(res&&res1&& res1.data){
             yAxisData=[...res.data.items];
             yAxisData1=[...res1.data||[]];
             yAxisData=this.stateWay(yAxisData);
