@@ -5,11 +5,24 @@ import React, { Component } from 'react';
 import { Layout } from 'antd';
 import { withRouter } from 'react-router-dom';
 import routes from '../routes/config';
+import {cloneDeep, forEach, find, findIndex} from 'lodash';
 import SiderMenu from './SiderMenu';
+import {getUserMenus} from '@/axios'
 
 const { Sider } = Layout;
 
 class SiderCustom extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            mode: 'inline',
+            openKey: '',
+            selectedKey: '',
+            routes: routes,
+            firstHide: true // 点击收缩菜单，第一次隐藏展开子菜单，openMenu时恢复
+        };
+    }
+
     static getDerivedStateFromProps (props, state) {
         if (props.collapsed !== state.collapsed) {
             const state1 = SiderCustom.setMenuOpen(props);
@@ -37,16 +50,43 @@ class SiderCustom extends Component {
             mode: collapsed ? 'vertical' : 'inline'
         };
     };
-    state = {
-        mode: 'inline',
-        openKey: '',
-        selectedKey: '',
-        firstHide: true // 点击收缩菜单，第一次隐藏展开子菜单，openMenu时恢复
-    };
+
     componentDidMount() {
         // this.setMenuOpen(this.props);
+        let cloneRoutes = cloneDeep(routes);
         const state = SiderCustom.setMenuOpen(this.props);
-        this.setState(state);
+        getUserMenus().then(res => {
+            if(res && res.data) {
+                let flattenDataSource = [];
+                this.flatten(res.data, flattenDataSource);
+                forEach(cloneRoutes.menus, menu => {
+                    if(menu.subs && menu.subs.length) {
+                        forEach(menu.subs || [], subMenu => {
+                            if(subMenu) {
+                                let index = findIndex(flattenDataSource, {name: subMenu.title});
+                                let subsIndex = findIndex(subMenu, {title: subMenu.title });
+                                if(index === -1) {
+                                    menu.subs.splice(subsIndex, 1);
+                                }
+                            }
+                        })
+                    }
+                });
+
+                state.routes = cloneRoutes;
+                this.setState(state);
+            }
+        }, err => {
+            this.setState(state);
+        })
+    }
+
+    flatten(list = [], flattenDataSource) {
+        list.forEach(item => {
+            item.id = item.id + '';
+            flattenDataSource.push(item);
+            this.flatten(item.children || [], flattenDataSource);
+        });
     }
     menuClick = e => {
         this.setState({
@@ -62,7 +102,7 @@ class SiderCustom extends Component {
         });
     };
     render() {
-        const { selectedKey, openKey, firstHide, collapsed } = this.state;
+        const { selectedKey, openKey, firstHide, collapsed, routes } = this.state;
         return (
             <Sider
                 trigger={null}
