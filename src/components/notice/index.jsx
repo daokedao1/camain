@@ -155,7 +155,8 @@ class News extends React.Component {
             width: '25%',
             render: (id,row) => {
                 return (<div className="option">
-                    <Button size="small" onClick={()=>this.editWay('编辑',row)} type="primary">编辑</Button>
+                    
+                    {!row.isPublish?<Button size="small" onClick={()=>this.editWay('编辑',row)} type="primary">编辑</Button>:''}
                     {!row.isPublish?<Button size="small" onClick={()=>this.publish(id,row)} type="primary">发布公告</Button>:<Button size="small" onClick={()=>this.retract(id,row)} type="primary">撤回公告</Button>}
                     {!row.hasTop?<Button size="small" onClick={()=>this.top(id,row)} type="primary">置顶</Button>:<Button size="small" onClick={()=>this.unpin(id,row)} type="primary">取消置顶</Button>}
 
