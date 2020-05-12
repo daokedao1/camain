@@ -7,7 +7,7 @@ import Quill from 'quill';
 import ListTable from '@/components/table/List_table';
 import InputForm from '@/components/input';
 import Header from './../layout/Header';
-import {getArticleList,addArticleList,delArticleList,editArticleList,pubArticleByid,retArticleByid,topArticlesList,unpinArticlesList,topListActivityList} from '@/axios';
+import {getArticleList,addArticleList,delArticleList,editArticleList,pubArticleByid,retArticleByid,topArticlesList,unpinArticlesList,getTopArticleList} from '@/axios';
 import {tableData,initParams,arr} from './serve';
 import {toolbarOptions} from '@/serve.js';
 
@@ -60,7 +60,7 @@ class Recruit extends React.Component {
         let yAxisData,
             yAxisData1,
             arrTable=[...tableData];
-        const [res,res1]= await Promise.all([getArticleList({type:3}),topListActivityList({type:3})]);
+        const [res,res1]= await Promise.all([getArticleList({type:3}),getTopArticleList({type:3})]);
 
         if(res){
             yAxisData=[...res.data.items];
