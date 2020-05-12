@@ -60,7 +60,7 @@ class Recruit extends React.Component {
         let yAxisData,
             yAxisData1,
             arrTable=[...tableData];
-        const [res,res1]= await Promise.all([getArticleList({type:3}),topListActivityList()]);
+        const [res,res1]= await Promise.all([getArticleList({type:3}),topListActivityList({type:3})]);
 
         if(res){
             yAxisData=[...res.data.items];
