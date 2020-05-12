@@ -4,12 +4,26 @@
 import React, { Component } from 'react';
 import { Layout } from 'antd';
 import { withRouter } from 'react-router-dom';
+import {projectDefault} from '../redux/common';
 import routes from '../routes/config';
+import {cloneDeep, forEach, find, findIndex} from 'lodash';
 import SiderMenu from './SiderMenu';
+import {getUserMenus} from '@/axios';
+import Storage from '../utils/localStorage';
+import UserRes from './pages/serve';
 
 const { Sider } = Layout;
 
+console.log(routes);
+
 class SiderCustom extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            stateRoutes: {menus: [], others: []}
+        };
+    }
+
     static getDerivedStateFromProps (props, state) {
         if (props.collapsed !== state.collapsed) {
             const state1 = SiderCustom.setMenuOpen(props);
@@ -37,32 +51,66 @@ class SiderCustom extends Component {
             mode: collapsed ? 'vertical' : 'inline'
         };
     };
-    state = {
-        mode: 'inline',
-        openKey: '',
-        selectedKey: '',
-        firstHide: true // 点击收缩菜单，第一次隐藏展开子菜单，openMenu时恢复
-    };
+
+    componentWillMount() {
+
+    }
+
     componentDidMount() {
         // this.setMenuOpen(this.props);
+        let cloneRoutes = cloneDeep(routes);
+        const {stateRoutes} = this.state;
+        console.log('cloneRoutes', cloneRoutes);
+        
         const state = SiderCustom.setMenuOpen(this.props);
-        this.setState(state);
+        // 先hack一下，后面看如何用react-redux
+        // 原来的路由建立的有问题，不用react-redux无法处理数据传递的问题
+        setTimeout(() => {
+           const userRes = Storage.get('userRes');
+        })
+        getUserMenus().then(res => {
+            if(res && res.data) {
+                let flattenDataSource = [];
+                this.flatten(res.data, flattenDataSource);
+                // 先最简单让功能看起来实现
+                // 只判断父级有菜单，就全部显示出来，后台返回的菜单跟前端根本无法对应，现在只能通过名字去判断
+                const newRoutes = [];
+                forEach(cloneRoutes.menus, menu => {
+                    let index = findIndex(flattenDataSource, {name: menu.title});
+                    if(index !== -1) {
+                        newRoutes.push(menu);
+                    }
+                    // forEach(menu.subs || [], subMenu => {
+                    //     if(subMenu) {
+                    //         let index = findIndex(flattenDataSource, {path: subMenu.key});
+                    //         let subsIndex = findIndex(menu.subs, {key: subMenu.key });
+                    //         if(index === -1) {
+                    //             menu.subs.splice(subsIndex, 1);
+                    //         }
+                    //     }
+                    // })
+                    
+                });
+                
+                stateRoutes.menus = newRoutes;
+                this.setState({stateRoutes, ...state});
+            }
+        }, err => {
+            this.setState(state);
+        })
     }
-    menuClick = e => {
-        this.setState({
-            selectedKey: e.key
+
+    flatten(list = [], flattenDataSource) {
+        list.forEach(item => {
+            item.id = item.id + '';
+            flattenDataSource.push(item);
+            this.flatten(item.children || [], flattenDataSource);
         });
-        const { popoverHide } = this.props; // 响应式布局控制小屏幕点击菜单时隐藏菜单操作
-        popoverHide && popoverHide();
-    };
-    openMenu = v => {
-        this.setState({
-            openKey: v[v.length - 1],
-            firstHide: false
-        });
-    };
+    }
+
     render() {
-        const { selectedKey, openKey, firstHide, collapsed } = this.state;
+        const {collapsed, stateRoutes } = this.state;
+        console.log(stateRoutes);
         return (
             <Sider
                 trigger={null}
@@ -76,12 +124,7 @@ class SiderCustom extends Component {
                      后台管理系统
                 </div>
                 <SiderMenu
-                    menus={routes.menus}
-                    onClick={this.menuClick}
-                    mode="inline"
-                    selectedKeys={[selectedKey]}
-                    openKeys={firstHide ? null : [openKey]}
-                    onOpenChange={this.openMenu}
+                    menus={stateRoutes.menus}
                 />
                 <style>
                     {`

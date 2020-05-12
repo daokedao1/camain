@@ -54,8 +54,13 @@ export const getSchoolList = (param = {}) => POST(config.GET_SCHOOL_LIST,param )
     return res;
 }).catch(err=>err);
 
+// 用户模块
 //获取用户list
 export const getCaUserList = (param = {}) => POST(config.GET_CAUSER_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+// 获取用户的菜单
+export const getUserMenus = (param = {}) => GET(config.GET_USER_MENUS,param ).then(res=>{
     return res;
 }).catch(err=>err);
 
@@ -188,6 +193,14 @@ export const editRoleList = (param = {}) => PUT(config.ADD_ROLE_LIST,param ).the
     export const getRoleAssociateUsers = (id, param = {}) => GET(`${config.ADD_ROLE_LIST}/${id}/users`, param).then(res=>{
         return res;
     }).catch(err=>err);
+
+    export const roleAssociateMenus = (id, param = {}) => POST(`${config.MENU_ROLE_LIST.replace(':id', id)}`, param).then(res=>{
+        return res;
+    }).catch(err=>err);
+
+    export const getRoleAssociateMenus = (id, param = {}) => GET(`${config.MENU_ROLE_LIST.replace(':id', id)}`, param).then(res=>{
+        return res;
+    }).catch(err=>err);
 //菜单
 export const addMenuList = (param = {}) => POST(config.ADD_MENU_LIST,param ).then(res=>{
     return res;
@@ -199,6 +212,9 @@ export const editMenuList = (param = {}) => PUT(config.ADD_MENU_LIST,param ).the
     return res;
 }).catch(err=>err);
 export const delMenuList = (param = {}) => PUT(config.DEL_MENU_LIST,param ).then(res=>{
+    return res;
+}).catch(err=>err);
+export const treeMenuList = (param = {}) => GET(config.TREE_MENU_ALL, param).then(res=>{
     return res;
 }).catch(err=>err);
 //系统配置

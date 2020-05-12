@@ -41,6 +41,7 @@ export const GET_SCHOOL_LIST = domain+'/api/school/page';//学校list
 //用户
 
 export const GET_CAUSER_LIST = domain+'/api/user/page';//用户list
+export const GET_USER_MENUS= domain+'/api/menu/build';//用户关联的菜单
 
 //文章
 export const GET_ARTICLE_LIST = domain+'/api/article/page';//文章articlelist
@@ -78,10 +79,12 @@ export const DEL_NAV_LIST = domain+'/api/home/guide/';//新建
 export const ADD_ROLE_LIST = domain+'/api/role';//新建
 export const LIST_ROLE_LIST = domain+'/api/role/all';//新建
 export const DEL_ROLE_LIST = domain+'/api/role/';//新建
+export const MENU_ROLE_LIST = domain+'/api/role/:id/menus'
 //菜单
 export const ADD_MENU_LIST = domain+'/api/menu';//新建
 export const LIST_MENU_LIST = domain+'/api/menu/list';//新建
-export const DEL_MENU_LIST = domain+'/api/menu/';//新建
+export const DEL_MENU_LIST = domain+'/api/menu/';
+export const TREE_MENU_ALL = domain+'/api/menu/tree';
 //用户反馈
 export const GET_FEEDBACK_LIST = domain+'/api/feedback/page';//list
 export const SET_FEEDBACK_OK = domain+'/api/feedback/';//处理反馈意见
