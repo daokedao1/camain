@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Tree,Row, Button,Divider,Table,Col,Input,Select,message,Modal} from 'antd';
+import { Tree,Row, Button,Divider,Table,Col,Input,Select,message,Modal, Checkbox, AutoComplete} from 'antd';
 import InputForm from '@/components/input';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import {getAlumniOrg,getCaUserList} from './../../axios';
 import Header from './../layout/Header';
+import DetailForm from './detailForm';
 import {tableData,initParams,arr} from './serve';
 
 const { Option } = Select;
@@ -270,28 +271,22 @@ class AlumniUser extends Component {
                 <Modal
                     title={operationName}
                     visible={visible}
-                    onOk={this.handleOk.bind(this)}
+                    width={800}
+                    // onOk={this.handleOk.bind(this)}
                     onCancel={this.handleCancel.bind(this)}
                     footer={''}
                     okButtonProps={{ disabled: true }}
                     cancelButtonProps={{ disabled: true }}
                     // searchData={searchData}
                     className="alum"
-
                 >
-                    <div className="delayedSwitch" >
-                        <p style={{width:'33.33%',color:' #000'}}>
-                                头像:
-                        </p>
-                        <img  src={params.photoImg} alt=""/>
-
+                    <div className="delayedSwitch" style={{justifyContent: 'center'}}>
+                        <span style={{"display": "inlink-block", width: 100, height: 100, borderRadius: '50%', background: '#f5f5f5'}}>
+                            <img  src={params.photoImg} alt=""/>
+                        </span>
                     </div>
-                    <InputForm
 
-                        styleCss={{height:'600px',overflowY: 'auto'}}   params={params} arr={arr}></InputForm>
-
-
-
+                    <DetailForm params={params} />
                 </Modal>
             </div>
         );

@@ -10,6 +10,7 @@ import { gitOauthToken, gitOauthInfo } from '../axios';
 import { queryString } from '../utils';
 import { withRouter } from 'react-router-dom';
 import { PwaInstaller } from './widget';
+import {getCookie,setCookie} from '../utils/index';
 import img from '../style//imgs/petrochinalogo-white.png';
 
 const { Header } = Layout;
@@ -51,6 +52,8 @@ class HeaderCustom extends Component {
     };
     logout = () => {
         localStorage.removeItem('user');
+        setCookie('token','');
+        setCookie('usertokentime',new Date().getTime());
         this.props.history.push('/login');
     };
     popoverHide = () => {

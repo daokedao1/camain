@@ -63,6 +63,11 @@ export const getCaUserList = (param = {}) => POST(config.GET_CAUSER_LIST,param )
 export const getUserMenus = (param = {}) => GET(config.GET_USER_MENUS,param ).then(res=>{
     return res;
 }).catch(err=>err);
+// 更新用户
+export const putUser = (param = {}) =>PUT(config.USER, param ).then(res=>{
+    return res;
+}).catch(err=>err);
+
 
 //获取文章list
 export const getArticleList = (param = {}) => POST(config.GET_ARTICLE_LIST,param ).then(res=>{
