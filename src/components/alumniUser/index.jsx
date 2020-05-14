@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Tree,Row, Button,Divider,Table,Col,Input,Select,message,Modal, Checkbox, AutoComplete} from 'antd';
-import InputForm from '@/components/input';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import {getAlumniOrg,getCaUserList} from './../../axios';
 import Header from './../layout/Header';
@@ -165,7 +164,7 @@ class AlumniUser extends Component {
         });
     onTreeNodeClick(keys, event){
         console.log(keys, event);
-        this.props.form.resetFields(); 
+        // this.props.form.resetFields(); 
         this.getOrgById(keys,event);
     }
     onPageChange(page, pageSize){

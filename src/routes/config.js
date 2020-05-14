@@ -11,7 +11,7 @@ export default {
         },
         {
             key: '/app/alumni',
-            title: '校友管理',
+            title: '校友相关管理',
             icon: 'area-chart',
             subs: [
                 { key: '/app/alumni/realNameAuthentication', title: '入会审核', component: 'RealNameAuthentication' },

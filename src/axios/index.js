@@ -45,7 +45,7 @@ export const AlumniAuditPass = (param = {}) => GET(config.OPT_ALUMNI_AUDIT_PASS+
     return res;
 }).catch(err=>err);
 //驳回加入协会申请（id为待审核记录ID）
-export const AlumniAuditRefuse = (param = {}) => GET(config.OPT_ALUMNI_AUDIT_PASS+param,{} ).then(res=>{
+export const AlumniAuditRefuse = (param = {}) => GET(config.OPT_ALUMNI_AUDIT_REFUSE+param,{} ).then(res=>{
     return res;
 }).catch(err=>err);
 
