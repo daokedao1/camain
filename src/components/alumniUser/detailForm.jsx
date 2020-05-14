@@ -215,6 +215,7 @@ class DetailForm extends React.Component {
                 <Form.Item label="现地址">
                     {
                         getFieldDecorator('address', {
+                            initialValue: params.address,
                             rules: []
                         })
                         (<Input />)
@@ -271,6 +272,7 @@ class DetailForm extends React.Component {
                 </Form.Item>
                 <Form.Item label="学历">
                     {getFieldDecorator('education', {
+                        initialValue: params.education,
                         rules: [],
                     })(
                         <Input />
@@ -278,6 +280,7 @@ class DetailForm extends React.Component {
                 </Form.Item>
                 <Form.Item label="邮箱">
                     {getFieldDecorator('email', {
+                        initialValue: params.email,
                         rules: [
                             { type: 'email', message: '请输入正确格式的邮箱' }
                         ],
