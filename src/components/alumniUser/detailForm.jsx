@@ -272,11 +272,7 @@ class DetailForm extends React.Component {
                 </Form.Item>
                 <Form.Item label="学历">
                     {getFieldDecorator('education', {
-<<<<<<< HEAD
-                        initialValue: params.education,
-=======
                         initialValue: params.education || '',
->>>>>>> 42056eb31d7142f3b8c4506e92fd69c270856e28
                         rules: [],
                     })(
                         <Input />
@@ -284,11 +280,7 @@ class DetailForm extends React.Component {
                 </Form.Item>
                 <Form.Item label="邮箱">
                     {getFieldDecorator('email', {
-<<<<<<< HEAD
-                        initialValue: params.email,
-=======
                         initialValue: params.email || '',
->>>>>>> 42056eb31d7142f3b8c4506e92fd69c270856e28
                         rules: [
                             { type: 'email', message: '请输入正确格式的邮箱' }
                         ],
