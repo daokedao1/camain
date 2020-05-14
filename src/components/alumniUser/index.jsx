@@ -30,6 +30,11 @@ class AlumniUser extends Component {
                 content:'',
                 type:1
             },
+            searchParams: {
+                name: '',
+                phone: '',
+                keyword: ''
+            },
             total:0,
             nodePos:'0-0',
             curSelectedOrgid:1,
@@ -65,30 +70,32 @@ class AlumniUser extends Component {
             'size': this.state.pageSize,
             'yn': 1
         };
-        let {nodePos,curSelectedOrgid} = this.state;
+        let {nodePos,curSelectedOrgid, searchParams} = this.state;
         console.log(curSelectedOrgid);
         console.log(nodePos);
         nodePos = nodePos.split('-');
         switch(nodePos.length) {
-        case 2:
-            console.log('组织');
+            case 2:
+                console.log('组织');
 
-            break;
-        case 3:
-            console.log('学院');
-            param.collegeId = curSelectedOrgid;
-            break;
-        case 4:
-            console.log('专业');
-            param.facultyId = curSelectedOrgid;
-            break;
-        case 5:
-            console.log('班级');
-            param.classId = curSelectedOrgid;
-            break;
-        default:
+                break;
+            case 3:
+                console.log('学院');
+                param.collegeId = curSelectedOrgid;
+                break;
+            case 4:
+                console.log('专业');
+                param.facultyId = curSelectedOrgid;
+                break;
+            case 5:
+                console.log('班级');
+                param.classId = curSelectedOrgid;
+                break;
+            default:
 
         }
+
+        param = {...searchParams, ...param};
         getCaUserList(param).then(res=>{
             if(res.success){
                 this.setState({
@@ -200,6 +207,18 @@ class AlumniUser extends Component {
             this.init();
         });
     }
+
+    IdChange(e,key){
+        const { searchParams } = this.state;
+        searchParams[key] = e.target.value || '';
+        this.setState({
+            searchParams
+        });
+    }
+
+    searchs() {
+        this.setState({page: 1, loading:true});
+    }
     render() {
         let columns = [
             {
@@ -245,7 +264,7 @@ class AlumniUser extends Component {
                 render: (text,row) => <a  onClick={()=>this.onDetailClick('详情',row)} >详情>></a>
             }
         ];
-        const {operationName,visible,params}=this.state;
+        const {operationName,visible,params, searchParams}=this.state;
         return (
             <div>
 
@@ -256,7 +275,21 @@ class AlumniUser extends Component {
                     </Col>
 
                     <Col className="gutter-row" span={19} >
+                        <Row gutter={14} style={{backgroundColor:'#fff',padding:'20px 0'}}>
+                            <Col className="gutter-row" md={6}>
+                                姓名：<Input value={searchParams.name} onChange={(e,v)=>this.IdChange(e,'name')}   placeholder="按姓名搜索" style={{width:'180px'}}/>
+                            </Col>
+                            <Col className="gutter-row" md={6}>
+                                电话：<Input value={searchParams.phone}  onChange={(e,v)=>this.IdChange(e,'phone')}   placeholder="按电话号码搜索" style={{width:'180px'}}/>
+                            </Col>
+                            <Col className="gutter-row" md={8}>
+                                关键字匹配：<Input value={searchParams.keyword}  onChange={(e,v)=>this.IdChange(e,'keyword')}   placeholder="按关键字模糊搜索" style={{width:'180px'}}/>
+                            </Col>
 
+                            <Col className="gutter-row" md={2}>
+                                <Button onClick={this.searchs.bind(this)} type="primary">搜索</Button>
+                            </Col>
+                        </Row>
                         <Table
                             style={{backgroundColor:'#fff'}}
                             pagination={{total:this.state.total,page:this.state.page,pageSize:this.state.pageSize,onChange:this.onPageChange.bind(this)}}
