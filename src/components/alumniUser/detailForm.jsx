@@ -150,7 +150,7 @@ class DetailForm extends React.Component {
         return (<Form {...formItemLayout} onSubmit={this.handleSubmit.bind(this)}>
                 <Form.Item label="姓名">
                 {getFieldDecorator('name', {
-                    initialValue: params.name,
+                    initialValue: params.name || '',
                     rules: [
                     {
                         required: true,
@@ -215,6 +215,7 @@ class DetailForm extends React.Component {
                 <Form.Item label="现地址">
                     {
                         getFieldDecorator('address', {
+                            initialValue: params.address,
                             rules: []
                         })
                         (<Input />)
@@ -271,6 +272,7 @@ class DetailForm extends React.Component {
                 </Form.Item>
                 <Form.Item label="学历">
                     {getFieldDecorator('education', {
+                        initialValue: params.education || '',
                         rules: [],
                     })(
                         <Input />
@@ -278,6 +280,7 @@ class DetailForm extends React.Component {
                 </Form.Item>
                 <Form.Item label="邮箱">
                     {getFieldDecorator('email', {
+                        initialValue: params.email || '',
                         rules: [
                             { type: 'email', message: '请输入正确格式的邮箱' }
                         ],
@@ -288,6 +291,7 @@ class DetailForm extends React.Component {
 
                 <Form.Item label="身份证">
                     {getFieldDecorator('idCard', {
+                        initialValue: params.idCard || '',
                         rules: [],
                     })(
                         <Input />
@@ -296,7 +300,7 @@ class DetailForm extends React.Component {
 
                 <Form.Item label="个人风采">
                     {getFieldDecorator('userTagIdList', {
-                        initialValue: params.userTagIdList,
+                        initialValue: params.userTagIdList || '',
                         rules: [],
                     })(
                         <Input />
@@ -305,7 +309,7 @@ class DetailForm extends React.Component {
 
                 <Form.Item label="微信">
                     {getFieldDecorator('wx', {
-                        initialValue: params.wx,
+                        initialValue: params.wx || '',
                         rules: [],
                     })(
                         <Input />
@@ -313,7 +317,7 @@ class DetailForm extends React.Component {
                 </Form.Item>
                 <Form.Item label="QQ">
                     {getFieldDecorator('qq', {
-                        initialValue: params.qq,
+                        initialValue: params.qq || '',
                         rules: [],
                     })(
                         <Input />
@@ -321,7 +325,7 @@ class DetailForm extends React.Component {
                 </Form.Item>
                 <Form.Item label="个性签名">
                     {getFieldDecorator('signature', {
-                        initialValue: params.signature,
+                        initialValue: params.signature || '',
                         rules: [],
                     })(
                         <Input />
