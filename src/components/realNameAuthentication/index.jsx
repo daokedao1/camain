@@ -4,6 +4,7 @@ import { Row, Col, Table,Input,Divider,Modal,message,Button, Select } from 'antd
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import Header from './../layout/Header';
 import {getAlumniAuditList,AlumniAuditPass,AlumniAuditRefuse} from './../../axios';
+import {find} from 'lodash';
 const { confirm } = Modal;
 const { Option } = Select;
 
@@ -153,6 +154,15 @@ class RealNameAuthentication extends Component {
         });
     }
     render() {
+        const {param}=this.state;
+        const auditStatus = param['auditStatus'];
+        const auditStatusData =  [
+            {id: 1, name: '待审核'},
+            {id: 2, name: '已驳回'},
+            {id: 3, name: '已通过'},
+            {id: 4, name: '已退出'}
+        ];
+
         let columns = [
             {
                 title: '申请ID',
@@ -187,23 +197,37 @@ class RealNameAuthentication extends Component {
                 key: 'userModelphone'
             },
             {
-                title: '操作',
+                title: auditStatus === 1 ? '操作' : '状态',
                 dataIndex: 'opt',
                 key: 'opt',
-                render: (e,record)=>(
-                    <span>
-                        {/* <a>详情</a>
-                        <Divider type="vertical" /> */}
-                        <a onClick={this.onPassClick.bind(this,record)}>通过</a>
-                        <Divider type="vertical" />
-                        <a onClick={this.onNoClick.bind(this,record)}>驳回</a>
-                    </span>
-                )
+                render: (e,record)=> {
+                    let action;
+                    switch(auditStatus) {
+                        case 1:
+                            action =  <span>
+                                        <a onClick={this.onPassClick.bind(this,record)}>通过</a>
+                                            <Divider type="vertical" />
+                                        <a onClick={this.onNoClick.bind(this,record)}>驳回</a>
+                                    </span>
+                            break;
+                        default:
+                            let findItem = find(auditStatusData, {id: auditStatus});
+                            action = <span>
+                                        {findItem.name || ''}
+                                    </span>
+                            break;
+                    }   
 
+                    return action;
+                }
             }
 
         ];
-        const {param}=this.state;
+
+        const auditStatusOptions = auditStatusData.map(item =>
+            (<Option value={item.id} key={item.id}>{item.name}</Option>)
+        )
+        
         return (
             <div>
 
@@ -221,8 +245,7 @@ class RealNameAuthentication extends Component {
                     </Col>
                     <Col className="gutter-row" md={6}>
                         状态：<Select defaultValue={param.auditStatus} style={{ width: 180 }} onChange={(e) => this.IdChange(e, 'auditStatus')}>
-                                <Option value={1}>未处理</Option>
-                                <Option value={0}>已处理</Option>
+                               {auditStatusOptions}
                              </Select>
                     </Col>
 
