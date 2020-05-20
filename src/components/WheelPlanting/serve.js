@@ -5,7 +5,7 @@ export const initParams={
     redirectPath:'',
     path:'',
     rank:'',
-    homePageId:'',
+    homePageId:'1',
     backColor:'',
     backImg:''
 };

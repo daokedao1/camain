@@ -23,7 +23,7 @@ class News extends React.Component {
                 redirectPath:'',
                 path:'',
                 rank:'',
-                homePageId:'',
+                homePageId:'1',
                 backColor:'',
                 backImg:''
             },
