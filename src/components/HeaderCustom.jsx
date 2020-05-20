@@ -89,14 +89,14 @@ class HeaderCustom extends Component {
                     <Menu.Item key="pwa">
                         <PwaInstaller />
                     </Menu.Item>
-                    <Menu.Item key="full" onClick={this.screenFull} >
+                    <Menu.Item key="full">
                         <Icon type="arrows-alt" onClick={this.screenFull} />
                     </Menu.Item>
-                    <Menu.Item key="1">
+                    {/* <Menu.Item key="1">
                         <Badge count={0} overflowCount={0} style={{marginLeft: 10}}>
                             <Icon type="notification" />
                         </Badge>
-                    </Menu.Item>
+                    </Menu.Item> */}
                     <SubMenu title={<span className="avatar"><img src={avater} alt="头像" /><i className="on bottom b-white" /></span>}>
                         <MenuItemGroup title="用户中心">
                             <Menu.Item key="setting:1">你好 - 系统管理员</Menu.Item>
