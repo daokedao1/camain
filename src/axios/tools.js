@@ -4,8 +4,8 @@ import Cookie from 'js-cookie';
 import store from './../redux/store';
 let query = {};
 const env = process.env.NODE_ENV || 'development';
-const token = 'Bearer '+Cookie.get('token');
-console.log(token);
+// const token = 'Bearer '+Cookie.get('token');
+// console.log(token);
 
 // axios.defaults.crossDomain = true;
 // axios.defaults.withCredentials  = true;
@@ -18,6 +18,9 @@ export const GET = (url, params = {}) => {
     if (!params) {
         params = {};
     }
+
+    const token = 'Bearer '+Cookie.get('token');
+
     let headers = {
         'content-type': 'application/json',
         'Authorization':token
@@ -77,6 +80,8 @@ export const POST = (url, data = {}) => {
     if (!data) {
         data = {};
     }
+
+    const token = 'Bearer '+Cookie.get('token');
     let headers = {
         'content-type': 'application/json',
         'Authorization':token
@@ -124,6 +129,8 @@ export const PUT = (url, data = {}) => {
     if (!data) {
         data = {};
     }
+
+    const token = 'Bearer '+Cookie.get('token');
     let headers = {
         'content-type': 'application/json',
         'Authorization':token
@@ -167,7 +174,7 @@ export const DEL = (url, data = {}) => {
     // query.p = sessionStorage.getItem("source") || cookieGet('source') || ''
     // query.v = sessionStorage.getItem("version") || cookieGet('version') || ''
 
-
+    const token = 'Bearer '+Cookie.get('token');
     if (!data) {
         data = {};
     }

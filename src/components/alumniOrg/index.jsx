@@ -297,7 +297,7 @@ class AlumniOrg extends Component {
 
         let buttons;
         switch (opttype) {
-            case 'query': 
+            case 'query':
                 buttons = (
                    <span style={{marginLeft: '10px'}}>
                         <Button type="primary" disabled={!curNode} onClick={this.addOrg.bind(this)} >
@@ -311,7 +311,7 @@ class AlumniOrg extends Component {
             case 'add':
                 buttons = (
                     <Button type="primary" disabled={!curNode} onClick={this.cancelAdd.bind(this)} >
-                        取消    
+                        取消
                     </Button>)
                 break;
 
@@ -365,6 +365,12 @@ class AlumniOrg extends Component {
                             </Form.Item>
                             <Form.Item label="简介">
                                 {getFieldDecorator('description', {
+                                    rules: [
+                                        {
+                                            max: 800,
+                                            message: '简介不能超过800字'
+                                        }
+                                    ],
                                     initialValue:this.state.description
                                 })(<TextArea autoSize={true}/>)}
                             </Form.Item>
@@ -396,12 +402,7 @@ class AlumniOrg extends Component {
                             </Form.Item>
                             <Form.Item label="领导简介">
                                 {getFieldDecorator('leader_desc', {
-                                    rules: [
-                                        {
-                                            required: false,
-                                            message: ''
-                                        }
-                                    ],
+                                    rules: [],
                                     initialValue:this.state.leader_desc
                                 })(<Input />)}
                             </Form.Item>
