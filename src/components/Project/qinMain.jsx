@@ -7,7 +7,7 @@ const ReactQiniuExample = React.createClass({
     getInitialState () {
         return {
             files: [],
-            token:getToken()
+            token:''
         };
     },
 
