@@ -20,7 +20,7 @@ import Employment from './employee';//招聘
 import Jijin from './jijinmanage';//基金
 import News from './News'; //新闻
 import Actions from './Actions'; //活动
-import Project from './Project'; //活动
+import Project from './Project/qinMain'; //活动
 import Navigation from './Navigation';//活动
 import WheelPlanting from './WheelPlanting';//活动
 import Menu from './Menu';//菜单

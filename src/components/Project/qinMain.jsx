@@ -1,13 +1,13 @@
 'use strict';
 import React from 'react';
 
-import ReactQiniu from './qinUi';
+import {getToken} from './../../utils/qiniu';
 
 const ReactQiniuExample = React.createClass({
     getInitialState () {
         return {
             files: [],
-            token: 'YOUR_QINIU_TOKEN'
+            token:getToken()
         };
     },
 

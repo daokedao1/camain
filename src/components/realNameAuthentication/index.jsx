@@ -170,6 +170,11 @@ class RealNameAuthentication extends Component {
                 key: 'username'
             },
             {
+                title: '当前隶属校友会',
+                dataIndex: 'username',
+                key: 'username'
+            },
+            {
                 title: '院系专业',
                 dataIndex: 'usercollegeName',
                 key: 'usercollegeName',

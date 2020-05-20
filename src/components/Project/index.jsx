@@ -5,7 +5,7 @@ import ReactQuill from 'react-quill';
 import ListTable from '@/components/table/List_table';
 import InputForm from '@/components/input';
 import {projectyList,addActivityList,delProjectList,editActivityList,retractProjectList,publishProjectList} from '@/axios';
-import {tableData,initParams,arr} from './serve';
+import {tableData,initParams,arr} from './server';
 import './index.less';
 class News extends React.Component {
     constructor(props){
