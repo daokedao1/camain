@@ -52,10 +52,6 @@ class SiderCustom extends Component {
         };
     };
 
-    componentWillMount() {
-
-    }
-
     componentDidMount() {
         // this.setMenuOpen(this.props);
         let cloneRoutes = cloneDeep(routes);

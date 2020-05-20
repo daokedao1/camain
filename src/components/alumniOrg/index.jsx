@@ -20,7 +20,7 @@ class AlumniOrg extends Component {
             opttype:'query',//add
             partentId:'0',
             schoollist:[],
-            curNode:[],
+            curNode: null,
             treeData:[
                 { title: '校友会', key: 2 }
             ],
@@ -32,7 +32,8 @@ class AlumniOrg extends Component {
             leader_desc:'',
             tel:'',
             type:'',
-            update_time:''
+            update_time:'',
+            action: 'normal'
         };
     }
     componentWillMount(){
@@ -196,13 +197,27 @@ class AlumniOrg extends Component {
     onTreeNodeClick(keys, event){
         console.log(keys, event);
         this.props.form.resetFields(); 
-        this.setState({
-            curNode:event.node,
-            opttype:'query',
-            orgtitle:'组织信息'
-        });
         if(!keys || !keys.length) {
-            return message.error(`查看${event.node.props.title}失败，请联系开发人员`);
+            this.setState({
+                orgtitle:'请先在左侧选择校友会',
+                curNode: null,
+                partentId: '',
+                id:'',
+                name:'',
+                description:'',
+                school_id:'',
+                organization:'',
+                leader_desc:'',
+                tel:'',
+                type:'',
+                update_time:'',
+                opttype:'query'
+            });
+            return;
+        }else {
+            this.setState({
+                curNode: event.node
+            });
         }
         this.getOrgById(keys[0]);
     }
@@ -223,8 +238,16 @@ class AlumniOrg extends Component {
             opttype:'add'
         });
     }
+
+    cancelAdd() {
+        let {partentId} = this.state;
+        this.setState({
+            opttype:'query'
+        });
+        this.getOrgById(partentId)
+    }
+
     delOrg(){
-        console.log(this.state.id > 3);
         let targetID = this.state.id;
         let _this = this;
         if(targetID > 3){
@@ -232,7 +255,6 @@ class AlumniOrg extends Component {
                 title: `您确认删除 ${this.state.name} 组织吗？?`,
                 content: '',
                 onOk() {
-                    console.log(22);
                     delAlumniById({id:targetID}).then(res=>{
                         console.log(res);
 
@@ -256,7 +278,7 @@ class AlumniOrg extends Component {
     render() {
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
 
-        const {schoollist} = this.state;
+        const {schoollist, curNode, opttype} = this.state;
         const formItemLayout = {
             labelCol: {
                 xs: { span: 24 },
@@ -273,13 +295,35 @@ class AlumniOrg extends Component {
             })
         );
 
+        let buttons;
+        switch (opttype) {
+            case 'query': 
+                buttons = (
+                   <span style={{marginLeft: '10px'}}>
+                        <Button type="primary" disabled={!curNode} onClick={this.addOrg.bind(this)} >
+                                新增下级组织
+                        </Button>
+                        <Button type="danger" disabled={!curNode} onClick={this.delOrg.bind(this)} >
+                                删除
+                        </Button>
+                    </span>)
+                break;
+            case 'add':
+                buttons = (
+                    <Button type="primary" disabled={!curNode} onClick={this.cancelAdd.bind(this)} >
+                        取消    
+                    </Button>)
+                break;
+
+        }
+
         return (
             <div>
                 <BreadcrumbCustom first="校友管理" second="校友会管理" />
 
                 <Row gutter={16}>
                     <Col className="gutter-row" span={8}>
-                    院系班级组织：
+                    校友会结构：（请现在左侧选择具体的校友会，再进行操作！）
                         <Tree style={{height:this.state.treeheight+'px',overflow: 'auto',backgroundColor:'#fff'}} onSelect={this.onTreeNodeClick.bind(this)} loadData={this.onLoadData.bind(this)}>{this.renderTreeNodes(this.state.treeData)}</Tree>
                     </Col>
 
@@ -404,15 +448,10 @@ class AlumniOrg extends Component {
                                 })(<Input disabled/>)}
                             </Form.Item>
                             <Form.Item style={{textAlign:'center'}}>
-                                <Button type="primary" htmlType="submit" disabled={this.hasErrors(getFieldsError())}>
+                                <Button type="primary" htmlType="submit" disabled={this.hasErrors(getFieldsError()) || !curNode}>
                                          保存
                                 </Button>
-                                <Button type="primary" onClick={this.addOrg.bind(this)} >
-                                         新增下级组织
-                                </Button>
-                                <Button type="danger" onClick={this.delOrg.bind(this)} >
-                                         删除
-                                </Button>
+                                {buttons}
                             </Form.Item>
                         </Form>
                     </Col>

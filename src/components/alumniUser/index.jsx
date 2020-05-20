@@ -276,14 +276,16 @@ class AlumniUser extends Component {
 
                     <Col className="gutter-row" span={19} >
                         <Row gutter={14} style={{backgroundColor:'#fff',padding:'20px 0'}}>
-                            <Col className="gutter-row" md={6}>
+                            {/* <Col className="gutter-row" md={6}>
                                 姓名：<Input value={searchParams.name} onChange={(e,v)=>this.IdChange(e,'name')}   placeholder="按姓名搜索" style={{width:'180px'}}/>
+                            </Col> */}
+
+                            <Col className="gutter-row" md={8}>
+                                姓名：<Input value={searchParams.keyword}  onChange={(e,v)=>this.IdChange(e,'keyword')}   placeholder="按姓名搜索" style={{width:'180px'}}/>
                             </Col>
+
                             <Col className="gutter-row" md={6}>
                                 电话：<Input value={searchParams.phone}  onChange={(e,v)=>this.IdChange(e,'phone')}   placeholder="按电话号码搜索" style={{width:'180px'}}/>
-                            </Col>
-                            <Col className="gutter-row" md={8}>
-                                关键字匹配：<Input value={searchParams.keyword}  onChange={(e,v)=>this.IdChange(e,'keyword')}   placeholder="按关键字模糊搜索" style={{width:'180px'}}/>
                             </Col>
 
                             <Col className="gutter-row" md={2}>
