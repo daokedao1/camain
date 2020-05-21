@@ -187,7 +187,7 @@ class AlumniUser extends Component {
         this.setState({
             visible:true,
             operationName:title,
-            params:param
+            params: param
         });
 
     }
@@ -219,6 +219,13 @@ class AlumniUser extends Component {
     searchs() {
         this.setState({page: 1, loading:true});
     }
+
+    callback = (detail) => {
+        if(detail.update) {
+            this.setState({visible: false});
+        }
+    }
+
     render() {
         let columns = [
             {
@@ -320,7 +327,7 @@ class AlumniUser extends Component {
                         </span>
                     </div>
 
-                    <DetailForm params={params} />
+                    <DetailForm params={params} callback={this.callback}/>
                 </Modal>
             </div>
         );

@@ -40,20 +40,26 @@ class DetailForm extends React.Component {
         this.state = {
             colleages: [],
             faculties: [],
-            classes: []
+            classes: [],
+            params: this.props.params
         };
-        console.log(props);
-    }
-
-    componentWillUnmount () {
-
     }
 
     componentDidMount() {
-        this.props.form.validateFields();
         this.getColleages();
-        this.getFaculties(this.props.params.collegeId);
-        this.getClasses(this.props.params.facultyId);
+    }
+
+    componentDidUpdate() {
+        const {id} = this.state.params;
+        const {params} = this.props;
+        if(params.id !== id) {
+            this.props.form.resetFields();
+            this.setState({
+                params
+            });
+            this.getFaculties(params.collegeId);
+            this.getClasses(params.facultyId);
+        } 
     }
 
     getColleages() {
@@ -96,13 +102,16 @@ class DetailForm extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-
+        let {params} = this.state;
         this.props.form.validateFieldsAndScroll((errors, values) => {
             if(!errors) {
                 values.birthday =moment(values.birthday).format('YYYY-MM-DD HH:mm:ss');
-                putUser(extend(this.props.params, values)).then(res => {
+                putUser(extend(params, values)).then(res => {
                     if(res.success) {
+                        this.props.callback({update: true});
                         message.success(`更新${values.name}的信息成功`);
+                    }else {
+                        message.error(`更新${values.name}的信息失败, 请联系管理员`);
                     }
                     
                 }, err => {
@@ -118,8 +127,7 @@ class DetailForm extends React.Component {
 
     render () {
         const {getFieldDecorator, getFieldsError} = this.props.form;
-        const {colleages, faculties, classes} = this.state;
-        const {params} = this.props;
+        const {colleages, faculties, classes, params} = this.state;
         const formItemLayout = {
             labelCol: {
                 xs: { span: 24 },
