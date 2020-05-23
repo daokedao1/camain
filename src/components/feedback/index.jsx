@@ -7,6 +7,11 @@ import { tableData, initParams, arr } from './serve';
 import './index.less';
 import 'react-quill/dist/quill.snow.css'; // ES6
 const { Option } = Select;
+const handlerColumn =  {
+    title: '处理人',
+    dataIndex: 'handlerName',
+    width: '10%'
+};
 class FeedBack extends React.Component {
     constructor(props) {
         super(props);
@@ -27,9 +32,6 @@ class FeedBack extends React.Component {
         };
     }
     componentDidMount() {
-        let { xAxisData } = this.state;
-        xAxisData.push(this.option());
-        this.setState({ xAxisData });
         this.getFeedBackList(1)
     }
 
@@ -39,11 +41,22 @@ class FeedBack extends React.Component {
     }
 
     getFeedBackList() {
-        let {param, page} = this.state;
+        let {param, page, xAxisData} = this.state;
+        const index = xAxisData.findIndex( item => item.dataIndex === handlerColumn.dataIndex);
+        if(param.status === 1) {
+            if(index !== -1) {
+                xAxisData.splice(index, 1);
+            }
+        }else {
+            if(index === -1) {
+                xAxisData.push(handlerColumn);
+            }
+        }
+        
         param['page'] = page;
         getFeedBackList(param).then(res => {
             if (res) {
-                this.setState({ dataSource: [...res.data.items], total: res.data.totalCount, loading: false });
+                this.setState({ dataSource: [...res.data.items], total: res.data.totalCount, loading: false, xAxisData});
             }
         });
 
@@ -90,19 +103,6 @@ class FeedBack extends React.Component {
             this.getFeedBackList();
             message.success('成功');
         }
-    }
-    option() {
-        return {
-            title: '操作',
-            dataIndex: 'id',
-            width: '15%',
-            render: (id, row) => {
-                return (<div className="option">
-                    {/* <Button size="small" onClick={()=>this.editWay('编辑',row)} type="primary">编辑</Button> */}
-                    {!row.status ? <Button size="small" disabled={true} onClick={() => this.publish(id, row)} type="default">已处理</Button> : <Button size="small" onClick={() => this.retract(id, row)} type="primary">处理</Button>}
-                </div>);
-            }
-        };
     }
 
     render() {

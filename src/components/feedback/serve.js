@@ -44,6 +44,16 @@ export const tableData=[
         title: '更新时间',
         dataIndex: 'updateTime',
         width:'10%'
+    },
+    {
+        title: '操作',
+        dataIndex: 'id',
+        width: '15%',
+        render: (id, row) => {
+            return (<div className="option">
+                {!row.status ? <Button size="small" disabled={true} onClick={() => this.publish(id, row)} type="default">通过</Button> : <Button size="small" onClick={() => this.retract(id, row)} type="primary">处理</Button>}
+            </div>);
+        }
     }
 ];
 export const arr=[

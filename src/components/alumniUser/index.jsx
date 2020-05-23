@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Tree,Row, Button,Divider,Table,Col,Input,Select,message,Modal, Checkbox, AutoComplete} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
-import {getAlumniOrg,getCaUserList} from './../../axios';
+import {getAlumniOrg,getCaUserList, getUser} from './../../axios';
 import Header from './../layout/Header';
 import DetailForm from './detailForm';
 import {tableData,initParams,arr} from './serve';
@@ -182,8 +182,9 @@ class AlumniUser extends Component {
             loading:true
         });
     }
-    async  onDetailClick(title,row){
-        let param={...row};
+    async onDetailClick(title,row){
+        // let param={...row};
+        const param = getUser(row.id);
         this.setState({
             visible:true,
             operationName:title,

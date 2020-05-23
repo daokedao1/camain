@@ -68,6 +68,8 @@ export const putUser = (param = {}) =>PUT(config.USER, param ).then(res=>{
     return res;
 }).catch(err=>err);
 
+// 获取具体的用户
+export const getUser = (id = '') => GET(config.USER_DETAIL.replace(':id', id)).then(res => res).catch(err=> err);
 
 //获取文章list
 export const getArticleList = (param = {}) => POST(config.GET_ARTICLE_LIST,param ).then(res=>{

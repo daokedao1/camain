@@ -42,7 +42,8 @@ export const GET_SCHOOL_LIST = domain+'/api/school/page';//学校list
 
 export const GET_CAUSER_LIST = domain+'/api/user/page';//用户list
 export const GET_USER_MENUS= domain+'/api/menu/build';//用户关联的菜单
-export const USER =  domain+'/api/user';//用户关联的菜单
+export const USER =  domain+'/api/user';//用户
+export const USER_DETAIL =  domain+'/api/user/:id';//具体用户
 
 //文章
 export const GET_ARTICLE_LIST = domain+'/api/article/page';//文章articlelist
