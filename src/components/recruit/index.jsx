@@ -189,15 +189,21 @@ class Recruit extends React.Component {
     async handleOk(){
         const {params,operationName}=this.state;
         let data={...params};
+        let res;
         if(operationName==='新建'){
-            await addArticleList(data);
+            res = await addArticleList(data);
         }else{
-            await editArticleList(data);
+            res = await editArticleList(data);
         }
 
-        this.setState({visible:false},()=>{
-            this.init();
-        });
+        if(res.success)  {
+            this.setState({visible:false},()=>{
+                this.init();
+            });
+        }else {
+            message.error(`操作失败，${res.msg ||  ''}`);
+        }
+       
     }
     add(){
         let params={...initParams};
@@ -267,7 +273,8 @@ class Recruit extends React.Component {
                         <ReactQuill
                             modules={{toolbar:toolbarOptions}}
 
-                            className="quill" value={params.content}
+                            className="quill" 
+                            value={params.content}
                             onChange={this.handleChange.bind(this)} />
                     </div>
 
