@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import { Tree,Row,Switch, Button,Modal,Col,Form,Input,Select,message} from 'antd';
+import {isEmpty, get} from 'lodash';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import {getAlumniOrg,getSchoolList,delAlumniById,getAlumniById,updateAlumniById,addAlumni} from './../../axios';
 
@@ -21,6 +22,7 @@ class ClassOrg extends Component {
             opttype:'query',//add
             partentId:'0',
             schoollist:[],
+            canDelete: false,
             treeData:[
                 { title: '院系组织', key: 1 }
             ],
@@ -131,9 +133,11 @@ class ClassOrg extends Component {
         let param = {
             id:id
         };
-        getAlumniById(param).then(res=>{
+        // id等于1 院系组织也不能删
+        return getAlumniById(param).then(res=>{
             if(res.success){
                 let orginfo = res.data;
+                let associateData = get(orginfo, ['userVOList']);
                 this.setState({
                     id:orginfo.id,
                     name:orginfo.name||'',
@@ -144,7 +148,8 @@ class ClassOrg extends Component {
                     tel:orginfo.tel||'',
                     type:orginfo.type||'1',
                     update_time:orginfo.update_time,
-                    partentId:orginfo.partentId
+                    partentId:orginfo.partentId,
+                    canDelete: isEmpty(associateData) && id > 1
                 });
             }else{
                 console.log(res);
@@ -192,19 +197,17 @@ class ClassOrg extends Component {
         let targetID = this.state.id;
         let _this = this;
         let curNode = this.state.curNode.node;
-        console.log(curNode);
+        // const orgRes = await this.getOrgById(targetID);
+        // if(orgRes)
         if(targetID > 3){
             confirm({
-                title: `您确认删除 ${_this.state.name} 组织吗？?`,
+                title: `您确认删除 ${_this.state.name}吗？?`,
                 content: 'When clicked the OK button, this dialog will be closed after 1 second',
                 onOk() {
                     delAlumniById({id:targetID}).then(res=>{
-                        console.log(res);
-
                         if(res.success){
                             message.success('删除成功！');
-     
-
+                            window.location.reload();
                         }else{
                             message.error('删除失败！');
                         }
@@ -285,7 +288,7 @@ class ClassOrg extends Component {
     render() {
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
 
-        const {schoollist} = this.state;
+        const {schoollist, canDelete} = this.state;
         const formItemLayout = {
             labelCol: {
                 xs: { span: 24 },
@@ -460,7 +463,7 @@ class ClassOrg extends Component {
                                 <Button type="primary" onClick={this.addOrg.bind(this)} >
                                          新增下级组织
                                 </Button>
-                                <Button type="danger" onClick={this.delOrg.bind(this)} >
+                                <Button type="danger" onClick={this.delOrg.bind(this)} disabled={!canDelete}>
                                          删除
                                 </Button>
                             </Form.Item>
