@@ -184,12 +184,17 @@ class AlumniUser extends Component {
     }
     async onDetailClick(title,row){
         // let param={...row};
-        const param = getUser(row.id);
-        this.setState({
-            visible:true,
-            operationName:title,
-            params: param
-        });
+        const param = await getUser(row.id);
+        if (param.success) {
+            this.setState({
+                visible:true,
+                operationName:title,
+                params: param.data
+            });
+        }else {
+            message.error(`获取${row.name}信息失败，请联系管理员`)
+        }
+        
 
     }
     handleCancel(){
