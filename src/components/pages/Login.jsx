@@ -3,18 +3,22 @@ import React,{Component} from 'react';
 import { Form, Icon, Input, Button,message } from 'antd';
 import { PwaInstaller } from '../widget';
 import {saveAuthInfo} from '../../redux/common';
-import {login} from '../../axios';
+import {login, getQiNiuToken} from '@/axios';
 import {setCookie} from './../../utils/index';
 import {connect} from 'react-redux';
 import Particles from 'reactparticles.js';
 import Storage from '../../utils/localStorage'
 import UserRes from './serve';
 import {get} from 'lodash';
+import QiniuService from './../../utils/qiniu';
+
+
 const bg = {
     backgroundImage:`url(${require('./img/login_bg1.jpg')})`,
     backgroundSize: '100% 100%'
 };
 const FormItem = Form.Item;
+const qiniuService = new QiniuService();
 @connect(state => {
     console.log(state);
     return {
@@ -30,6 +34,7 @@ class Login extends Component {
             title: ''
         };
     //   localStorage.setItem('allData','');
+
     }
     componentDidUpdate(prevProps) { // React 16.3+弃用componentWillReceiveProps
         const { auth: nextAuth = {}, history } = this.props;
@@ -60,6 +65,17 @@ class Login extends Component {
                         this.props.saveAuthInfo(res);
                         setCookie('token',res.data.token);
                         setCookie('usertokentime',new Date().getTime());
+
+                        getQiNiuToken().then(res => {
+                            console.log(res);
+                            if( res && res.success) {
+                                QiniuService.token = res.data;
+                            }
+
+                            qiniuService.getUploadUrl(res.data || '').then(domain => {
+                                QiniuService.config = {domain};
+                            });
+                        })
 
                         this.props.history.push('/');
                         UserRes.data = res;

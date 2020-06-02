@@ -96,6 +96,9 @@ export const ADD_CONFIG_LIST = domain+'/api/config';//新建
 export const LIST_CONFIG_LIST = domain+'/api/config/list';//新建
 export const DEL_CONFIG_LIST = domain+'/api/config/';//新建
 
+//qiniu
+export const QI_NIU_TOKEN = domain + '/api/qiniu/getToken'; //token
+
 
 
 

@@ -265,3 +265,7 @@ export const CongifListData = (param = {}) => GET(config.LIST_CONFIG_LIST ).then
 export const editConfigList = (param = {}) => PUT(config.ADD_CONFIG_LIST,param ).then(res=>{
     return res;
 }).catch(err=>err);
+
+//qiniu
+
+export const getQiNiuToken = () => POST(config.QI_NIU_TOKEN).then(res => res).catch(err => err);

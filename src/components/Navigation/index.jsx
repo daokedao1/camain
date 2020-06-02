@@ -7,7 +7,11 @@ import InputForm from '@/components/input';
 import {bannerList,addBannerList,delBannerList,editBannerList} from '@/axios';
 import {tableData,initParams,arr} from './serve';
 import './index.less';
+import {merge} from 'lodash';
+import NavModalForm from './modal'; 
 import 'react-quill/dist/quill.snow.css'; // ES6
+
+console.log(NavModalForm);
 class News extends React.Component {
     constructor(props){
         super(props);
@@ -137,18 +141,35 @@ class News extends React.Component {
     handleCancel(){
         this.setState({visible:false});
     }
-    async handleOk(){
-        const {params,operationName}=this.state;
-        let data={...params};
-        if(operationName==='新建'){
-            await addBannerList(data);
-        }else{
-            await editBannerList(data);
-        }
+    handleOk(){
+        debugger;
+        let  {params,operationName}=this.state;
+        const {form} = this.modalFormRef.props;
+        const {state} = this.modalFormRef;
 
-        this.setState({visible:false},()=>{
-            this.init();
+        form.validateFields(async (err, values) => {
+            if (err) {
+                return message.error('保存信息失败，请查看信息填写是否正确或者联系管理员');
+            }
+
+            form.resetFields();
+            params = merge(params, values, {path: state.imageUrl});
+            let res;
+            if(operationName==='新建'){
+                res = await addBannerList(params);
+            }else{
+                res = await editBannerList(params);
+            }
+            
+            if(!res.success) {
+                return message.error(res.message);
+            } 
+            this.setState({visible:false},()=>{
+                this.init();
+            });
+
         });
+        
     }
     add(){
         let params={...initParams};
@@ -157,6 +178,11 @@ class News extends React.Component {
             operationName:'新建',
             params:params//初始化
         });
+    }
+
+    saveForm(form) {
+        this.modalFormRef = form;
+        console.log(this.modalFormRef);
     }
     render() {
         const {yAxisData,total,xAxisData,operationName,visible,loading,params}=this.state;
@@ -179,12 +205,15 @@ class News extends React.Component {
                 <Modal
                     title={operationName}
                     visible={visible}
+                    width={800}
                     onOk={this.handleOk.bind(this)}
                     onCancel={this.handleCancel.bind(this)}
                     // searchData={searchData}
                 >
-                    <InputForm styleCss={{height:'100%'}}  indexWay={this.indexWay.bind(this)} params={params} arr={arr}></InputForm>
+                    {/* <InputForm styleCss={{height:'100%'}}  indexWay={this.indexWay.bind(this)} params={params} arr={arr}></InputForm> */}
+                    {/* <NavModalForm wrappedComponentRef={(form) => this.form = form} params={params}/> */}
 
+                    <NavModalForm wrappedComponentRef={this.saveForm.bind(this)} params={params}></NavModalForm>
                 </Modal>
             </div>
         );
