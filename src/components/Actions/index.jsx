@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import Quill from 'quill';
 import ListTable from '@/components/table/List_table';
+import {get} from 'lodash';
 import InputForm from '@/components/input';
 import {activityList,addActivityList,delActivityList,editActivityList,retractActivityList,publishActivityList,topActivityList,unpinActivityList,listTopActivityList} from '@/axios';
 import {tableData,initParams,arr} from './serve';
@@ -58,15 +59,17 @@ class News extends React.Component {
         let yAxisData,
             yAxisData1 = [],
             arrTable=[...tableData];
-        const [res,res1]= await Promise.all([activityList({}),listTopActivityList()]);
-        if(res&&res1&& res1.data){
-            yAxisData=[...res.data.items];
-            yAxisData1=[...res1.data||[]];
+        const res = await activityList({});
+        const res1 = await listTopActivityList();
+        // const [res,res1]= await Promise.all([activityList({}),listTopActivityList()]);
+        if(res&&res1){
+            yAxisData=get(res, ['data', 'items'], []);
+            yAxisData1=get(res1, ['data', 'items'], []);
             yAxisData=this.stateWay(yAxisData);
             const option=this.option();
             arrTable.push(option);
         }
-        this.setState({yAxisData:yAxisData,xAxisData:arrTable,loading:false,yAxisData1:[...yAxisData1]});
+        this.setState({yAxisData,xAxisData:arrTable,loading:false,yAxisData1:[...yAxisData1]});
     }
     stateWay(data){
         let obj=[...data];
