@@ -131,7 +131,7 @@ class NavModal extends React.Component {
 
             <Form.Item label="顺序">
                 {getFieldDecorator('rank', {
-                    rules: [{ required: true, message: '请输入跳转地址' }],
+                    rules: [{ required: true, message: '请输入顺序' }],
                     initialValue: params.rank || ''
                 })(
                     <Input />
@@ -142,8 +142,8 @@ class NavModal extends React.Component {
                 {getFieldDecorator('path', {
                     valuePropName: 'fileList',
                     getValueFromEvent: this.normFile,
-                    initialValue: defaultFileList,
-                    rules: [{ required: true, message: '请输入跳转地址' }],
+                    initialValue: imageUrl,
+                    rules: [{ required: true, message: '图片是必须项' }],
                 })(
                     <Upload 
                     name="file" 

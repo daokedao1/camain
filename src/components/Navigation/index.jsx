@@ -142,7 +142,6 @@ class News extends React.Component {
         this.setState({visible:false});
     }
     handleOk(){
-        debugger;
         let  {params,operationName}=this.state;
         const {form} = this.modalFormRef.props;
         const {state} = this.modalFormRef;
