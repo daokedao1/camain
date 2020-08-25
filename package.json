@@ -190,5 +190,5 @@
     "antd-theme-generator": "^1.1.7",
     "webpack-cli": "^3.3.8"
   },
-  "proxy": "http://47.105.149.158:8090/"
+  "proxy": "https://camapi.youngdao.com:8088"
 }

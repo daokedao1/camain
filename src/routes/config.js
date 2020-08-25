@@ -11,7 +11,7 @@ export default {
         },
         {
             key: '/app/alumni',
-            title: '校友相关管理',
+            title: '校友管理',
             icon: 'area-chart',
             subs: [
                 { key: '/app/alumni/realNameAuthentication', title: '入会审核', component: 'RealNameAuthentication' },
@@ -33,7 +33,7 @@ export default {
                 { key: '/app/operate/notice', title: '公告管理', component: 'Notice' },
                 { key: '/app/operate/news', title: '新闻管理', component: 'News' },
                 { key: '/app/operate/Actions', title: '活动管理', component: 'Actions' },
-                
+
                 { key: '/app/operate/Project', title: '项目管理', component: 'Project' },
                 { key: '/app/operate/Jijin', title: '基金管理', component: 'Jijin' },
                 { key: '/app/operate/MentorProgram', title: '导师计划', component: 'MentorProgram' },
@@ -60,11 +60,11 @@ export default {
         },
         {
             key: '/app/config',
-            title: 'APP管理',
+            title: '平台管理',
             icon: 'scan',
             subs: [
                 { key: '/app/config/wheelPlanting', title: '主页导航', component: 'WheelPlanting' },
-                { key: '/app/config/Configure', title: '配置管理', component: 'Configure' },
+                { key: '/app/config/Configure', title: '配置管理', component: 'Configure' }
             ]
         },
         {

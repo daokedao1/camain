@@ -57,17 +57,20 @@ class SiderCustom extends Component {
         let cloneRoutes = cloneDeep(routes);
         const {stateRoutes} = this.state;
         console.log('cloneRoutes', cloneRoutes);
-        
+
         const state = SiderCustom.setMenuOpen(this.props);
         // 先hack一下，后面看如何用react-redux
         // 原来的路由建立的有问题，不用react-redux无法处理数据传递的问题
         setTimeout(() => {
-           const userRes = Storage.get('userRes');
-        })
+            const userRes = Storage.get('userRes');
+        });
         getUserMenus().then(res => {
             if(res && res.data) {
                 let flattenDataSource = [];
+                console.log(res.data);
                 this.flatten(res.data, flattenDataSource);
+                console.log(res.data);
+
                 // 先最简单让功能看起来实现
                 // 只判断父级有菜单，就全部显示出来，后台返回的菜单跟前端根本无法对应，现在只能通过名字去判断
                 const newRoutes = [];
@@ -85,15 +88,17 @@ class SiderCustom extends Component {
                     //         }
                     //     }
                     // })
-                    
+
                 });
-                
+                console.log('22222');
+                console.log(newRoutes);
+                console.log(state);
                 stateRoutes.menus = newRoutes;
                 this.setState({stateRoutes, ...state});
             }
         }, err => {
             this.setState(state);
-        })
+        });
     }
 
     flatten(list = [], flattenDataSource) {
@@ -106,7 +111,7 @@ class SiderCustom extends Component {
 
     render() {
         const {collapsed, stateRoutes } = this.state;
-        console.log(stateRoutes);
+
         return (
             <Sider
                 trigger={null}

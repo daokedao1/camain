@@ -45,9 +45,9 @@ class SiderMenu extends React.Component {
             openKey: '',
             selectedKey: '',
             firstHide: true // 点击收缩菜单，第一次隐藏展开子菜单，openMenu时恢复
-        }
+        };
     }
-   
+
     componentDidUpdate(prevProps, prevState) {
         if(prevProps.menus !== this.props.menus) {
             let dragItems = this.props.menus || [];
@@ -81,6 +81,7 @@ class SiderMenu extends React.Component {
     };
     render() {
         const {dragItems, restProps, selectedKey, firstHide, openKey} = this.state;
+        console.log(dragItems);
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
                 <Droppable droppableId="droppable">
@@ -95,8 +96,8 @@ class SiderMenu extends React.Component {
                                                 {...provided.dragHandleProps}
                                                 {...provided.draggableProps}
                                             >
-                                                <Menu 
-                                                    mode="inline"  
+                                                <Menu
+                                                    mode="inline"
                                                     onClick={this.menuClick}
                                                     selectedKeys={[selectedKey]}
                                                     openKeys={firstHide ? null : [openKey]}
