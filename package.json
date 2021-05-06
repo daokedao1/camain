@@ -78,7 +78,7 @@
     "react-dev-utils": "^6.0.4",
     "react-document-title": "^2.0.3",
     "react-dom": "^16.10.2",
-    "react-draft-wysiwyg": "^1.12.13",
+    "react-draft-wysiwyg": "^1.14.6",
     "react-draggable": "^3.0.5",
     "react-highlight-words": "^0.16.0",
     "react-hot-loader": "^4.3.11",
